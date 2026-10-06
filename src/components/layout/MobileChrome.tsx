@@ -30,6 +30,7 @@ export function MobileTopBar({ onOpenFilters, initialQuery = '' }: { onOpenFilte
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Explorar coleções"
+          maxLength={80}
           className="h-full w-full bg-transparent text-sm font-bold text-cream outline-none placeholder:text-khaki"
         />
       </form>

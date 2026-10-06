@@ -75,7 +75,7 @@ function HeaderSearch() {
             <label htmlFor="header-search" className="sr-only">
               Termo de busca
             </label>
-            <Input id="header-search" name="q" type="search" placeholder="Explorar coleções" autoFocus />
+            <Input id="header-search" name="q" type="search" placeholder="Explorar coleções" maxLength={80} autoFocus />
             <Button type="submit">Buscar</Button>
           </form>
         </DialogContent>
@@ -117,7 +117,10 @@ function AccountMenu({ username, displayName }: { username: string; displayName:
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onSelect={() => {
-            logout.mutate(undefined, { onSettled: () => void navigate({ to: '/' }) })
+            void logout
+              .mutateAsync()
+              .catch(() => undefined)
+              .then(() => navigate({ to: '/' }))
           }}
         >
           <LogoutIcon aria-hidden className="size-4" /> Sair

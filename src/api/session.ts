@@ -3,6 +3,7 @@ import { CurrentSessionResponse, SessionResponse, type LoginInput, type Register
 import { cartApi } from './cart'
 import { qk } from './query-keys'
 import { http, request } from '@/lib/http'
+import { STORAGE_KEYS, session } from '@/lib/storage'
 import { sessionStore, useSessionSnapshot } from '@/features/session/session-store'
 import { guestCart } from '@/features/cart/guest-cart'
 import { clearPrivateCache } from '@/app/query-client'
@@ -79,6 +80,8 @@ export function useLogout() {
     mutationFn: sessionApi.logout,
     onSettled: () => {
       disconnectSocket()
+      session.remove(STORAGE_KEYS.checkoutDraft)
+      session.remove(STORAGE_KEYS.checkoutAttempt)
       sessionStore.signOut()
       clearPrivateCache(queryClient)
     },

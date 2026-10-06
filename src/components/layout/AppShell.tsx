@@ -5,6 +5,7 @@ import { MobileTabBar } from './MobileChrome'
 import { useSession } from '@/api/session'
 import { useRealtime } from '@/features/realtime/useRealtime'
 import { SessionBanner } from '@/features/session/SessionBanner'
+import { useSessionRouteGuard } from '@/features/session/useSessionRouteGuard'
 import { LiveRegion } from '@/components/common/LiveRegion'
 import { NotAvailableProvider } from '@/components/common/NotAvailable'
 import { Toaster } from '@/components/ui/sonner'
@@ -14,6 +15,7 @@ import { cn } from '@/lib/utils'
 export function AppShell() {
   useSession()
   useRealtime()
+  useSessionRouteGuard()
   const matches = useMatches()
   const title = [...matches].reverse().find((m) => m.staticData?.title)?.staticData.title
   const chrome = [...matches].reverse().find((m) => m.staticData?.mobileChrome)?.staticData.mobileChrome

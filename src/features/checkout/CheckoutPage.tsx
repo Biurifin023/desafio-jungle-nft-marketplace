@@ -9,6 +9,7 @@ import { accountApi, useProfile, useWallets } from '@/api/account'
 import { useCart, useQuote } from '@/api/cart'
 import { ordersApi } from '@/api/orders'
 import { formatDiscount } from '@/features/cart/CartSummary'
+import { useSessionSnapshot } from '@/features/session/session-store'
 import { EmptyState, ErrorState, errorMessage } from '@/components/common/QueryState'
 import { FormError, FormField, selectClassName } from '@/components/common/FormField'
 import { Button } from '@/components/ui/button'
@@ -24,24 +25,59 @@ const CheckoutSchema = CollectorDetails.extend({
 })
 type FormValues = z.infer<typeof CheckoutSchema>
 
-function loadDraft(): Partial<FormValues> {
-  return session.get<Partial<FormValues>>(STORAGE_KEYS.checkoutDraft) ?? {}
+type OrderPayload = Parameters<typeof ordersApi.create>[0]
+
+/** Rascunho e tentativa ficam no sessionStorage marcados com o dono; os de outro usuário são ignorados. */
+interface StoredDraft {
+  userId: string
+  values: Partial<FormValues>
 }
 
-async function submitOrder(payload: Parameters<typeof ordersApi.create>[0]) {
-  return ordersApi.create(payload, attemptKey())
+/** `body`: primeiro corpo enviado com esta chave cujo resultado ainda é desconhecido (timeout/rede). */
+interface StoredAttempt {
+  userId: string
+  key: string
+  body?: OrderPayload
 }
 
-function attemptKey() {
-  const existing = session.get<string>(STORAGE_KEYS.checkoutAttempt)
-  if (existing) return existing
-  const key = crypto.randomUUID()
-  session.set(STORAGE_KEYS.checkoutAttempt, key)
-  return key
+function loadDraft(userId: string): Partial<FormValues> {
+  const draft = session.get<StoredDraft>(STORAGE_KEYS.checkoutDraft)
+  return draft?.userId === userId ? (draft.values ?? {}) : {}
+}
+
+function currentAttempt(userId: string): StoredAttempt {
+  const stored = session.get<StoredAttempt>(STORAGE_KEYS.checkoutAttempt)
+  if (stored?.userId === userId && stored.key) return stored
+  const attempt = { userId, key: crypto.randomUUID() }
+  session.set(STORAGE_KEYS.checkoutAttempt, attempt)
+  return attempt
+}
+
+/**
+ * O servidor só registra a chave de idempotência quando cria o pedido. Um 409 `idempotency_conflict`
+ * significa que uma tentativa anterior sem resposta criou o pedido com outro corpo (ex.: cotação renovada);
+ * reenviar o corpo original com a mesma chave devolve esse pedido em vez de duplicar a compra.
+ */
+async function submitOrder(userId: string, payload: OrderPayload) {
+  const attempt = currentAttempt(userId)
+  if (!attempt.body) session.set(STORAGE_KEYS.checkoutAttempt, { ...attempt, body: payload })
+  try {
+    return await ordersApi.create(payload, attempt.key)
+  } catch (error) {
+    if (!isApiError(error) || error.kind !== 'http') throw error
+    if (error.code === 'idempotency_conflict') {
+      if (attempt.body) return ordersApi.create(attempt.body, attempt.key)
+    } else {
+      session.set(STORAGE_KEYS.checkoutAttempt, { userId, key: attempt.key })
+    }
+    throw error
+  }
 }
 
 export function CheckoutPage() {
   const navigate = useNavigate()
+  const snapshot = useSessionSnapshot()
+  const userId = snapshot.status === 'authenticated' ? snapshot.user.id : null
   const cart = useCart()
   const wallets = useWallets()
   const profile = useProfile()
@@ -74,8 +110,8 @@ export function CheckoutPage() {
   })
 
   useEffect(() => {
-    if (hydrated.current || !profile.data || wallets.isPending) return
-    const draft = loadDraft()
+    if (hydrated.current || !userId || !profile.data || wallets.isPending) return
+    const draft = loadDraft(userId)
     form.reset({
       displayName: draft.displayName ?? profile.data.displayName,
       username: draft.username ?? profile.data.username,
@@ -88,16 +124,15 @@ export function CheckoutPage() {
       network: draft.network ?? network,
     })
     hydrated.current = true
-  }, [profile.data, wallets.isPending, walletList, form, network])
+  }, [userId, profile.data, wallets.isPending, walletList, form, network])
 
-  useEffect(
-    () =>
-      form.subscribe({
-        formState: { values: true },
-        callback: ({ values }) => session.set(STORAGE_KEYS.checkoutDraft, values),
-      }),
-    [form],
-  )
+  useEffect(() => {
+    if (!userId) return
+    return form.subscribe({
+      formState: { values: true },
+      callback: ({ values }) => session.set(STORAGE_KEYS.checkoutDraft, { userId, values } satisfies StoredDraft),
+    })
+  }, [form, userId])
 
   async function connect() {
     const walletId = form.getValues('walletId')
@@ -120,7 +155,7 @@ export function CheckoutPage() {
   }
 
   async function onSubmit(values: FormValues) {
-    if (!quote.data || submitting) return
+    if (!quote.data || !userId || submitting) return
     if (!connected) {
       toast.error('Conecte a carteira antes de confirmar')
       return
@@ -141,7 +176,7 @@ export function CheckoutPage() {
       },
     }
     try {
-      const order = await submitOrder(payload)
+      const order = await submitOrder(userId, payload)
       session.remove(STORAGE_KEYS.checkoutAttempt)
       session.remove(STORAGE_KEYS.checkoutDraft)
       setStale(null)
@@ -152,9 +187,14 @@ export function CheckoutPage() {
         setStale(error.message)
         announce(error.message, 'assertive')
         await quote.refetch()
+      } else if (isApiError(error) && error.code === 'idempotency_conflict') {
+        session.remove(STORAGE_KEYS.checkoutAttempt)
+        setStale('Não foi possível recuperar a tentativa anterior. Revise os dados e confirme novamente.')
+        announce('Não foi possível recuperar a tentativa anterior. Confirme novamente.', 'assertive')
+        await quote.refetch()
       } else if (isApiError(error) && error.kind === 'timeout') {
         try {
-          const recovered = await submitOrder(payload)
+          const recovered = await submitOrder(userId, payload)
           session.remove(STORAGE_KEYS.checkoutAttempt)
           session.remove(STORAGE_KEYS.checkoutDraft)
           announce('Pedido recuperado')
@@ -236,7 +276,7 @@ export function CheckoutPage() {
               <Input {...form.register('profileName')} />
             </FormField>
             <FormField label="Carteira" error={form.formState.errors.walletId?.message} required>
-              <select className={selectClassName} {...form.register('walletId')}>
+              <select className={selectClassName} {...form.register('walletId', { onChange: () => setConnected(false) })}>
                 <option value="">Selecione uma carteira</option>
                 {walletList.map((w) => (
                   <option key={w.id} value={w.id}>

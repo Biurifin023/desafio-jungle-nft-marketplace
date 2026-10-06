@@ -1,4 +1,4 @@
-import { NftListQuery, type Category, type Network, type NftListQuery as NftListQueryInput } from '@/api/contracts'
+import { Category, Network, NftListQuery, type NftListQuery as NftListQueryInput } from '@/api/contracts'
 
 /** Search da Home. Campos com default no Zod ficam opcionais para `Link to="/"` sem `search`. */
 export type CatalogSearch = NftListQueryInput
@@ -18,19 +18,28 @@ function asNumber(value: unknown) {
   return undefined
 }
 
-/** Converte o search da URL (strings) no contrato de GET /api/nfts. */
+const MAX_QUERY_LENGTH = 80
+
+/**
+ * Converte o search da URL (strings) no contrato de GET /api/nfts.
+ * Valores inválidos (link antigo ou editado à mão) são descartados em vez de derrubar a rota.
+ */
 export function parseNftSearch(raw: Record<string, unknown>): NftListQueryInput {
-  return NftListQuery.parse({
-    q: typeof raw.q === 'string' ? raw.q : undefined,
-    categories: asList(raw.categories) as Category[] | undefined,
-    networks: asList(raw.networks) as Network[] | undefined,
+  const input = {
+    q: typeof raw.q === 'string' ? raw.q.trim().slice(0, MAX_QUERY_LENGTH) : undefined,
+    categories: asList(raw.categories)?.filter((c): c is Category => Category.safeParse(c).success),
+    networks: asList(raw.networks)?.filter((n): n is Network => Network.safeParse(n).success),
     minPrice: typeof raw.minPrice === 'string' ? raw.minPrice : undefined,
     maxPrice: typeof raw.maxPrice === 'string' ? raw.maxPrice : undefined,
     tab: raw.tab,
     sort: raw.sort,
     page: asNumber(raw.page),
     pageSize: asNumber(raw.pageSize),
-  })
+  }
+  const result = NftListQuery.safeParse(input)
+  if (result.success) return result.data
+  const invalid = new Set(result.error.issues.map((issue) => issue.path[0]))
+  return NftListQuery.parse(Object.fromEntries(Object.entries(input).filter(([key]) => !invalid.has(key))))
 }
 
 /**
