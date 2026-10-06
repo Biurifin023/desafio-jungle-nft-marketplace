@@ -1,31 +1,39 @@
 import type { Page } from '@playwright/test'
-import { CART_EMERALD, expect, loginAs, openCheckout, resetScenario, seedUserCart, test } from '../fixtures'
+import {
+  CART_EMERALD,
+  connectCheckoutWallet,
+  expect,
+  loginAs,
+  openCheckout,
+  resetScenario,
+  seedUserCart,
+  test,
+  waitForCheckoutWallet,
+} from '../fixtures'
 
 async function waitForSocket(page: Page) {
   await page.waitForFunction(() => window.__kurioSocket?.connected === true, undefined, { timeout: 15_000 })
 }
 
 test.describe('9. alteração via Socket.IO no checkout', () => {
-  test('preço muda durante o checkout e impede a cotação antiga', async ({ page }) => {
+  test('preço muda durante o checkout e impede a cotação antiga', async ({ page, isMobile }) => {
     await resetScenario(page, 'fast')
     await loginAs(page, 'ana')
     await seedUserCart(page, [CART_EMERALD])
     await page.evaluate(() => window.__mock!.setScenario('price-changed'))
     await page.goto('/checkout')
-    await expect(page.getByTestId('checkout-page')).toBeVisible()
-    await expect(page.getByLabel('Carteira')).not.toHaveValue('')
+    await waitForCheckoutWallet(page)
     await waitForSocket(page)
-    await page.getByTestId('connect-wallet').click()
-    await expect(page.getByTestId('wallet-status')).toBeVisible()
+    await connectCheckoutWallet(page, isMobile)
     await page.getByTestId('confirm-order').click()
-    await expect(page.getByTestId('checkout-stale').or(page.getByTestId('realtime-change'))).toBeVisible()
+    await expect(page.getByTestId('checkout-stale').or(page.getByTestId('realtime-change')).first()).toBeVisible()
     await expect(page).toHaveURL(/\/checkout/)
     await expect(page.getByRole('heading', { name: /pedido confirmado/i })).toHaveCount(0)
   })
 })
 
 test.describe('10. duplicatas, versão antiga, desconexão e retomada', () => {
-  test('ignora replay e versão antiga; recupera pedido pendente após drop', async ({ page }) => {
+  test('ignora replay e versão antiga; recupera pedido pendente após drop', async ({ page, isMobile }) => {
     await openCheckout(page, 'fast')
     await waitForSocket(page)
 
@@ -51,8 +59,7 @@ test.describe('10. duplicatas, versão antiga, desconexão e retomada', () => {
     await expect(page.getByText('0.01 ETH')).toHaveCount(0)
 
     await page.evaluate(() => window.__mock!.setScenario('payment-pending'))
-    await page.getByTestId('connect-wallet').click()
-    await expect(page.getByTestId('wallet-status')).toBeVisible()
+    await connectCheckoutWallet(page, isMobile)
     await page.getByTestId('confirm-order').click()
     await expect(page.getByRole('heading', { name: /pedido (pendente|confirmado)/i })).toBeVisible({ timeout: 20_000 })
     const orderId = await page.getByTestId('order-id').innerText()

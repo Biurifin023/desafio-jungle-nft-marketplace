@@ -1,5 +1,16 @@
 import type { Page } from '@playwright/test'
-import { CART_EMERALD, expect, loginAs, openCheckout, resetScenario, seedGuestCart, seedUserCart, test } from '../fixtures'
+import {
+  CART_EMERALD,
+  connectCheckoutWallet,
+  expect,
+  loginAs,
+  openCheckout,
+  resetScenario,
+  seedGuestCart,
+  seedUserCart,
+  test,
+  waitForCheckoutWallet,
+} from '../fixtures'
 
 type FailureRule = Parameters<NonNullable<Window['__mock']>['failNext']>[0]
 
@@ -21,7 +32,7 @@ test.describe('estados de erro', () => {
     await expect(page.getByTestId('cart-subtotal')).toBeVisible()
   })
 
-  test('checkout: falha ao carregar o perfil mostra erro e a nova tentativa preenche o formulário', async ({ page }) => {
+  test('checkout: falha ao carregar o perfil mostra erro e a nova tentativa preenche o formulário', async ({ page, isMobile }) => {
     await resetScenario(page, 'fast')
     await loginAs(page, 'ana')
     await seedUserCart(page, [CART_EMERALD])
@@ -30,8 +41,9 @@ test.describe('estados de erro', () => {
 
     await expect(page.getByText('Não foi possível carregar seus dados')).toBeVisible()
     await page.getByRole('button', { name: 'Tentar novamente' }).click()
-    await expect(page.getByLabel('Carteira')).not.toHaveValue('')
-    await expect(page.getByLabel('E-mail')).toHaveValue('ana@kurio.dev')
+    await waitForCheckoutWallet(page)
+    await expect(page.getByText('Não foi possível carregar seus dados')).toHaveCount(0)
+    if (!isMobile) await expect(page.getByLabel('E-mail')).toHaveValue('ana@kurio.dev')
   })
 
   test('checkout: falha na cotação aparece na revisão com nova tentativa', async ({ page }) => {
@@ -46,10 +58,9 @@ test.describe('estados de erro', () => {
     await expect(page.getByTestId('checkout-total')).toBeVisible()
   })
 
-  test('checkout: erro 422 com campos aparece no campo e recebe o foco', async ({ page }) => {
+  test('checkout: erro 422 com campos aparece no campo e recebe o foco', async ({ page, isMobile }) => {
     await openCheckout(page)
-    await page.getByTestId('connect-wallet').click()
-    await expect(page.getByTestId('wallet-status')).toBeVisible()
+    await connectCheckoutWallet(page, isMobile)
     await page.evaluate(() =>
       window.__mock!.failNext({
         method: 'POST',
@@ -64,7 +75,9 @@ test.describe('estados de erro', () => {
     await page.getByTestId('confirm-order').click()
 
     await expect(page.getByText('Use um e-mail válido para o recibo.')).toBeVisible()
-    await expect(page.getByLabel('E-mail')).toBeFocused()
+    // No mobile os dados do colecionador não aparecem; o erro leva ao perfil.
+    if (isMobile) await expect(page.getByRole('link', { name: 'Revisar perfil' })).toBeVisible()
+    else await expect(page.getByLabel('E-mail')).toBeFocused()
     await expect(page).toHaveURL(/\/checkout/)
   })
 

@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { z } from 'zod'
 import { toast } from 'sonner'
-import { CollectorDetails, NETWORK_LABEL, WALLET_PROVIDER_LABEL, type Network } from '@/api/contracts'
+import { CollectorDetails, NETWORK_LABEL, WALLET_PROVIDER_LABEL, type Network, type Wallet } from '@/api/contracts'
 import { accountApi, useProfile, useWallets } from '@/api/account'
 import { useCart, useQuote } from '@/api/cart'
 import { ordersApi } from '@/api/orders'
@@ -18,6 +18,8 @@ import { announce } from '@/lib/announce'
 import { isApiError } from '@/lib/http'
 import { formatEth } from '@/lib/money'
 import { STORAGE_KEYS, session } from '@/lib/storage'
+import { useDesktop } from '@/lib/use-desktop'
+import { MobileCheckout } from './MobileCheckout'
 
 const CheckoutSchema = CollectorDetails.extend({
   walletId: z.string().min(1, 'Selecione uma carteira cadastrada'),
@@ -88,6 +90,7 @@ export function CheckoutPage() {
   const [stale, setStale] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const hydrated = useRef(false)
+  const desktop = useDesktop()
 
   const walletList = useMemo(
     () => [wallets.data?.primary, wallets.data?.secondary].filter((w): w is NonNullable<typeof w> => Boolean(w)),
@@ -108,6 +111,7 @@ export function CheckoutPage() {
       network: 'ethereum',
     },
   })
+  const selectedWalletId = useWatch({ control: form.control, name: 'walletId' })
 
   useEffect(() => {
     if (hydrated.current || !userId || !profile.data || wallets.isPending) return
@@ -138,7 +142,7 @@ export function CheckoutPage() {
     const walletId = form.getValues('walletId')
     if (!walletId) {
       form.setError('walletId', { message: 'Selecione uma carteira cadastrada' })
-      return
+      return false
     }
     setConnecting(true)
     try {
@@ -146,12 +150,25 @@ export function CheckoutPage() {
       setConnected(true)
       announce('Carteira conectada')
       toast.success('Carteira conectada')
+      return true
     } catch (error) {
       setConnected(false)
       toast.error(errorMessage(error, 'A carteira recusou a conexão'))
+      return false
     } finally {
       setConnecting(false)
     }
+  }
+
+  function changeNetwork(next: Network) {
+    setNetwork(next)
+    form.setValue('network', next)
+    setConnected(false)
+  }
+
+  function selectWallet(wallet: Wallet) {
+    form.setValue('walletId', wallet.id, { shouldValidate: form.formState.isSubmitted })
+    changeNetwork(wallet.network)
   }
 
   function applyFieldErrors(fields: Record<string, string>) {
@@ -166,13 +183,18 @@ export function CheckoutPage() {
     return applied > 0
   }
 
-  async function onSubmit(values: FormValues) {
+  /** `autoConnect`: o layout mobile não tem botão de conectar; confirmar conecta a carteira escolhida antes. */
+  async function onSubmit(values: FormValues, autoConnect = false) {
     if (!quote.data || !userId || submitting) return
-    if (!connected) {
+    if (!connected && !autoConnect) {
       toast.error('Conecte a carteira antes de confirmar')
       return
     }
     setSubmitting(true)
+    if (!connected && !(await connect())) {
+      setSubmitting(false)
+      return
+    }
     const payload = {
       quoteId: quote.data.id,
       walletId: values.walletId,
@@ -242,9 +264,71 @@ export function CheckoutPage() {
   }
 
   const priceIssues = quote.data?.issues.filter((issue) => issue.type === 'price_changed') ?? []
+  const loadError =
+    profile.isError || wallets.isError ? (
+      <ErrorState
+        title="Não foi possível carregar seus dados"
+        error={profile.error ?? wallets.error}
+        onRetry={() => {
+          void profile.refetch()
+          void wallets.refetch()
+        }}
+      />
+    ) : null
+  const quoteError =
+    quote.isError && !quote.data ? (
+      <ErrorState className="px-0 py-4" title="Não foi possível calcular a cotação" error={quote.error} onRetry={() => void quote.refetch()} />
+    ) : null
+  const quoteNotices = (
+    <>
+      {priceIssues.map((issue) => (
+        <p key={issue.itemId ?? issue.message} role="status" className="mt-3 text-sm text-sand" data-testid="realtime-change">
+          {issue.message}
+        </p>
+      ))}
+      {stale ? (
+        <FormError>
+          <span data-testid="checkout-stale">{stale}</span>
+        </FormError>
+      ) : null}
+    </>
+  )
+
+  if (!desktop) {
+    const collectorError = Object.entries(form.formState.errors).find(([name]) => name !== 'walletId')?.[1]?.message
+    return (
+      <MobileCheckout
+        wallets={walletList}
+        walletsPending={wallets.isPending}
+        walletId={selectedWalletId}
+        walletError={form.formState.errors.walletId?.message}
+        onSelectWallet={selectWallet}
+        total={quote.data ? formatEth(quote.data.totalEth) : undefined}
+        totalPending={quote.isPending}
+        status={
+          <>
+            {loadError}
+            {quoteError}
+            {quoteNotices}
+            {collectorError ? (
+              <FormError>
+                {collectorError}{' '}
+                <Link to="/profile" className="font-bold underline">
+                  Revisar perfil
+                </Link>
+              </FormError>
+            ) : null}
+          </>
+        }
+        canSubmit={Boolean(quote.data?.valid)}
+        busy={submitting || connecting}
+        onSubmit={form.handleSubmit((values) => onSubmit(values, true))}
+      />
+    )
+  }
 
   return (
-    <section className="page-container py-8" aria-labelledby="checkout-title" data-testid="checkout-page">
+    <section className="page-container py-8" aria-labelledby="checkout-title" data-testid="checkout-page" data-wallet={selectedWalletId}>
       <nav aria-label="Trilha" className="text-sm font-bold text-cream">
         <Link to="/" className="transition-colors hover:text-amber">
           Início
@@ -261,19 +345,9 @@ export function CheckoutPage() {
       <h1 id="checkout-title" className="mt-6 text-3xl font-bold text-cream">
         Pagamento
       </h1>
-      {profile.isError || wallets.isError ? (
-        <ErrorState
-          className="mt-6"
-          title="Não foi possível carregar seus dados"
-          error={profile.error ?? wallets.error}
-          onRetry={() => {
-            void profile.refetch()
-            void wallets.refetch()
-          }}
-        />
-      ) : null}
+      {loadError ? <div className="mt-6">{loadError}</div> : null}
 
-      <form className="mt-8 grid gap-10 lg:grid-cols-[1fr_332px]" onSubmit={form.handleSubmit(onSubmit)} noValidate>
+      <form className="mt-8 grid gap-10 lg:grid-cols-[1fr_332px]" onSubmit={form.handleSubmit((values) => onSubmit(values))} noValidate>
         <div>
           <h2 className="text-[17px] font-bold text-cream">Perfil do colecionador</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -287,12 +361,7 @@ export function CheckoutPage() {
               <select
                 className={selectClassName}
                 value={network}
-                onChange={(e) => {
-                  const next = e.target.value as Network
-                  setNetwork(next)
-                  form.setValue('network', next)
-                  setConnected(false)
-                }}
+                onChange={(e) => changeNetwork(e.target.value as Network)}
               >
                 {Object.entries(NETWORK_LABEL).map(([id, label]) => (
                   <option key={id} value={id}>
@@ -339,9 +408,7 @@ export function CheckoutPage() {
         <aside className="rounded-md bg-surface p-6">
           <h2 className="text-lg font-bold text-cream">Revisão</h2>
           {quote.isPending ? <p className="mt-4 text-sand">Calculando cotação…</p> : null}
-          {quote.isError && !quote.data ? (
-            <ErrorState className="mt-4 px-0 py-4" title="Não foi possível calcular a cotação" error={quote.error} onRetry={() => void quote.refetch()} />
-          ) : null}
+          {quoteError ? <div className="mt-4">{quoteError}</div> : null}
           {quote.data ? (
             <dl className="mt-4 space-y-2 text-sm text-cream">
               <Row label="Subtotal" value={formatEth(quote.data.subtotalEth)} />
@@ -350,16 +417,7 @@ export function CheckoutPage() {
               <Row label="Total" value={formatEth(quote.data.totalEth)} strong testId="checkout-total" />
             </dl>
           ) : null}
-          {priceIssues.map((issue) => (
-            <p key={issue.itemId ?? issue.message} role="status" className="mt-3 text-sm text-sand" data-testid="realtime-change">
-              {issue.message}
-            </p>
-          ))}
-          {stale ? (
-            <FormError>
-              <span data-testid="checkout-stale">{stale}</span>
-            </FormError>
-          ) : null}
+          {quoteNotices}
           <Button type="submit" className="mt-6 w-full" disabled={submitting || !quote.data?.valid} data-testid="confirm-order">
             {submitting ? 'Enviando…' : 'Confirmar compra'}
           </Button>

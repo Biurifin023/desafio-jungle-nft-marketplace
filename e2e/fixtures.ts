@@ -82,7 +82,19 @@ export async function openCheckout(page: Page, scenarioId = 'fast') {
   await loginAs(page, 'ana')
   await seedUserCart(page, [CART_EMERALD])
   await page.goto('/checkout')
-  await expect(page.getByLabel('Carteira')).not.toHaveValue('')
+  await waitForCheckoutWallet(page)
+}
+
+/** Carteira padrão hidratada, nos dois layouts (select no desktop, cartões no mobile). */
+export async function waitForCheckoutWallet(page: Page) {
+  await expect(page.getByTestId('checkout-page')).toHaveAttribute('data-wallet', /.+/)
+}
+
+/** O desktop conecta pelo botão; no mobile, "Confirmar compra" conecta antes de enviar. */
+export async function connectCheckoutWallet(page: Page, isMobile: boolean) {
+  if (isMobile) return
+  await page.getByTestId('connect-wallet').click()
+  await expect(page.getByTestId('wallet-status')).toBeVisible()
 }
 
 export const test = base

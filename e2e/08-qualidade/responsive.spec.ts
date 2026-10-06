@@ -1,5 +1,15 @@
 import type { Locator, Page } from '@playwright/test'
-import { CART_EMERALD, expect, loginAs, resetScenario, seedGuestCart, seedUserCart, test } from '../fixtures'
+import {
+  CART_EMERALD,
+  connectCheckoutWallet,
+  expect,
+  loginAs,
+  resetScenario,
+  seedGuestCart,
+  seedUserCart,
+  test,
+  waitForCheckoutWallet,
+} from '../fixtures'
 
 /** 720 px de viewport CSS equivale a uma janela de 1440 px com zoom de 200%. */
 const VIEWPORTS = [
@@ -60,9 +70,8 @@ test.describe('responsividade 390 / 768 / 1440 e zoom 200%', () => {
 
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/checkout')
-    await expect(page.getByLabel('Carteira')).not.toHaveValue('')
-    await page.getByTestId('connect-wallet').click()
-    await expect(page.getByTestId('wallet-status')).toBeVisible()
+    await waitForCheckoutWallet(page)
+    await connectCheckoutWallet(page, false)
     await page.getByTestId('confirm-order').click()
     await expect(page.getByRole('heading', { name: /pedido confirmado/i })).toBeVisible({ timeout: 20_000 })
 

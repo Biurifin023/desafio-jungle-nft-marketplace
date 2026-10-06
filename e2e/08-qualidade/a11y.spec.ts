@@ -118,7 +118,8 @@ test.describe('11. teclado, foco e validação', () => {
     await expect(trigger).toBeFocused()
   })
 
-  test('checkout associa erros de validação aos campos', async ({ page }) => {
+  test('checkout associa erros de validação aos campos', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'O checkout mobile não exibe os dados do colecionador.')
     await openCheckout(page, 'fast')
     const displayName = page.getByLabel('Nome de exibição')
     await displayName.fill('')

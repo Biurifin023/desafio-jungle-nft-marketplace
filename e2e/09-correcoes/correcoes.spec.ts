@@ -1,4 +1,4 @@
-import { CART_EMERALD, expect, loginAs, openCheckout, resetScenario, seedUserCart, test } from '../fixtures'
+import { CART_EMERALD, connectCheckoutWallet, expect, loginAs, openCheckout, resetScenario, seedUserCart, test } from '../fixtures'
 
 const isMobile = (project: string) => project.includes('mobile')
 const HOME_URL = /^https?:\/\/[^/]+\/(\?.*)?$/
@@ -17,7 +17,8 @@ test.describe('search params inválidos na Home', () => {
 })
 
 test.describe('checkout: carteira conectada', () => {
-  test('trocar de carteira exige conectar de novo', async ({ page }) => {
+  test('trocar de carteira exige conectar de novo', async ({ page }, testInfo) => {
+    test.skip(isMobile(testInfo.project.name), 'No mobile, "Confirmar compra" conecta a carteira escolhida.')
     await openCheckout(page, 'fast')
     await page.getByTestId('connect-wallet').click()
     await expect(page.getByTestId('wallet-status')).toBeVisible()
@@ -31,7 +32,8 @@ test.describe('checkout: carteira conectada', () => {
 })
 
 test.describe('checkout: rascunho por usuário', () => {
-  test('o rascunho de um usuário não aparece para outro', async ({ page }) => {
+  test('o rascunho de um usuário não aparece para outro', async ({ page }, testInfo) => {
+    test.skip(isMobile(testInfo.project.name), 'O checkout mobile não exibe os dados do colecionador.')
     await openCheckout(page, 'fast')
     await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
 
@@ -43,9 +45,11 @@ test.describe('checkout: rascunho por usuário', () => {
     await expect(displayName).not.toHaveValue('Ana Rascunho')
   })
 
-  test('sair apaga o rascunho e a tentativa da aba', async ({ page }) => {
+  test('sair apaga o rascunho e a tentativa da aba', async ({ page }, testInfo) => {
     await openCheckout(page, 'fast')
-    await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
+    if (isMobile(testInfo.project.name)) await page.getByText('Reserva', { exact: true }).click()
+    else await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
+    await expect.poll(() => page.evaluate(() => sessionStorage.getItem('kurio.checkoutDraft'))).not.toBeNull()
     await page.goto('/profile')
     await page.getByTestId('logout').click()
     await expect(page).toHaveURL(HOME_URL)
@@ -55,10 +59,10 @@ test.describe('checkout: rascunho por usuário', () => {
 })
 
 test.describe('checkout: idempotência após resposta perdida', () => {
-  test('409 de idempotência recupera o pedido já criado em vez de travar', async ({ page }) => {
+  test('409 de idempotência recupera o pedido já criado em vez de travar', async ({ page }, testInfo) => {
     await openCheckout(page, 'fast')
     await page.evaluate(() => window.__mock!.setScenario('payment-pending'))
-    const walletId = await page.getByLabel('Carteira').inputValue()
+    const walletId = await page.getByTestId('checkout-page').getAttribute('data-wallet')
 
     // Simula uma tentativa cujo pedido foi criado mas cuja resposta nunca chegou ao cliente.
     const createdId = await page.evaluate(async (wallet) => {
@@ -89,10 +93,9 @@ test.describe('checkout: idempotência após resposta perdida', () => {
       const { order } = (await res.json()) as { order: { id: string } }
       sessionStorage.setItem('kurio.checkoutAttempt', JSON.stringify({ userId: user.id, key, body }))
       return order.id
-    }, walletId)
+    }, walletId!)
 
-    await page.getByTestId('connect-wallet').click()
-    await expect(page.getByTestId('wallet-status')).toBeVisible()
+    await connectCheckoutWallet(page, isMobile(testInfo.project.name))
     await page.getByTestId('confirm-order').click()
     await expect(page.getByTestId('order-id')).toHaveText(createdId, { timeout: 20_000 })
     const count = await page.evaluate(() => (window.__mock!.state() as { orders: unknown[] }).orders.length)

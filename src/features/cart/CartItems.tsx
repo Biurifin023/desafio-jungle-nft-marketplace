@@ -1,5 +1,4 @@
 import { Link } from '@tanstack/react-router'
-import { useSyncExternalStore } from 'react'
 import { toast } from 'sonner'
 import type { CartItem, QuoteLine } from '@/api/contracts'
 import { useRemoveCartItem, useUpdateCartItem } from '@/api/cart'
@@ -9,6 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { announce } from '@/lib/announce'
 import { formatEth } from '@/lib/money'
 import { errorMessage } from '@/components/common/QueryState'
+import { useDesktop } from '@/lib/use-desktop'
 import { cn } from '@/lib/utils'
 import { maxQuantity } from './limits'
 import { QuantityStepper } from './QuantityStepper'
@@ -32,18 +32,6 @@ export function CartItems({ items, lines, quotePending }: { items: CartItem[]; l
         ))}
       </ul>
     </div>
-  )
-}
-
-function useDesktop() {
-  return useSyncExternalStore(
-    (onChange) => {
-      const mq = window.matchMedia('(min-width: 1024px)')
-      mq.addEventListener('change', onChange)
-      return () => mq.removeEventListener('change', onChange)
-    },
-    () => window.matchMedia('(min-width: 1024px)').matches,
-    () => false,
   )
 }
 

@@ -1,5 +1,5 @@
 import type { Page } from '@playwright/test'
-import { CREDENTIALS, expect, loginAs, openCheckout, resetScenario, test } from '../fixtures'
+import { CREDENTIALS, connectCheckoutWallet, expect, loginAs, openCheckout, resetScenario, test } from '../fixtures'
 
 /** Fora dos favoritos iniciais da Ana (a fixture já favorita o Emerald Ape). */
 const NFT_ID = 'violet-nomad-314'
@@ -76,11 +76,10 @@ test.describe('sessão e dados', () => {
     expect(await serverFavorites(page)).toContain(NFT_ID)
   })
 
-  test('evento de pedido em tempo real chega ao dono com o token só no auth do Socket.IO', async ({ page }) => {
+  test('evento de pedido em tempo real chega ao dono com o token só no auth do Socket.IO', async ({ page, isMobile }) => {
     await openCheckout(page)
     await page.evaluate(() => window.__mock!.setScenario('payment-pending'))
-    await page.getByTestId('connect-wallet').click()
-    await expect(page.getByTestId('wallet-status')).toBeVisible()
+    await connectCheckoutWallet(page, isMobile)
     await page.getByTestId('confirm-order').click()
     await expect(page.getByRole('heading', { name: /pedido pendente/i })).toBeVisible({ timeout: 20_000 })
     const orderId = await page.getByTestId('order-id').innerText()
