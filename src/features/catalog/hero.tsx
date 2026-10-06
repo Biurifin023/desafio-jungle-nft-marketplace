@@ -62,8 +62,8 @@ function DesktopHero({
       aria-labelledby="home-title"
       data-testid="catalog-hero"
     >
-      <div className="flex h-full w-full items-center justify-between gap-10">
-        <div className="flex max-w-[600px] min-w-0 flex-col justify-end gap-8 self-stretch pb-10 pt-8">
+      <div className="flex h-full w-full min-w-0 items-center justify-between gap-6 xl:gap-10">
+        <div className="flex max-w-[600px] min-w-0 flex-1 flex-col justify-end gap-8 self-stretch pb-10 pt-8">
           <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium tracking-[0.1em] text-cream">Bem-vindo à Kurio</p>
@@ -86,11 +86,11 @@ function DesktopHero({
           </a>
         </div>
         {current ? (
-          <Link to="/nft/$id" params={{ id: current.id }} className="size-[450px] shrink-0 overflow-hidden rounded-3xl">
+          <Link to="/nft/$id" params={{ id: current.id }} className="size-[min(450px,38vw)] shrink-0 overflow-hidden rounded-3xl">
             <NftImage image={current.image} sizes="450px" priority className="size-full rounded-3xl" />
           </Link>
         ) : (
-          <div className="size-[450px] shrink-0 rounded-3xl bg-surface" />
+          <div className="size-[min(450px,38vw)] shrink-0 rounded-3xl bg-surface" />
         )}
       </div>
       <HeroDots slides={slides} index={index} onIndex={onIndex} className="absolute bottom-2 left-[40%] hidden lg:flex" />

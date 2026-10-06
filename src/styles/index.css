@@ -83,10 +83,13 @@
   html {
     color-scheme: dark;
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
     min-height: 100dvh;
+    max-width: 100%;
+    overflow-x: clip;
   }
   :focus-visible {
     outline: 2px solid var(--kurio-amber);

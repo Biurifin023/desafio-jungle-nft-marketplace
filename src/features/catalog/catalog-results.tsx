@@ -38,7 +38,7 @@ export function CatalogToolbar({
 
 function CatalogTabs({ value, onChange }: { value: NftTab; onChange: (tab: NftTab) => void }) {
   return (
-    <div className="flex min-w-0 flex-wrap items-end gap-4 lg:gap-5" role="tablist" aria-label="Aba do catálogo">
+    <div className="flex w-full min-w-0 flex-wrap items-end justify-between gap-x-2 gap-y-1 lg:w-auto lg:justify-start lg:gap-5" role="tablist" aria-label="Aba do catálogo">
       {TABS.map((tab) => {
         const active = value === tab.id
         return (
