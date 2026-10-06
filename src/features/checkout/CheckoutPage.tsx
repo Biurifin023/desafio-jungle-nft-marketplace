@@ -74,7 +74,7 @@ export function CheckoutPage() {
   })
 
   useEffect(() => {
-    if (hydrated.current || !profile.data) return
+    if (hydrated.current || !profile.data || wallets.isPending) return
     const draft = loadDraft()
     form.reset({
       displayName: draft.displayName ?? profile.data.displayName,
@@ -88,7 +88,7 @@ export function CheckoutPage() {
       network: draft.network ?? network,
     })
     hydrated.current = true
-  }, [profile.data, walletList, form, network])
+  }, [profile.data, wallets.isPending, walletList, form, network])
 
   useEffect(
     () =>

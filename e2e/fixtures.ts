@@ -82,6 +82,7 @@ export async function openCheckout(page: Page, scenarioId = 'fast') {
   await loginAs(page, 'ana')
   await seedUserCart(page, [CART_EMERALD])
   await page.goto('/checkout')
+  await expect(page.getByLabel('Carteira')).not.toHaveValue('')
 }
 
 export const test = base
