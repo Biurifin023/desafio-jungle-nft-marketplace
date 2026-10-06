@@ -8,7 +8,7 @@ export function LiveRegion() {
       <div className="sr-only" aria-live="polite" aria-atomic="true" data-testid="live-region">
         {message.politeness === 'polite' ? <span key={message.id}>{message.text}</span> : null}
       </div>
-      <div className="sr-only" aria-live="assertive" aria-atomic="true">
+      <div className="sr-only" aria-live="assertive" aria-atomic="true" data-testid="live-region-assertive">
         {message.politeness === 'assertive' ? <span key={message.id}>{message.text}</span> : null}
       </div>
     </>

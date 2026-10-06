@@ -1,5 +1,5 @@
 import type { QueryClient } from '@tanstack/react-query'
-import type { FeaturedResponse, Nft, NftListResponse, NftSummary, NftUpdatedEvent, Order, RealtimeEvent } from '@/api/contracts'
+import type { Cart, FeaturedResponse, Nft, NftListResponse, NftSummary, NftUpdatedEvent, Order, RealtimeEvent } from '@/api/contracts'
 import { qk } from '@/api/query-keys'
 import { announce } from '@/lib/announce'
 
@@ -37,14 +37,18 @@ function applyNftUpdated(queryClient: QueryClient, event: NftUpdatedEvent) {
     }
   })
 
+  const nftId = event.resource.id
+  const inCart = queryClient.getQueriesData<Cart>({ queryKey: ['cart'] }).some(([, cart]) => cart?.items.some((item) => item.nftId === nftId))
+  const viewing = (queryClient.getQueryCache().find({ queryKey: qk.nfts.detail(nftId), exact: true })?.getObserversCount() ?? 0) > 0
+
   void queryClient.invalidateQueries({ queryKey: ['cart'] })
   void queryClient.invalidateQueries({ queryKey: ['quote'] })
 
-  const message =
-    event.data.reason === 'price_changed'
-      ? 'O preço de um colecionável mudou. Revise a cotação antes de confirmar.'
-      : 'A disponibilidade de um colecionável mudou. Revise a cotação antes de confirmar.'
-  announce(message, 'assertive')
+  // Mudanças em NFTs que a pessoa não está vendo nem comprando não interrompem o leitor de tela.
+  if (!inCart && !viewing) return
+  const subject = event.data.reason === 'price_changed' ? 'O preço' : 'A disponibilidade'
+  if (inCart) announce(`${subject} de um colecionável do seu carrinho mudou. Revise a cotação antes de confirmar.`, 'assertive')
+  else announce(`${subject} deste colecionável mudou.`)
 }
 
 function applyOrderUpdated(queryClient: QueryClient, event: Extract<RealtimeEvent, { type: 'order.updated' }>) {

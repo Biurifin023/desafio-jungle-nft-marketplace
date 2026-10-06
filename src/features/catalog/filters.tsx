@@ -134,6 +134,8 @@ function CatalogFiltersBody({
           value={range}
           onValueChange={setRange}
           aria-labelledby={priceLabelId}
+          thumbLabels={['Preço mínimo', 'Preço máximo']}
+          formatValueText={(value) => `${formatEthPtBr(value.toFixed(2))} ETH`}
         />
         <p className="text-[15px] text-cream">
           Preço: {formatEthPtBr(range[0]!.toFixed(2))} - {formatEthPtBr(range[1]!.toFixed(2))} ETH

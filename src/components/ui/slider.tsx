@@ -8,8 +8,15 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  thumbLabels,
+  formatValueText,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root> & {
+  /** Nome acessível de cada ponto (o Radix usa "Minimum"/"Maximum" em inglês). */
+  thumbLabels?: string[]
+  /** Texto lido pelos leitores de tela no lugar do número cru. */
+  formatValueText?: (value: number) => string
+}) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
@@ -50,6 +57,8 @@ function Slider({
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
           key={index}
+          aria-label={thumbLabels?.[index]}
+          aria-valuetext={formatValueText && _values[index] !== undefined ? formatValueText(_values[index]) : undefined}
           className="block size-[15px] shrink-0 rounded-full border-[3px] border-ink bg-copper shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
         />
       ))}

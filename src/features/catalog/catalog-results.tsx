@@ -3,6 +3,7 @@ import type { NftListResponse, NftTab } from '@/api/contracts'
 import { ArrowRightIcon } from '@/components/icons'
 import { BackgroundRefresh, EmptyState, ErrorState } from '@/components/common/QueryState'
 import { Button } from '@/components/ui/button'
+import { handleRovingKeyDown } from '@/lib/roving-focus'
 import { cn } from '@/lib/utils'
 import { NftCard, NftCardSkeleton } from './nft-card'
 import { SortSelect } from './filters'
@@ -38,7 +39,15 @@ export function CatalogToolbar({
 
 function CatalogTabs({ value, onChange }: { value: NftTab; onChange: (tab: NftTab) => void }) {
   return (
-    <div className="flex w-full min-w-0 flex-wrap items-end justify-between gap-x-2 gap-y-1 lg:w-auto lg:justify-start lg:gap-5" role="tablist" aria-label="Aba do catálogo">
+    <div
+      className="flex w-full min-w-0 flex-wrap items-end justify-between gap-x-2 gap-y-1 lg:w-auto lg:justify-start lg:gap-5"
+      role="tablist"
+      aria-label="Aba do catálogo"
+      onKeyDown={(event) => {
+        const index = handleRovingKeyDown(event)
+        if (index !== null) onChange(TABS[index]!.id)
+      }}
+    >
       {TABS.map((tab) => {
         const active = value === tab.id
         return (
@@ -47,6 +56,8 @@ function CatalogTabs({ value, onChange }: { value: NftTab; onChange: (tab: NftTa
             type="button"
             role="tab"
             aria-selected={active}
+            tabIndex={active ? 0 : -1}
+            data-roving-item
             onClick={() => onChange(tab.id)}
             className={cn(
               'relative cursor-pointer pb-1 text-sm leading-4 whitespace-nowrap transition-colors hover:text-amber',

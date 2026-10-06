@@ -5,6 +5,8 @@ const shot = { animations: 'disabled' as const, caret: 'hide' as const }
 test.describe('regressão visual', () => {
   test('início', async ({ page }) => {
     await resetScenario(page, 'fast')
+    // Mouse sobre o destaque segura a troca automática durante a captura.
+    await page.getByRole('heading', { level: 1 }).hover()
     await expect(page.getByRole('link', { name: /emerald ape #042/i }).first()).toBeVisible()
     await expect(page).toHaveScreenshot('inicio.png', { ...shot, fullPage: true })
   })
