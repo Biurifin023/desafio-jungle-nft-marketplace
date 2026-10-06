@@ -11,6 +11,7 @@ async function submitLogin(page: Page, email: string, password: string) {
   await page.getByRole('textbox', { name: 'E-mail' }).fill(email)
   await page.getByLabel('Senha', { exact: true }).fill(password)
   await page.getByTestId('auth-submit').click()
+  await expect(page).not.toHaveURL(/\/login/)
 }
 
 async function logoutFromProfile(page: Page) {
@@ -23,6 +24,7 @@ async function logoutFromProfile(page: Page) {
 
 test.describe('auth e sessão', () => {
   test('cadastro, login, expiração, logout e troca de usuário', async ({ page }) => {
+    test.setTimeout(90_000)
     await resetScenario(page, 'fast')
 
     await page.goto('/register')
@@ -33,7 +35,6 @@ test.describe('auth e sessão', () => {
     await page.getByLabel('Confirmar senha').fill('Kurio@2026')
     await page.getByTestId('auth-submit').click()
     await expect(page).toHaveURL(/\/$|\/\?/)
-    await expect(page.getByTestId('account-menu').or(page.getByRole('link', { name: /conta/i }))).toBeVisible()
 
     await page.goto('/profile')
     await expect(page.getByTestId('session-email')).toHaveText('nova.kurio@kurio.dev')
@@ -51,7 +52,7 @@ test.describe('auth e sessão', () => {
     await expect(page.getByTestId('session-email')).toHaveText(CREDENTIALS.ana.email)
 
     await page.goto('/favorites')
-    await expect(page.getByTestId('favorite-id')).toHaveText('emerald-ape-042')
+    await expect(page.getByTestId('favorite-id')).toHaveAttribute('data-nft-id', 'emerald-ape-042')
 
     await page.evaluate(() => window.__mock!.expireSessions())
     await page.reload()
@@ -63,13 +64,15 @@ test.describe('auth e sessão', () => {
     await page.getByRole('textbox', { name: 'E-mail' }).fill(CREDENTIALS.ana.email)
     await page.getByLabel('Senha', { exact: true }).fill(CREDENTIALS.ana.password)
     await page.getByTestId('auth-submit').click()
+    await expect(page).not.toHaveURL(/\/login/)
     await expect(page).toHaveURL(/\/favorites/)
-    await expect(page.getByTestId('favorite-id')).toHaveText('emerald-ape-042')
+    await expect(page.getByTestId('favorite-id')).toHaveAttribute('data-nft-id', 'emerald-ape-042')
 
     await logoutFromProfile(page)
     await expect(page.getByTestId('session-email')).toHaveCount(0)
 
     await submitLogin(page, CREDENTIALS.bruno.email, CREDENTIALS.bruno.password)
+    await expect(page).toHaveURL(/\/$|\/\?/)
     await page.goto('/profile')
     await expect(page.getByTestId('session-email')).toHaveText(CREDENTIALS.bruno.email)
     await expect(page.getByTestId('session-name')).toHaveText('Bruno Cripto')

@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from '@tanstack/react-query'
+import { queryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   ProfileResponse,
   WalletConnectionResponse,
@@ -6,6 +6,7 @@ import {
   WalletsResponse,
   type ChangePasswordInput,
   type ConnectWalletInput,
+  type Profile,
   type UpdateAvatarInput,
   type UpdateProfileInput,
   type WalletInput,
@@ -13,7 +14,7 @@ import {
 } from './contracts'
 import { qk } from './query-keys'
 import { http, request } from '@/lib/http'
-import { useSessionSnapshot } from '@/features/session/session-store'
+import { sessionStore, useSessionSnapshot } from '@/features/session/session-store'
 
 export const accountApi = {
   profile: (signal?: AbortSignal) => request(ProfileResponse, { url: '/me/profile', signal }).then((r) => r.profile),
@@ -52,4 +53,69 @@ export function useProfile() {
 export function useWallets() {
   const userId = usePrivateUserId()
   return useQuery({ ...walletsQuery(userId ?? 'anonymous'), enabled: Boolean(userId) })
+}
+
+function rememberProfile(profile: Profile) {
+  const snap = sessionStore.get()
+  if (snap.status === 'authenticated') {
+    sessionStore.updateUser({
+      ...snap.user,
+      displayName: profile.displayName,
+      username: profile.username,
+      email: profile.email,
+      avatarUrl: profile.avatarUrl,
+    })
+  }
+  return profile
+}
+
+export function useUpdateProfile() {
+  const queryClient = useQueryClient()
+  const userId = usePrivateUserId()
+  return useMutation({
+    mutationFn: accountApi.updateProfile,
+    onSuccess: (profile) => {
+      rememberProfile(profile)
+      if (userId) queryClient.setQueryData(qk.profile(userId), profile)
+    },
+  })
+}
+
+export function useUpdateAvatar() {
+  const queryClient = useQueryClient()
+  const userId = usePrivateUserId()
+  return useMutation({
+    mutationFn: accountApi.updateAvatar,
+    onSuccess: (profile) => {
+      rememberProfile(profile)
+      if (userId) queryClient.setQueryData(qk.profile(userId), profile)
+    },
+  })
+}
+
+export function useRemoveAvatar() {
+  const queryClient = useQueryClient()
+  const userId = usePrivateUserId()
+  return useMutation({
+    mutationFn: accountApi.removeAvatar,
+    onSuccess: (profile) => {
+      rememberProfile(profile)
+      if (userId) queryClient.setQueryData(qk.profile(userId), profile)
+    },
+  })
+}
+
+export function useChangePassword() {
+  return useMutation({ mutationFn: accountApi.changePassword })
+}
+
+export function useSaveWallet() {
+  const queryClient = useQueryClient()
+  const userId = usePrivateUserId()
+  return useMutation({
+    mutationFn: ({ slot, input }: { slot: WalletSlot; input: WalletInput }) => accountApi.saveWallet(slot, input),
+    onSuccess: () => {
+      if (userId) void queryClient.invalidateQueries({ queryKey: qk.wallets(userId) })
+    },
+  })
 }

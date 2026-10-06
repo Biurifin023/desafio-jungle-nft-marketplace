@@ -34,8 +34,11 @@ export const http = axios.create({
 })
 
 http.interceptors.request.use((config) => {
+  const method = (config.method ?? 'get').toLowerCase()
+  const path = (config.url ?? '').replace(/^\//, '')
+  const isCredentialRequest = (path === 'session' && method === 'post') || (path === 'accounts' && method === 'post')
   const token = sessionStore.token()
-  if (token) config.headers.set('Authorization', `Bearer ${token}`)
+  if (token && !isCredentialRequest) config.headers.set('Authorization', `Bearer ${token}`)
   const guestId = guestCart.id()
   if (guestId) config.headers.set('X-Guest-Cart', guestId)
   return config

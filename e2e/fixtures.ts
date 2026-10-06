@@ -56,6 +56,34 @@ export async function seedGuestCart(
   }, items)
 }
 
+export async function seedUserCart(
+  page: Page,
+  items: { nftId: string; editionId: string; quantity: number }[],
+) {
+  await page.evaluate(async (payload) => {
+    const raw = localStorage.getItem('kurio.session')
+    if (!raw) throw new Error('Sessão ausente para semear o carrinho')
+    const session = JSON.parse(raw) as { token: string }
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session.token}`,
+    }
+    for (const item of payload) {
+      const res = await fetch('/api/cart/items', { method: 'POST', headers, body: JSON.stringify(item) })
+      if (!res.ok) throw new Error(await res.text())
+    }
+  }, items)
+}
+
+export const CART_EMERALD = { nftId: 'emerald-ape-042', editionId: '1-50', quantity: 2 }
+
+export async function openCheckout(page: Page, scenarioId = 'fast') {
+  await resetScenario(page, scenarioId)
+  await loginAs(page, 'ana')
+  await seedUserCart(page, [CART_EMERALD])
+  await page.goto('/checkout')
+}
+
 export const test = base
 
 export { expect }

@@ -4,10 +4,10 @@ test.describe('2. acesso direto e 404', () => {
   test('abre /nft/emerald-ape-042 e mostra o colecionável', async ({ page }) => {
     await resetScenario(page, 'fast')
     await page.goto('/nft/emerald-ape-042')
-    await expect(page.getByRole('heading', { name: /emerald ape #042/i })).toBeVisible()
-    await expect(page.getByText('1.19 ETH').first()).toBeVisible()
-    await expect(page.getByText(/id do token/i).first()).toBeVisible()
-    await expect(page.getByText(/kurio apes/i).first()).toBeVisible()
+    await expect(page.getByRole('heading', { name: /emerald ape #042/i }).filter({ visible: true })).toBeVisible()
+    await expect(page.getByText('1.19 ETH').filter({ visible: true })).toBeVisible()
+    await expect(page.getByText(/id do token/i).filter({ visible: true })).toBeVisible()
+    await expect(page.getByText(/kurio apes/i).filter({ visible: true }).first()).toBeVisible()
   })
 
   test('id inexistente mostra 404', async ({ page }) => {
@@ -83,7 +83,7 @@ test.describe('4. favoritos', () => {
 test.describe('12. skeleton no cenário lento', () => {
   test('mostra shimmer enquanto o detalhe carrega', async ({ page }) => {
     const navigation = page.goto('/nft/emerald-ape-042?scenario=slow')
-    await expect(page.locator('[data-slot="skeleton"]').first()).toBeVisible()
+    await expect(page.locator('[data-slot="skeleton"]').filter({ visible: true }).first()).toBeVisible()
     await navigation
     await expect(page.getByRole('heading', { name: /emerald ape #042/i })).toBeVisible({ timeout: 15_000 })
     await expect(page.getByTestId('nft-skeleton')).toHaveCount(0)

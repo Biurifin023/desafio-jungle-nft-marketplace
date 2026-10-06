@@ -56,5 +56,6 @@ declare global {
   interface Window {
     __mock?: MockControl
     __mockReady?: Promise<void>
+    __kurioSocket?: { connected: boolean; error?: string }
   }
 }

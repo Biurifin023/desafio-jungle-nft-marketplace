@@ -110,7 +110,7 @@ function CatalogFiltersBody({
                   aria-pressed={selected}
                   onClick={() => toggleCategory(category)}
                   className={cn(
-                    'flex h-10 w-full min-w-0 items-center justify-between text-[15px] leading-10',
+                    'flex h-10 w-full min-w-0 cursor-pointer items-center justify-between text-[15px] leading-10',
                     selected ? 'font-normal text-amber' : 'text-sand',
                   )}
                 >
@@ -156,7 +156,7 @@ function CatalogFiltersBody({
                   aria-pressed={selected}
                   onClick={() => toggleNetwork(network)}
                   className={cn(
-                    'flex h-10 w-full min-w-0 items-center justify-between text-[15px] leading-10',
+                    'flex h-10 w-full min-w-0 cursor-pointer items-center justify-between text-[15px] leading-10',
                     selected ? 'text-amber' : 'text-sand',
                   )}
                 >
@@ -183,7 +183,7 @@ export function SortSelect({ value, onChange }: { value: NftSort; onChange: (sor
         <SelectTrigger
           id={sortId}
           size="sm"
-          className="h-auto min-w-0 max-w-full border-0 bg-transparent px-1 py-0 text-[15px] shadow-none [&_svg]:text-cream"
+          className="h-auto min-w-0 max-w-full cursor-pointer border-0 bg-transparent px-1 py-0 text-[15px] shadow-none [&_svg]:text-cream"
           aria-label="Ordenar por"
         >
           <SelectValue />

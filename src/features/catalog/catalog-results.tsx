@@ -49,7 +49,7 @@ function CatalogTabs({ value, onChange }: { value: NftTab; onChange: (tab: NftTa
             aria-selected={active}
             onClick={() => onChange(tab.id)}
             className={cn(
-              'relative pb-1 text-sm leading-4 whitespace-nowrap',
+              'relative cursor-pointer pb-1 text-sm leading-4 whitespace-nowrap',
               active ? 'font-bold text-amber lg:font-medium' : 'font-normal text-cream lg:font-medium',
             )}
           >
@@ -129,7 +129,7 @@ export function CatalogPagination({ search, totalPages }: { search: CatalogSearc
               aria-label={`Página ${page}`}
               aria-current={page === current ? 'page' : undefined}
               className={cn(
-                'grid size-[35px] place-items-center rounded-[4px] text-lg',
+                'grid size-[35px] cursor-pointer place-items-center rounded-[4px] text-lg',
                 page === current ? 'bg-copper font-bold text-ink' : 'border border-border font-normal text-cream hover:border-copper hover:text-amber',
               )}
             >
@@ -144,7 +144,7 @@ export function CatalogPagination({ search, totalPages }: { search: CatalogSearc
             aria-label="Próxima página"
             aria-disabled={current >= totalPages}
             className={cn(
-              'grid size-[35px] place-items-center rounded-[4px] border border-border text-cream hover:border-copper hover:text-amber',
+              'grid size-[35px] cursor-pointer place-items-center rounded-[4px] border border-border text-cream hover:border-copper hover:text-amber',
               current >= totalPages && 'pointer-events-none opacity-40',
             )}
           >

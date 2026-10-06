@@ -55,9 +55,9 @@ export function useLogin() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: sessionApi.login,
-    onSuccess: async (s) => {
+    onSuccess: (s) => {
       beginSession(queryClient, s)
-      await adoptGuestCart(queryClient, s.user.id)
+      void adoptGuestCart(queryClient, s.user.id)
     },
   })
 }
@@ -66,9 +66,9 @@ export function useRegister() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: sessionApi.register,
-    onSuccess: async (s) => {
+    onSuccess: (s) => {
       beginSession(queryClient, s)
-      await adoptGuestCart(queryClient, s.user.id)
+      void adoptGuestCart(queryClient, s.user.id)
     },
   })
 }

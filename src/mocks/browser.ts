@@ -4,6 +4,9 @@ import { mockControl, resetMocks } from './control'
 import { findScenario, scenarioState } from './scenarios'
 import { settleDue } from './domain/orders'
 import { db, MOCK_DB_KEY } from './db/store'
+import { realtimeBus } from './realtime/bus'
+import { realtimeTransport } from './realtime/transport'
+import './realtime/socket'
 
 /**
  * Inicializa o MSW (Service Worker) e a API de controle `window.__mock`.
@@ -30,6 +33,7 @@ export async function startMocks() {
   })
 
   window.__mock = mockControl
+  realtimeBus.subscribe((event) => realtimeTransport.deliver(event))
   // Pedidos pendentes que venceram enquanto a página estava fechada são concluídos agora.
   settleDue()
   if (import.meta.env.DEV) console.info(`[mocks] cenário ativo: ${scenarioState.activeId()}`)
