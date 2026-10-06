@@ -7,15 +7,15 @@ import { useSessionSnapshot } from '@/features/session/session-store'
 import { useNotAvailable } from '@/components/common/NotAvailable'
 import { cn } from '@/lib/utils'
 
-export function MobileTopBar({ onOpenFilters }: { onOpenFilters?: () => void }) {
+export function MobileTopBar({ onOpenFilters, initialQuery = '' }: { onOpenFilters?: () => void; initialQuery?: string }) {
   const navigate = useNavigate()
-  const [q, setQ] = useState('')
+  const [q, setQ] = useState(initialQuery)
   function submit(e: FormEvent) {
     e.preventDefault()
     void navigate({ to: '/', search: q.trim() ? { q: q.trim() } : {}, hash: 'catalogo' })
   }
   return (
-    <div className="flex items-center gap-2 px-6 pt-10 lg:hidden">
+    <div className="flex items-center gap-2 px-[var(--page-gutter)] pt-10 lg:hidden">
       <form role="search" onSubmit={submit} className="flex h-[45px] flex-1 items-center gap-2 rounded-[10px] bg-surface px-3">
         <label htmlFor="mobile-search" className="sr-only">
           Explorar coleções

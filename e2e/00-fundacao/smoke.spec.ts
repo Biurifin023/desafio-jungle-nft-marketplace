@@ -3,7 +3,7 @@ import { expect, resetScenario, test } from '../fixtures'
 test.describe('fundação', () => {
   test('sobe a aplicação com mocks e header', async ({ page }) => {
     await resetScenario(page, 'fast')
-    await expect(page.getByRole('heading', { name: /seja dono do futuro/i })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1, name: /seja dono/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /início/i }).first()).toBeVisible()
     await expect(page).toHaveTitle(/início/i)
   })
