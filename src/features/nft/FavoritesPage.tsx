@@ -63,9 +63,9 @@ export function FavoritesPage() {
           }
         />
       ) : (
-        <ul className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+        <ul data-testid="favorites-list" className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
           {nfts.map((nft) => (
-            <li key={nft.id}>
+            <li key={nft.id} data-testid="favorite-id">
               <FavoriteItem nft={nft} />
             </li>
           ))}

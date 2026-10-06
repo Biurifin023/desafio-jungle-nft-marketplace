@@ -2,6 +2,7 @@ import { Outlet, useMatches } from '@tanstack/react-router'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { MobileTabBar } from './MobileChrome'
+import { useSession } from '@/api/session'
 import { SessionBanner } from '@/features/session/SessionBanner'
 import { LiveRegion } from '@/components/common/LiveRegion'
 import { NotAvailableProvider } from '@/components/common/NotAvailable'
@@ -10,6 +11,7 @@ import { usePageTitle } from '@/lib/use-page-title'
 import { cn } from '@/lib/utils'
 
 export function AppShell() {
+  useSession()
   const matches = useMatches()
   const title = [...matches].reverse().find((m) => m.staticData?.title)?.staticData.title
   const chrome = [...matches].reverse().find((m) => m.staticData?.mobileChrome)?.staticData.mobileChrome
@@ -26,7 +28,7 @@ export function AppShell() {
       <main id="conteudo" className={cn('min-h-[50vh]', chrome !== 'none' && 'pb-28 lg:pb-0')}>
         <Outlet />
       </main>
-      <Footer />
+      {chrome !== 'none' ? <Footer /> : null}
       <MobileTabBar />
       <Toaster position="top-right" />
     </NotAvailableProvider>

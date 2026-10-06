@@ -1,5 +1,5 @@
 ﻿import { queryOptions, useMutation, useQuery, useQueryClient, type QueryClient } from '@tanstack/react-query'
-import { CurrentSessionResponse, SessionResponse, type LoginInput, type RegisterInput } from './contracts'
+import { CurrentSessionResponse, SessionResponse, type LoginInput, type RegisterInput, type User } from './contracts'
 import { cartApi } from './cart'
 import { qk } from './query-keys'
 import { http, request } from '@/lib/http'
@@ -45,12 +45,18 @@ async function adoptGuestCart(queryClient: QueryClient, userId: string) {
   }
 }
 
+function beginSession(queryClient: QueryClient, s: { token: string; user: User; expiresAt: string }) {
+  disconnectSocket()
+  clearPrivateCache(queryClient)
+  sessionStore.signIn(s.token, s.user, s.expiresAt)
+}
+
 export function useLogin() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: sessionApi.login,
     onSuccess: async (s) => {
-      sessionStore.signIn(s.token, s.user, s.expiresAt)
+      beginSession(queryClient, s)
       await adoptGuestCart(queryClient, s.user.id)
     },
   })
@@ -61,7 +67,7 @@ export function useRegister() {
   return useMutation({
     mutationFn: sessionApi.register,
     onSuccess: async (s) => {
-      sessionStore.signIn(s.token, s.user, s.expiresAt)
+      beginSession(queryClient, s)
       await adoptGuestCart(queryClient, s.user.id)
     },
   })
