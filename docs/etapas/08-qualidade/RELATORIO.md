@@ -27,7 +27,7 @@ pnpm test:e2e
 
 Os 4 pulos são intencionais: drawer de filtros só no mobile, zoom da galeria só no desktop e os 2 testes responsivos só no projeto desktop (eles trocam o viewport sozinhos).
 
-> Atualização posterior: com `e2e/09-correcoes` e `e2e/10-ajustes`, a suíte tem 154 testes (141 executados e 13 pulados). Os pulos novos seguem a mesma regra de viewport: um teste de correção, o slider de preço, o rodapé e a aba de detalhes, que só aparecem no layout desktop, os testes dos campos do colecionador no checkout (o layout mobile mostra só a escolha da carteira) e o teste do pagamento com carteira, que só existe no mobile.
+> Atualização posterior: com `e2e/09-correcoes` e `e2e/10-ajustes`, a suíte tem 156 testes (142 executados e 14 pulados). Os pulos novos seguem a mesma regra de viewport: um teste de correção, o slider de preço, o rodapé e a aba de detalhes, que só aparecem no layout desktop, os testes dos campos do colecionador no checkout (o layout mobile mostra só a escolha da carteira) e os testes do pagamento com carteira e do contador do carrinho na barra de compra, que só existem no mobile.
 
 ## Lighthouse (mediana)
 
