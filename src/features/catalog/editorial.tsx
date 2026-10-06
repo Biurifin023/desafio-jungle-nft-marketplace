@@ -85,7 +85,7 @@ export function CatalogBlog() {
       </header>
       <ul className="grid w-full grid-cols-4 gap-6">
         {BLOG_POSTS.map((post) => (
-          <li key={post.title} className="min-w-0 overflow-hidden rounded-lg bg-surface">
+          <li key={post.title} className="flex min-w-0 flex-col overflow-hidden rounded-lg bg-surface">
             <img
               src={`${post.image}-640.webp`}
               alt={post.alt}
@@ -93,11 +93,12 @@ export function CatalogBlog() {
               height={195}
               className="h-[195px] w-full object-cover"
             />
-            <div className="flex flex-col gap-2 px-4 py-3">
+            {/* Título e resumo reservam duas linhas para os cards ficarem alinhados entre si. */}
+            <div className="flex flex-1 flex-col gap-2 px-4 py-3">
               <p className="text-xs font-medium leading-4 text-sand">{post.meta}</p>
-              <h3 className="text-base leading-[21px] font-bold text-cream">{post.title}</h3>
-              <p className="text-xs font-medium leading-4 text-sand">{post.excerpt}</p>
-              <NotAvailableLink feature={post.title} className="inline-flex items-center gap-1 text-xs font-bold text-amber">
+              <h3 className="line-clamp-2 min-h-[42px] text-base leading-[21px] font-bold text-cream">{post.title}</h3>
+              <p className="line-clamp-2 min-h-8 text-xs font-medium leading-4 text-sand">{post.excerpt}</p>
+              <NotAvailableLink feature={post.title} className="mt-auto inline-flex w-fit items-center gap-1 text-xs font-bold text-amber">
                 Ler mais <span aria-hidden>→</span>
               </NotAvailableLink>
             </div>

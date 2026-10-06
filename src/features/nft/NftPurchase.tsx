@@ -1,5 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import type { Edition } from '@/api/contracts'
+import { useCartCount } from '@/api/cart'
+import { CartBadge } from '@/components/layout/Header'
 import { CartIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { formatEth } from '@/lib/money'
@@ -69,6 +71,7 @@ export function NftMobilePurchase({
   pending: boolean
   allSoldOut: boolean
 }) {
+  const cartCount = useCartCount()
   const soldOut = allSoldOut || isEditionSoldOut(edition)
   const label = buyLabel(edition, allSoldOut) ?? 'Comprar NFT'
   const max = editionLimit(edition)
@@ -96,8 +99,11 @@ export function NftMobilePurchase({
             {label}
           </Button>
           <Button asChild variant="secondary" size="icon-lg" className="border border-border bg-surface-2">
-            <Link to="/cart" aria-label="Abrir carrinho">
-              <CartIcon aria-hidden className="size-5 text-khaki" />
+            <Link to="/cart" aria-label={`Abrir carrinho, ${cartCount} ${cartCount === 1 ? 'item' : 'itens'}`}>
+              <span className="relative">
+                <CartIcon aria-hidden className="size-5 text-khaki" />
+                <CartBadge count={cartCount} className="-top-1.5 -right-2.5" />
+              </span>
             </Link>
           </Button>
         </div>

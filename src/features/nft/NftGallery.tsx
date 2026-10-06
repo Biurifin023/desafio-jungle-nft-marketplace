@@ -23,11 +23,11 @@ export function NftGallery({ images, name }: { images: ImageRef[]; name: string 
                 aria-label={`Ver imagem ${index + 1} de ${name}`}
                 aria-current={selected ? 'true' : undefined}
                 className={cn(
-                  'size-[100px] overflow-hidden rounded-lg border bg-surface',
+                  'size-[100px] cursor-pointer overflow-hidden rounded-lg border-[3px] bg-surface transition-colors',
                   selected ? 'border-copper' : 'border-transparent hover:border-copper/50',
                 )}
               >
-                <NftImage image={image} sizes="100px" decorative className="size-[100px]" />
+                <NftImage image={image} sizes="100px" decorative className="size-full" />
               </button>
             </li>
           )

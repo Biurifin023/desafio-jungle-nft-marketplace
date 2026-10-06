@@ -25,6 +25,19 @@ test.describe('2. acesso direto e 404', () => {
     await expect(buy).toBeVisible()
     await expect(buy).toBeDisabled()
   })
+
+  test('comprar no mobile mostra a contagem no atalho do carrinho', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'O atalho do carrinho fica na barra de compra do mobile.')
+    await resetScenario(page, 'fast')
+    await page.goto('/nft/emerald-ape-042')
+    const cart = page.getByRole('link', { name: /^Abrir carrinho/ })
+    await expect(cart).toHaveAccessibleName('Abrir carrinho, 0 itens')
+    await expect(cart.getByTestId('cart-badge')).toHaveCount(0)
+
+    await page.getByRole('button', { name: 'Comprar NFT' }).click()
+    await expect(cart.getByTestId('cart-badge')).toHaveText('1')
+    await expect(cart).toHaveAccessibleName('Abrir carrinho, 1 item')
+  })
 })
 
 test.describe('4. favoritos', () => {
