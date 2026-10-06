@@ -67,8 +67,10 @@ function normalize(error: AxiosError): ApiRequestError {
     ? parsed.data.error
     : { code: status >= 500 ? ('internal' as const) : ('conflict' as const), message: 'Erro inesperado.', retryable: status >= 500, fields: undefined, details: undefined }
 
-  const sentToken = Boolean(error.config?.headers?.Authorization)
-  if (status === 401 && sentToken) sessionStore.expire()
+  // Um 401 de uma requisição feita com um token anterior (troca de conta) não derruba a sessão atual.
+  const sentAuth = error.config?.headers?.Authorization
+  const currentToken = sessionStore.token()
+  if (status === 401 && currentToken && sentAuth === `Bearer ${currentToken}`) sessionStore.expire()
 
   return new ApiRequestError(body.message, 'http', status, body.code, body.retryable, body.fields ?? {}, body.details)
 }

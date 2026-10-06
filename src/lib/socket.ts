@@ -28,7 +28,6 @@ export function connectSocket() {
     path: '/socket.io',
     transports: ['websocket'],
     auth: { token },
-    query: token ? { token } : {},
     reconnection: true,
     reconnectionDelay: 400,
     reconnectionAttempts: Infinity,

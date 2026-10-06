@@ -30,6 +30,8 @@ export function FavoriteButton({
       void navigate({ to: '/login', search: { redirect: location.href } })
       return
     }
+    // Cliques repetidos durante a requisição desfariam a atualização otimista antes da resposta.
+    if (toggle.isPending) return
     const next = !isFavorite
     toggle.mutate(
       { nftId, favorite: next },
@@ -50,6 +52,7 @@ export function FavoriteButton({
         type="button"
         aria-label={label}
         aria-pressed={isFavorite}
+        aria-busy={toggle.isPending || undefined}
         onClick={onToggle}
         className={cn(
           'grid size-[35px] place-items-center rounded-full border border-border bg-surface-2 text-amber',
@@ -67,6 +70,7 @@ export function FavoriteButton({
       variant="outline"
       aria-label={label}
       aria-pressed={isFavorite}
+      aria-busy={toggle.isPending || undefined}
       onClick={onToggle}
       className={cn('h-10 w-[130px] gap-2 font-medium text-amber', className)}
     >

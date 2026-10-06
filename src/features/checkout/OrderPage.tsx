@@ -27,7 +27,7 @@ export function OrderPage({ orderId }: { orderId: string }) {
   const query = useOrder(orderId)
 
   if (query.isPending) return <p className="page-container py-16 text-sand">Carregando pedido…</p>
-  if (query.isError) {
+  if (query.isError && !query.data) {
     if (isApiError(query.error) && query.error.status === 404) return <OrderNotFound />
     return <ErrorState className="page-container py-16" error={query.error} onRetry={() => void query.refetch()} />
   }

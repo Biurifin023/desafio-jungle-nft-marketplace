@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react'
-import type { User } from '@/api/contracts'
+import { z } from 'zod'
+import { User } from '@/api/contracts'
 import { STORAGE_KEYS, local } from '@/lib/storage'
 
 /**
@@ -12,9 +13,16 @@ export type SessionSnapshot =
 
 type Listener = (next: SessionSnapshot, prev: SessionSnapshot) => void
 
+const StoredSession = z.object({ token: z.string().min(1), user: User, expiresAt: z.string() })
+
+/** O localStorage pode ter sido editado ou vir de uma versão antiga: dados inválidos são descartados. */
 function load(): SessionSnapshot {
-  const stored = local.get<{ token: string; user: User; expiresAt: string }>(STORAGE_KEYS.session)
-  return stored ? { status: 'authenticated', ...stored } : { status: 'anonymous' }
+  const raw = local.get<unknown>(STORAGE_KEYS.session)
+  if (raw == null) return { status: 'anonymous' }
+  const stored = StoredSession.safeParse(raw)
+  if (stored.success) return { status: 'authenticated', ...stored.data }
+  local.remove(STORAGE_KEYS.session)
+  return { status: 'anonymous' }
 }
 
 let snapshot: SessionSnapshot = typeof window === 'undefined' ? { status: 'anonymous' } : load()

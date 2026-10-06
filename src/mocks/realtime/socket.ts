@@ -20,11 +20,16 @@ type Client = {
 const clients = new Set<Client>()
 let offline = false
 
-function userIdFromUrl(raw: string | URL) {
+/**
+ * O token chega no `auth` do pacote CONNECT do namespace padrão (`40{"token":...}`),
+ * nunca na URL, para não vazar em logs de acesso e histórico.
+ */
+function userIdFromConnectPacket(data: unknown) {
+  if (typeof data !== 'string' || !data.startsWith('40')) return undefined
   try {
-    const url = typeof raw === 'string' ? new URL(raw, 'http://localhost') : raw
-    const token = url.searchParams.get('token')
-    if (!token) return null
+    const auth: unknown = JSON.parse(data.slice(2) || '{}')
+    const token = auth && typeof auth === 'object' && 'token' in auth ? auth.token : null
+    if (typeof token !== 'string') return null
     const session = db.get().sessions.find((s) => s.token === token && !s.revoked && Date.parse(s.expiresAt) > Date.now())
     return session?.userId ?? null
   } catch {
@@ -71,10 +76,14 @@ export const realtimeHandlers = [
     const io = toSocketIo(connection)
     const client: Client = {
       emit: (event, data) => io.client.emit(event, data),
-      userId: userIdFromUrl(connection.client.url),
+      userId: null,
       close: () => connection.client.close(),
     }
     clients.add(client)
+    connection.client.addEventListener('message', (event) => {
+      const userId = userIdFromConnectPacket(event.data)
+      if (userId !== undefined) client.userId = userId
+    })
     connection.client.addEventListener('close', () => {
       clients.delete(client)
     })
