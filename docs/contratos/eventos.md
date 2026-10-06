@@ -1,6 +1,6 @@
 # Eventos Socket.IO
 
-Transporte: `socket.io-client` no cliente. Nos mocks, `@mswjs/socket.io-binding` (Etapa 7). Até lá, `src/mocks/realtime/transport.ts` é um no-op e os eventos ficam no barramento em memória.
+Transporte: `socket.io-client` no cliente (`src/lib/socket.ts`). Nos mocks, `@mswjs/socket.io-binding` em `src/mocks/realtime/socket.ts`. Mutações do DB publicam em `realtimeBus`; o transporte entrega aos sockets conectados.
 
 Todo evento carrega:
 
@@ -49,4 +49,5 @@ Privado (`userId`). Só chega às conexões autenticadas daquele usuário.
 
 - O binding Socket.IO do MSW não replica um cluster real: reconexão, salas e auth via handshake são simulados no worker do navegador.
 - Eventos disparados por `__mock.updateNft` / mutações do DB passam pelo mesmo barramento que o cliente escuta.
-- Sem a Etapa 7, `deliver()` não chega ao `socket.io-client`.
+- O MSW remove o prefixo `/socket.io/` antes de casar o handler; o link é `/.*/` e conexões que não são Socket.IO (HMR) passam adiante.
+- `engine.io-client` captura `WebSocket` na carga do módulo. O app só é importado depois de `startMocks()` (`src/main.tsx`) para o interceptor do MSW estar ativo.
