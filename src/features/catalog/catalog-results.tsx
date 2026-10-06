@@ -84,7 +84,7 @@ export function CatalogGrid({
     return (
       <ul className="grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-[72px]" data-testid="catalog-skeleton">
         {Array.from({ length: 6 }, (_, i) => (
-          <li key={i} className={cn('min-w-0', i % 2 === 1 && 'pt-8 lg:pt-0')}>
+          <li key={i} className="min-w-0">
             <NftCardSkeleton />
           </li>
         ))}
@@ -95,7 +95,7 @@ export function CatalogGrid({
   return (
     <ul className="grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-[72px]" data-testid="nft-grid">
       {items.map((nft, i) => (
-        <li key={nft.id} className={cn('min-w-0', i % 2 === 1 && 'pt-8 lg:pt-0')}>
+        <li key={nft.id} className="min-w-0">
           <NftCard nft={nft} priority={i < 2} />
         </li>
       ))}

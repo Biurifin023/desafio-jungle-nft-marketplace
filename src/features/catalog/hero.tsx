@@ -58,7 +58,7 @@ export function CatalogHero({
   return (
     <>
       <DesktopHero current={current} controls={controls} interaction={interaction} />
-      <MobileHero current={current} secondary={slides[1] ?? current} controls={controls} interaction={interaction} />
+      <MobileHero current={current} controls={controls} interaction={interaction} />
     </>
   )
 }
@@ -129,12 +129,10 @@ function DesktopHero({
 
 function MobileHero({
   current,
-  secondary,
   controls,
   interaction,
 }: {
   current?: NftSummary
-  secondary?: NftSummary
   controls: HeroControls
   interaction: HeroInteraction
 }) {
@@ -159,22 +157,8 @@ function MobileHero({
             <ArrowRightIcon className="size-4 text-copper" />
           </Link>
         </div>
-        <div className="relative h-[146px] w-[138px] shrink-0">
-          {current ? (
-            <NftImage
-              image={current.image}
-              sizes="138px"
-              priority
-              className="absolute top-0 left-0 size-[138px] rounded-2xl"
-            />
-          ) : null}
-          {secondary ? (
-            <NftImage
-              image={secondary.image}
-              sizes="58px"
-              className="absolute right-0 bottom-0 size-[58px] rounded-2xl"
-            />
-          ) : null}
+        <div className="size-[138px] shrink-0">
+          {current ? <NftImage image={current.image} sizes="138px" priority className="size-full rounded-2xl" /> : null}
         </div>
       </div>
       <HeroDots {...controls} className="mt-2 justify-center" />

@@ -87,7 +87,8 @@ test.describe('catálogo', () => {
     await resetScenario(page, 'fast')
     await searchCatalog(page, info.project.name, 'Golden')
     await expect(page).toHaveURL(/q=Golden/)
-    await expect(page.getByRole('link', { name: /golden beat #207/i })).toBeVisible()
+    const grid = page.getByTestId('nft-grid')
+    await expect(grid.getByRole('link', { name: /golden beat #207/i })).toBeVisible()
 
     await page.getByRole('link', { name: /página 2/i }).click()
     await expect(page).toHaveURL(/page=2/)
@@ -96,7 +97,7 @@ test.describe('catálogo', () => {
     await page.goBack()
     await expect(page).toHaveURL(/q=Golden/)
     await expect(page).not.toHaveURL(/page=2/)
-    await expect(page.getByRole('link', { name: /golden beat #207/i })).toBeVisible()
+    await expect(grid.getByRole('link', { name: /golden beat #207/i })).toBeVisible()
   })
 
   test('cenário empty mostra estado vazio', async ({ page }) => {

@@ -88,6 +88,8 @@ Limitação: o binding no navegador não replica cluster nem salas. Auth vai no 
 - Skeletons com shimmer respeitam `prefers-reduced-motion`.
 - Pontos do carrossel de destaques: o ponto visual continua com 8 px, mas cada botão tem área de toque de 24 px (WCAG 2.5.8). Os pontos ficam 16 px mais espaçados que no Figma.
 - Busca mobile: o contêiner ganha anel âmbar quando o campo recebe foco por teclado (o Figma não define estado de foco).
+- Grid do catálogo no mobile: no Figma a coluna da direita desce 32 px, formando um mosaico escalonado. Alinhamos as duas colunas (`catalog-results.tsx`, no grid e no skeleton). Foi uma mudança visual, por acreditarmos que o grid alinhado fica visualmente melhor e melhora a experiência do usuário: cada linha lê como um par e a comparação de nome e preço lado a lado fica mais fácil.
+- Destaque (hero) no mobile: o Figma sobrepõe uma miniatura de 58 px do próximo destaque no canto da imagem principal. Removemos a miniatura e mantemos só a imagem principal (`hero.tsx`). Também foi uma mudança visual, pelo mesmo motivo: a composição fica mais limpa, a miniatura não cobre a arte em destaque e não sugere um toque que não existia.
 
 ## Deploy
 
