@@ -23,7 +23,6 @@ export function NftCard({ nft, priority = false }: { nft: NftSummary; priority?:
           to="/nft/$id"
           params={{ id: nft.id }}
           className="group flex flex-col gap-2 lg:gap-3"
-          aria-label={`${nft.name}, ${price}`}
         >
           <div
             className={cn(

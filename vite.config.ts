@@ -13,7 +13,11 @@ export default defineConfig({
     svgr({ svgrOptions: { dimensions: false } }),
   ],
   resolve: {
-    alias: { '@': path.resolve(import.meta.dirname, 'src') },
+    alias: [
+      { find: '@', replacement: path.resolve(import.meta.dirname, 'src') },
+      // O cookie store do MSW não é usado (auth por Bearer); ver src/mocks/vendor/tough-cookie.ts.
+      { find: /^tough-cookie$/, replacement: path.resolve(import.meta.dirname, 'src/mocks/vendor/tough-cookie.ts') },
+    ],
   },
   server: { port: 5173 },
   preview: { port: 4173 },

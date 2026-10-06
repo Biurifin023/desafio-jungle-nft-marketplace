@@ -50,7 +50,10 @@ export function HomePage({
       <div className="page-container flex min-w-0 flex-col gap-16 overflow-x-clip pt-6 pb-8 lg:gap-24 lg:pt-8">
         <CatalogHero featured={featured.data} isPending={featured.isPending} />
 
-        <section id="catalogo" className="flex min-w-0 flex-col gap-8 scroll-mt-6 lg:flex-row lg:gap-12">
+        <section id="catalogo" aria-labelledby="catalogo-title" className="flex min-w-0 flex-col gap-8 scroll-mt-6 lg:flex-row lg:gap-12">
+          <h2 id="catalogo-title" className="sr-only">
+            Catálogo de NFTs
+          </h2>
           <aside className="hidden w-[310px] shrink-0 flex-col gap-6 lg:flex">
             <div className="bg-surface p-5">
               <CatalogFilters search={search} facets={facets} onPatch={patch} />

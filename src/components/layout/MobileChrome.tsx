@@ -16,7 +16,11 @@ export function MobileTopBar({ onOpenFilters, initialQuery = '' }: { onOpenFilte
   }
   return (
     <div className="flex items-center gap-2 px-[var(--page-gutter)] pt-10 lg:hidden">
-      <form role="search" onSubmit={submit} className="flex h-[45px] flex-1 items-center gap-2 rounded-[10px] bg-surface px-3">
+      <form
+        role="search"
+        onSubmit={submit}
+        className="flex h-[45px] flex-1 items-center gap-2 rounded-[10px] bg-surface px-3 has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-amber"
+      >
         <label htmlFor="mobile-search" className="sr-only">
           Explorar coleções
         </label>

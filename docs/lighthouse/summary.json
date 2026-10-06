@@ -1,0 +1,276 @@
+{
+  "generatedAt": "2026-10-06T04:07:13.146Z",
+  "config": "lighthouserc.cjs",
+  "baseURL": "http://127.0.0.1:4173",
+  "numberOfRuns": 3,
+  "targets": {
+    "performance": 90,
+    "accessibility": 95,
+    "best-practices": 95,
+    "seo": 90
+  },
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32 x64",
+    "lighthouse": "13.5.0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36"
+  },
+  "pages": {
+    "inicio-mobile": {
+      "url": "http://127.0.0.1:4173/?scenario=default",
+      "conditions": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "benchmarkIndex": 2981
+      },
+      "runs": {
+        "performance": [
+          72,
+          88,
+          87
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          100,
+          100,
+          100
+        ],
+        "lcpSeconds": [
+          3.6121271249999998,
+          3.506546700000001,
+          3.5228811249999996
+        ],
+        "cls": [
+          0.023869831840962488,
+          0.023869831840962488,
+          0.023869831840962488
+        ],
+        "tbtMs": [
+          501.5,
+          101,
+          93.5
+        ]
+      },
+      "medians": {
+        "performance": 87,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100,
+        "lcpSeconds": 3.52,
+        "cls": 0.024,
+        "tbtMs": 101
+      },
+      "belowTarget": [
+        "performance"
+      ]
+    },
+    "inicio-desktop": {
+      "url": "http://127.0.0.1:4173/?scenario=default",
+      "conditions": {
+        "formFactor": "desktop",
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "benchmarkIndex": 3062.5
+      },
+      "runs": {
+        "performance": [
+          98,
+          98,
+          99
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          100,
+          100,
+          100
+        ],
+        "lcpSeconds": [
+          1.0023535,
+          1.0108907499999997,
+          0.9347621500000002
+        ],
+        "cls": [
+          0.0004836997956773493,
+          0.0004836997956773493,
+          0.0004836997956773493
+        ],
+        "tbtMs": [
+          5,
+          8,
+          0
+        ]
+      },
+      "medians": {
+        "performance": 98,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100,
+        "lcpSeconds": 1,
+        "cls": 0,
+        "tbtMs": 5
+      },
+      "belowTarget": []
+    },
+    "detalhe-mobile": {
+      "url": "http://127.0.0.1:4173/nft/emerald-ape-042?scenario=default",
+      "conditions": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "benchmarkIndex": 3130
+      },
+      "runs": {
+        "performance": [
+          88,
+          88,
+          88
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          100,
+          100,
+          100
+        ],
+        "lcpSeconds": [
+          3.441514700000001,
+          3.4317421500000007,
+          3.32694975
+        ],
+        "cls": [
+          0,
+          0,
+          0
+        ],
+        "tbtMs": [
+          95,
+          116,
+          120.5
+        ]
+      },
+      "medians": {
+        "performance": 88,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100,
+        "lcpSeconds": 3.43,
+        "cls": 0,
+        "tbtMs": 116
+      },
+      "belowTarget": [
+        "performance"
+      ]
+    },
+    "detalhe-desktop": {
+      "url": "http://127.0.0.1:4173/nft/emerald-ape-042?scenario=default",
+      "conditions": {
+        "formFactor": "desktop",
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 40,
+          "throughputKbps": 10240,
+          "requestLatencyMs": 0,
+          "downloadThroughputKbps": 0,
+          "uploadThroughputKbps": 0,
+          "cpuSlowdownMultiplier": 1
+        },
+        "benchmarkIndex": 3110
+      },
+      "runs": {
+        "performance": [
+          99,
+          99,
+          99
+        ],
+        "accessibility": [
+          100,
+          100,
+          100
+        ],
+        "best-practices": [
+          100,
+          100,
+          100
+        ],
+        "seo": [
+          100,
+          100,
+          100
+        ],
+        "lcpSeconds": [
+          0.8655695,
+          0.8769109,
+          0.8922918499999999
+        ],
+        "cls": [
+          0.0001249472852933355,
+          0.0001249472852933355,
+          0.0001249472852933355
+        ],
+        "tbtMs": [
+          0,
+          0,
+          0
+        ]
+      },
+      "medians": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100,
+        "lcpSeconds": 0.88,
+        "cls": 0,
+        "tbtMs": 0
+      },
+      "belowTarget": []
+    }
+  }
+}

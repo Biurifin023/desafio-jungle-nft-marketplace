@@ -6,12 +6,14 @@ const baseURL = `http://127.0.0.1:${port}`
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
-  workers: process.env.CI ? 2 : 3,
-  workers: process.env.CI ? 2 : 2,
+  workers: 2,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   timeout: 60_000,
-  expect: { timeout: 10_000 },
+  expect: {
+    timeout: 10_000,
+    toHaveScreenshot: { maxDiffPixelRatio: 0.0005 },
+  },
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report' }]],
   use: {
     baseURL,
@@ -30,7 +32,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `pnpm exec cross-env VITE_ENABLE_MOCKS=true vite --host 127.0.0.1 --port ${port} --strictPort`,
+    command: `pnpm build:demo && pnpm exec vite preview --host 127.0.0.1 --port ${port} --strictPort`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

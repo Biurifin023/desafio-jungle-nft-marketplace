@@ -4,10 +4,16 @@
 
 Detalhe com galeria, edições, quantidade, adicionar ao carrinho, favorito otimista, 404, esgotado, relacionados e lista `/favorites`.
 
+## Fechamento
+
+- O preço `1.19 ETH` ficava duplicado (mobile/desktop) e oculto num dos layouts; o assert agora filtra o elemento visível.
+- Os timeouts no desktop vinham de 4 suítes rodando em paralelo contra o servidor dev. A suíte passou a rodar contra o build de preview.
+- O diálogo de zoom da galeria devolve o foco ao botão que o abriu (`useReturnFocus`).
+
 ## Playwright
 
-Acesso direto, 404, esgotado, visitante→login e rollback de favorito passaram no mobile. Desktop sofreu timeout por contenção ao rodar 4 suítes juntas. Skeleton em `slow` é sensível à corrida com o `load`.
+`e2e/02-detalhe`: 7 testes × 2 projetos (acesso direto, 404, esgotado, visitante → login, persistência e rollback de favorito, skeleton), todos verdes na suíte completa.
 
 ## Typecheck / lint
 
-Passaram nesta worktree.
+Passam.

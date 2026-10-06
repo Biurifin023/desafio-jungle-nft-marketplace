@@ -166,7 +166,7 @@ function HeroDots({
 }) {
   if (slides.length < 2) return null
   return (
-    <div className={cn('flex items-center gap-1.5', className)} role="tablist" aria-label="Destaques">
+    <div className={cn('-mx-2 flex items-center', className)} role="tablist" aria-label="Destaques">
       {slides.map((slide, i) => (
         <button
           key={slide.id}
@@ -175,8 +175,10 @@ function HeroDots({
           aria-selected={i === index}
           aria-label={`Destaque ${i + 1} de ${slides.length}`}
           onClick={() => onIndex(i)}
-          className={cn('size-2 rounded-full', i === index ? 'bg-copper' : 'bg-copper/40')}
-        />
+          className="grid size-6 cursor-pointer place-items-center rounded-full"
+        >
+          <span aria-hidden className={cn('size-2 rounded-full', i === index ? 'bg-copper' : 'bg-copper/40')} />
+        </button>
       ))}
     </div>
   )
