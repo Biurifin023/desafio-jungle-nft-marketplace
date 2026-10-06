@@ -1,4 +1,15 @@
-import { CART_EMERALD, connectCheckoutWallet, expect, loginAs, openCheckout, resetScenario, seedUserCart, test } from '../fixtures'
+import {
+  CART_EMERALD,
+  connectCheckoutWallet,
+  expect,
+  loginAs,
+  openCheckout,
+  openCollectorDetails,
+  resetScenario,
+  seedUserCart,
+  test,
+  waitForCheckoutWallet,
+} from '../fixtures'
 
 const isMobile = (project: string) => project.includes('mobile')
 const HOME_URL = /^https?:\/\/[^/]+\/(\?.*)?$/
@@ -33,13 +44,15 @@ test.describe('checkout: carteira conectada', () => {
 
 test.describe('checkout: rascunho por usuário', () => {
   test('o rascunho de um usuário não aparece para outro', async ({ page }, testInfo) => {
-    test.skip(isMobile(testInfo.project.name), 'O checkout mobile não exibe os dados do colecionador.')
+    const mobile = isMobile(testInfo.project.name)
     await openCheckout(page, 'fast')
+    await openCollectorDetails(page, mobile)
     await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
 
     await loginAs(page, 'bruno')
     await seedUserCart(page, [CART_EMERALD])
     await page.goto('/checkout')
+    await waitForCheckoutWallet(page)
     const displayName = page.getByLabel('Nome de exibição')
     await expect(displayName).not.toHaveValue('')
     await expect(displayName).not.toHaveValue('Ana Rascunho')
@@ -47,8 +60,8 @@ test.describe('checkout: rascunho por usuário', () => {
 
   test('sair apaga o rascunho e a tentativa da aba', async ({ page }, testInfo) => {
     await openCheckout(page, 'fast')
-    if (isMobile(testInfo.project.name)) await page.getByText('Reserva', { exact: true }).click()
-    else await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
+    await openCollectorDetails(page, isMobile(testInfo.project.name))
+    await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
     await expect.poll(() => page.evaluate(() => sessionStorage.getItem('kurio.checkoutDraft'))).not.toBeNull()
     await page.goto('/profile')
     await page.getByTestId('logout').click()

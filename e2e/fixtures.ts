@@ -90,6 +90,13 @@ export async function waitForCheckoutWallet(page: Page) {
   await expect(page.getByTestId('checkout-page')).toHaveAttribute('data-wallet', /.+/)
 }
 
+/** No mobile, os dados do colecionador ficam numa seção recolhível. */
+export async function openCollectorDetails(page: Page, isMobile: boolean) {
+  if (!isMobile) return
+  const section = page.locator('details').filter({ hasText: 'Dados do colecionador' })
+  if (!(await section.evaluate((el) => (el as HTMLDetailsElement).open))) await section.locator('summary').click()
+}
+
 /** O desktop conecta pelo botão; no mobile, "Confirmar compra" conecta antes de enviar. */
 export async function connectCheckoutWallet(page: Page, isMobile: boolean) {
   if (isMobile) return

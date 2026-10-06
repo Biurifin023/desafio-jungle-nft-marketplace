@@ -1,5 +1,5 @@
 import type { Locator, Page } from '@playwright/test'
-import { expect, openCheckout, resetScenario, test } from '../fixtures'
+import { expect, openCheckout, openCollectorDetails, resetScenario, test } from '../fixtures'
 
 const isMobile = (projectName: string) => projectName.includes('mobile')
 
@@ -119,8 +119,8 @@ test.describe('11. teclado, foco e validação', () => {
   })
 
   test('checkout associa erros de validação aos campos', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'O checkout mobile não exibe os dados do colecionador.')
     await openCheckout(page, 'fast')
+    await openCollectorDetails(page, isMobile)
     const displayName = page.getByLabel('Nome de exibição')
     await displayName.fill('')
     await page.getByTestId('confirm-order').click()

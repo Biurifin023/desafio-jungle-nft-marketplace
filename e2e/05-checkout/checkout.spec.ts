@@ -5,6 +5,7 @@ import {
   connectCheckoutWallet,
   expect,
   loginAs,
+  openCollectorDetails,
   resetScenario,
   seedUserCart,
   test,
@@ -54,6 +55,10 @@ test.describe('checkout mobile: pagamento com carteira', () => {
     await expect(page.getByRole('radio', { name: 'Coinbase Wallet' })).toBeChecked()
     await expect(page.getByText('Rede Polygon')).toBeVisible()
 
+    await page.getByText('Resumo', { exact: true }).click()
+    await expect(page.getByText('Subtotal')).toBeVisible()
+    await expect(page.getByText('Taxa de rede')).toBeVisible()
+
     await page.getByText('WalletConnect', { exact: true }).click()
     await expect(page.getByRole('dialog')).toBeVisible()
     await page.keyboard.press('Escape')
@@ -71,16 +76,17 @@ test.describe('checkout mobile: pagamento com carteira', () => {
 
 test.describe('sessão expirada durante o checkout', () => {
   test('preserva o rascunho e o carrinho e retoma o checkout após novo login', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'O checkout mobile não exibe os dados do colecionador; o rascunho é o mesmo do desktop.')
     await resetScenario(page, 'fast')
     await loginAs(page, 'ana')
     await seedUserCart(page, [CART_EMERALD])
     await page.goto('/checkout')
     await waitForCheckoutWallet(page)
+    await openCollectorDetails(page, isMobile)
     await page.getByLabel('Nome de exibição').fill('Ana Rascunho')
 
     await page.evaluate(() => window.__mock!.expireSessions())
-    await page.getByTestId('connect-wallet').click()
+    // No mobile não há botão de conectar: confirmar tenta conectar e recebe o 401.
+    await page.getByTestId(isMobile ? 'confirm-order' : 'connect-wallet').click()
     await expect(page.getByRole('alert').filter({ hasText: /sessão expirou/i })).toBeVisible()
     await page.getByRole('button', { name: /entrar novamente/i }).click()
     await expect(page).toHaveURL(/\/login\?redirect=/)

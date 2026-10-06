@@ -75,8 +75,8 @@ test.describe('estados de erro', () => {
     await page.getByTestId('confirm-order').click()
 
     await expect(page.getByText('Use um e-mail válido para o recibo.')).toBeVisible()
-    // No mobile os dados do colecionador não aparecem; o erro leva ao perfil.
-    if (isMobile) await expect(page.getByRole('link', { name: 'Revisar perfil' })).toBeVisible()
+    // No mobile a seção recolhível dos dados do colecionador abre sozinha para mostrar o erro.
+    if (isMobile) await expect(page.getByLabel('E-mail')).toBeVisible()
     else await expect(page.getByLabel('E-mail')).toBeFocused()
     await expect(page).toHaveURL(/\/checkout/)
   })

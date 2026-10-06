@@ -58,7 +58,7 @@ Limitação: o binding no navegador não replica cluster nem salas; o mock lê o
 5. `/orders/$id` só mostra recibo se `status === 'confirmed'`. Pending e declined têm telas próprias.
 6. Recibo é snapshot; o catálogo posterior não o altera.
 
-O desktop e o mobile renderizam árvores diferentes (`useDesktop`, breakpoint `lg`) sobre o mesmo formulário. No mobile (`MobileCheckout.tsx`, frame "Pagamento com carteira"), escolher o cartão da carteira define também a rede da cotação, e "Confirmar compra" conecta a carteira antes de enviar o pedido, porque o frame não tem botão de conectar. Os dados do colecionador vêm do perfil; se a API recusar algum, o erro aparece com link para o perfil.
+O desktop e o mobile renderizam árvores diferentes (`useDesktop`, breakpoint `lg`) sobre o mesmo formulário. No mobile (`MobileCheckout.tsx`, frame "Pagamento com carteira"), escolher o cartão da carteira define também a rede da cotação, e "Confirmar compra" conecta a carteira antes de enviar o pedido, porque o frame não tem botão de conectar. O frame mobile só mostra o total, então o detalhamento (subtotal, desconto, taxa) e os dados do colecionador ficam em seções recolhíveis (`<details>`) abaixo do total, fechadas por padrão; a de dados do colecionador abre sozinha quando a validação ou a API recusa algum campo.
 
 ## Acessibilidade
 

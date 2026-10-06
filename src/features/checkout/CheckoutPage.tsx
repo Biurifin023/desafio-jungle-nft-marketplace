@@ -27,6 +27,9 @@ const CheckoutSchema = CollectorDetails.extend({
 })
 type FormValues = z.infer<typeof CheckoutSchema>
 
+const COLLECTOR_FIELDS = ['displayName', 'username', 'profileName', 'referralCode', 'email', 'ensName'] as const
+type CollectorField = (typeof COLLECTOR_FIELDS)[number]
+
 type OrderPayload = Parameters<typeof ordersApi.create>[0]
 
 /** Rascunho e tentativa ficam no sessionStorage marcados com o dono; os de outro usuário são ignorados. */
@@ -294,8 +297,13 @@ export function CheckoutPage() {
     </>
   )
 
+  const collectorField = (name: CollectorField, label: string, type?: string) => (
+    <FormField label={label} error={form.formState.errors[name]?.message} required>
+      <Input type={type} {...form.register(name)} />
+    </FormField>
+  )
+
   if (!desktop) {
-    const collectorError = Object.entries(form.formState.errors).find(([name]) => name !== 'walletId')?.[1]?.message
     return (
       <MobileCheckout
         wallets={walletList}
@@ -310,16 +318,28 @@ export function CheckoutPage() {
             {loadError}
             {quoteError}
             {quoteNotices}
-            {collectorError ? (
-              <FormError>
-                {collectorError}{' '}
-                <Link to="/profile" className="font-bold underline">
-                  Revisar perfil
-                </Link>
-              </FormError>
-            ) : null}
           </>
         }
+        summary={
+          quote.data ? (
+            <dl className="space-y-2 text-sm text-cream">
+              <Row label="Subtotal" value={formatEth(quote.data.subtotalEth)} />
+              <Row label="Desconto" value={formatDiscount(quote.data.discountEth)} />
+              <Row label="Taxa de rede" value={formatEth(quote.data.networkFeeEth)} />
+            </dl>
+          ) : null
+        }
+        collectorFields={
+          <>
+            {collectorField('displayName', 'Nome de exibição')}
+            {collectorField('username', 'Nome de usuário')}
+            {collectorField('profileName', 'Nome do perfil')}
+            {collectorField('referralCode', 'Código de indicação')}
+            {collectorField('email', 'E-mail', 'email')}
+            {collectorField('ensName', 'ENS')}
+          </>
+        }
+        collectorInvalid={COLLECTOR_FIELDS.some((name) => form.formState.errors[name])}
         canSubmit={Boolean(quote.data?.valid)}
         busy={submitting || connecting}
         onSubmit={form.handleSubmit((values) => onSubmit(values, true))}
@@ -351,12 +371,8 @@ export function CheckoutPage() {
         <div>
           <h2 className="text-[17px] font-bold text-cream">Perfil do colecionador</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <FormField label="Nome de exibição" error={form.formState.errors.displayName?.message} required>
-              <Input {...form.register('displayName')} />
-            </FormField>
-            <FormField label="Nome de usuário" error={form.formState.errors.username?.message} required>
-              <Input {...form.register('username')} />
-            </FormField>
+            {collectorField('displayName', 'Nome de exibição')}
+            {collectorField('username', 'Nome de usuário')}
             <FormField label="Rede" required>
               <select
                 className={selectClassName}
@@ -370,9 +386,7 @@ export function CheckoutPage() {
                 ))}
               </select>
             </FormField>
-            <FormField label="Nome do perfil" error={form.formState.errors.profileName?.message} required>
-              <Input {...form.register('profileName')} />
-            </FormField>
+            {collectorField('profileName', 'Nome do perfil')}
             <FormField label="Carteira" error={form.formState.errors.walletId?.message} required>
               <select className={selectClassName} {...form.register('walletId', { onChange: () => setConnected(false) })}>
                 <option value="">Selecione uma carteira</option>
@@ -383,15 +397,9 @@ export function CheckoutPage() {
                 ))}
               </select>
             </FormField>
-            <FormField label="Código de indicação" error={form.formState.errors.referralCode?.message} required>
-              <Input {...form.register('referralCode')} />
-            </FormField>
-            <FormField label="E-mail" error={form.formState.errors.email?.message} required>
-              <Input type="email" {...form.register('email')} />
-            </FormField>
-            <FormField label="ENS" error={form.formState.errors.ensName?.message} required>
-              <Input {...form.register('ensName')} />
-            </FormField>
+            {collectorField('referralCode', 'Código de indicação')}
+            {collectorField('email', 'E-mail', 'email')}
+            {collectorField('ensName', 'ENS')}
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button type="button" variant="outline" onClick={() => void connect()} disabled={connecting} data-testid="connect-wallet">

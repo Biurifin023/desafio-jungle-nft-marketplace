@@ -1,8 +1,8 @@
-import type { FormEvent, ReactNode } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 import { Link } from '@tanstack/react-router'
 import { NETWORK_LABEL, WALLET_PROVIDER_LABEL, type Network, type Wallet, type WalletProvider } from '@/api/contracts'
 import { useNotAvailable } from '@/components/common/NotAvailable'
-import { ArrowLeftIcon, WalletIcon } from '@/components/icons'
+import { ArrowDownIcon, ArrowLeftIcon, WalletIcon } from '@/components/icons'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 
@@ -27,6 +27,9 @@ export function MobileCheckout({
   total,
   totalPending,
   status,
+  summary,
+  collectorFields,
+  collectorInvalid,
   canSubmit,
   busy,
   onSubmit,
@@ -40,12 +43,18 @@ export function MobileCheckout({
   totalPending: boolean
   /** Erros de carregamento, mudanças de preço e cotação vencida. */
   status: ReactNode
+  /** Subtotal, desconto e taxa; o frame mobile só mostra o total, então ficam numa seção recolhível. */
+  summary: ReactNode
+  collectorFields: ReactNode
+  collectorInvalid: boolean
   canSubmit: boolean
   busy: boolean
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
 }) {
   const unavailable = useNotAvailable()
   const selected = wallets.find((wallet) => wallet.id === walletId)
+  const [collectorOpen, setCollectorOpen] = useState(false)
+  if (collectorInvalid && !collectorOpen) setCollectorOpen(true)
 
   function selectProvider(provider: WalletProvider) {
     const wallet = wallets.find((w) => w.provider === provider)
@@ -185,6 +194,11 @@ export function MobileCheckout({
           )}
         </div>
         {status}
+
+        <Disclosure title="Resumo">{summary ?? <p className="text-sm text-sand">Calculando cotação…</p>}</Disclosure>
+        <Disclosure title="Dados do colecionador" open={collectorOpen} onToggle={setCollectorOpen}>
+          <div className="grid gap-5">{collectorFields}</div>
+        </Disclosure>
       </form>
 
       <button
@@ -197,6 +211,32 @@ export function MobileCheckout({
         {busy ? 'Enviando…' : 'Confirmar compra'}
       </button>
     </section>
+  )
+}
+
+function Disclosure({
+  title,
+  open,
+  onToggle,
+  children,
+}: {
+  title: string
+  open?: boolean
+  onToggle?: (open: boolean) => void
+  children: ReactNode
+}) {
+  return (
+    <details
+      open={open}
+      onToggle={onToggle ? (event) => onToggle(event.currentTarget.open) : undefined}
+      className="group rounded-[14px] bg-surface"
+    >
+      <summary className="flex h-[52px] cursor-pointer list-none items-center justify-between rounded-[14px] px-[19px] text-base leading-4 font-bold text-cream [&::-webkit-details-marker]:hidden">
+        {title}
+        <ArrowDownIcon aria-hidden className="size-5 text-khaki transition-transform group-open:rotate-180" />
+      </summary>
+      <div className="px-[19px] pb-5">{children}</div>
+    </details>
   )
 }
 
