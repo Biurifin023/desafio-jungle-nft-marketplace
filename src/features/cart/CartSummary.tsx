@@ -36,7 +36,7 @@ export function CartSummary({
       className="-mx-[var(--page-gutter)] mt-8 rounded-t-[40px] bg-surface px-[var(--page-gutter)] pt-6 pb-10 lg:mx-0 lg:mt-0 lg:w-[332px] lg:shrink-0 lg:rounded-none lg:bg-transparent lg:p-0"
     >
       <h2 id="cart-summary-title" className="hidden text-lg font-bold text-cream lg:block">
-        Resumo da carteira
+        Resumo do pedido
       </h2>
       <div className="mt-3 hidden border-b border-copper/30 lg:block" />
 

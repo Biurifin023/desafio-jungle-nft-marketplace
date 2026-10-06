@@ -87,7 +87,7 @@ function TabBar() {
             <TabHeartIcon className="size-5" />
           </TabLink>
           <li className="w-8" aria-hidden />
-          <TabLink to="/cart" label={`Carrinho, ${count} itens`} active={path === '/cart'}>
+          <TabLink to="/cart" label={`Carrinho, ${count} ${count === 1 ? 'item' : 'itens'}`} active={path === '/cart'}>
             <span className="relative">
               <TabShopIcon className="size-5" />
               <CartBadge count={count} className="-right-2" />

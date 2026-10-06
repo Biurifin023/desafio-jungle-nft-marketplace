@@ -80,10 +80,10 @@ export function NftStory({ nft }: { nft: Nft }) {
         <p className="text-sand">
           {shortAddress(nft.contract.address)} • Contrato inteligente {nft.contract.standard} verificado.
         </p>
-        <p className="font-bold text-cream">Direitos autorais:</p>
+        <p className="font-bold text-cream">Royalties:</p>
         <p className="text-sand">
-          Direitos autorais do criador: {nft.contract.royaltiesPct}% nas vendas secundárias, pagos automaticamente pelos
-          mercados compatíveis.
+          O criador recebe {nft.contract.royaltiesPct}% de cada revenda (royalties), pagos automaticamente pelos mercados
+          compatíveis.
         </p>
       </TabsContent>
       <TabsContent value="reviews" className="flex flex-col gap-3">

@@ -78,7 +78,7 @@ export function Footer() {
           <a className="text-sm text-cream hover:text-amber" href="mailto:contato@email.com">
             contato@email.com
           </a>
-          <a className="text-sm text-cream hover:text-amber" href="tel:+551140399999">
+          <a className="text-sm text-cream hover:text-amber" href="tel:+551140028922">
             +55 11 4002 8922
           </a>
         </div>

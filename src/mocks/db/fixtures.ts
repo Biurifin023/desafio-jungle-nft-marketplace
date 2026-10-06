@@ -120,7 +120,7 @@ function buildNft(index: number, name: string, art: Artwork, price: string, comp
     description: `Um colecionável digital finalizado à mão da coleção ${COLLECTIONS[collectionId]}, verificado na Ethereum, com arte desbloqueável e acesso para colecionadores.`,
     story: [
       `${name} é uma obra digital 1/50 finalizada à mão da coleção Kurio Editions. Cada atributo fica armazenado nos metadados do token e verificado na Ethereum. A obra explora identidade, movimento e luz em um mundo digital sem fronteiras.`,
-      `A propriedade inclui a arte em alta resolução, lançamentos exclusivos para colecionadores e um registro permanente de procedência registrada na rede. ${baseName} recebe 5% de direitos autorais nas vendas secundárias, apoiando novos trabalhos e lançamentos da comunidade.`,
+      `A propriedade inclui a arte em alta resolução, lançamentos exclusivos para colecionadores e um registro permanente de procedência registrada na rede. O criador de ${baseName} recebe 5% de royalties nas revendas, apoiando novos trabalhos e lançamentos da comunidade.`,
     ],
     creator: { name: 'Kurio Studio', handle: '@kurio.studio' },
     attributes: ART_ATTRIBUTES[art],
