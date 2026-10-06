@@ -220,7 +220,7 @@ export function CheckoutPage() {
         title="Seu carrinho está vazio"
         action={
           <Link to="/" className="text-amber underline">
-            Voltar ao mercado
+            Voltar ao catálogo
           </Link>
         }
       />
@@ -236,7 +236,7 @@ export function CheckoutPage() {
           Início
         </Link>
         <span> / </span>
-        <Link to="/" hash="catalogo" resetScroll={false} className="text-amber">
+        <Link to="/cart" className="text-amber">
           Mercado
         </Link>
         <span> / </span>

@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { NftDetailPage } from '@/features/nft/NftDetailPage'
 
 export const Route = createFileRoute('/nft/$id')({
-  staticData: { nav: 'mercado', title: 'Detalhe do NFT', mobileChrome: 'none' },
+  staticData: { nav: 'inicio', title: 'Detalhe do NFT', mobileChrome: 'none' },
   component: NftRoute,
 })
 

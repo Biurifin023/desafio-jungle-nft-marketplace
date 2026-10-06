@@ -259,7 +259,7 @@ export function CartEmpty() {
     <div data-testid="cart-empty">
       <EmptyState
         title="Seu carrinho está vazio"
-        description="Explore o mercado e adicione edições para ver o resumo da cotação aqui."
+        description="Explore o catálogo e adicione edições para ver o resumo da cotação aqui."
         action={
           <Button asChild>
             <Link to="/" hash="catalogo" resetScroll={false}>

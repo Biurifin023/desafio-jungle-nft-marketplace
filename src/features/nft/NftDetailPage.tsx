@@ -142,9 +142,13 @@ export function NftDetailPage({ id }: { id: string }) {
               Início
             </Link>
             <span aria-hidden> / </span>
-            <Link to="/" hash="catalogo" resetScroll={false} className="text-amber">
-              Mercado
+            <Link to="/" hash="catalogo" resetScroll={false} className="transition-colors hover:text-amber">
+              Catálogo
             </Link>
+            <span aria-hidden> / </span>
+            <span aria-current="page" className="text-amber">
+              {nft.name}
+            </span>
           </nav>
           <div className="flex items-start gap-8">
             <NftGallery images={nft.gallery} name={nft.name} />

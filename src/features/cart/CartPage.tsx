@@ -83,11 +83,7 @@ function CartBreadcrumb() {
         </BreadcrumbItem>
         <BreadcrumbSeparator className="text-cream [&>svg]:hidden">/</BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbLink asChild className="text-amber hover:text-amber">
-            <Link to="/" hash="catalogo" resetScroll={false}>
-              Mercado
-            </Link>
-          </BreadcrumbLink>
+          <span className="text-amber">Mercado</span>
         </BreadcrumbItem>
         <BreadcrumbSeparator className="text-cream [&>svg]:hidden">/</BreadcrumbSeparator>
         <BreadcrumbItem>
