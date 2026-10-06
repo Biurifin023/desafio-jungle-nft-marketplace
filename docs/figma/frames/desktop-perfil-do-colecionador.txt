@@ -1,0 +1,235 @@
+FRAME "Desktop / Perfil do Colecionador" [9:1238] @0,0 1440x1080 fill=#140d0a layout=VERTICAL gap=96 pad=24/120/24/120 align=/
+  FRAME "Top" [70386:264] @120,24 1200x803 layout=VERTICAL gap=32 pad=0/0/0/0 align=/
+    INSTANCE "Header With Divider" [70522:3267] @120,24 1200x45 layout=VERTICAL gap=0 pad=0/0/0/0 align=/
+      INSTANCE "Header Row" [I70522:3267;70504:3015] @120,24 1200x45 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+        FRAME "Logo" [I70522:3267;70504:3015;70486:509] @120,24 160x34
+          TEXT "KURIO Wordmark" [I70522:3267;70504:3015;70486:510] @120,32 48x18 fill=#f5f1eb font="Roboto Mono 700 14/18.5 ls=1.4000000000000001" text="KURIO"
+        FRAME "Nav" [I70522:3267;70504:3015;70486:511] @496,24 401x45 layout=HORIZONTAL gap=40 pad=0/0/0/0 align=/
+          FRAME "Nav Item" [I70522:3267;70504:3015;70486:512] @496,24 58x45 layout=VERTICAL gap=24 pad=0/0/0/0 align=/
+            TEXT "Início" [I70522:3267;70504:3015;70486:513] @496,24 58x21 fill=#e89b55 font="Roboto Mono 700 16/21.1 ls=0" text="Início"
+            LINE "Active Underline" [I70522:3267;70504:3015;70486:514] @496,69 58x0 stroke=#d28a4c/3
+          TEXT "Mercado" [I70522:3267;70504:3015;70486:515] @594,24 68x21 fill=#f5f1eb font="Roboto Mono 400 16/21.1 ls=0" text="Mercado"
+          TEXT "Criadores" [I70522:3267;70504:3015;70486:516] @702,24 87x21 fill=#f5f1eb font="Roboto Mono 400 16/21.1 ls=0" text="Criadores"
+          TEXT "Aprenda" [I70522:3267;70504:3015;70486:517] @829,24 68x21 fill=#f5f1eb font="Roboto Mono 400 16/21.1 ls=0" text="Aprenda"
+        FRAME "Header Actions" [I70522:3267;70504:3015;70486:518] @1113,24 207x35 layout=HORIZONTAL gap=28 pad=0/0/0/0 align=/CENTER
+          VECTOR "Search Icon" [I70522:3267;70504:3015;70486:519] @1113,32 20x20 fill=#f5f1eb
+          GROUP "Cart" [I70522:3267;70504:3015;70486:520] @1161,30 31x24
+            VECTOR "Cart Icon" [I70522:3267;70504:3015;70486:521] @1161,30 24x24 fill=#f5f1eb
+            ELLIPSE "Badge" [I70522:3267;70504:3015;70486:522] @1176,30 16x16 fill=#d28a4c stroke=#140d0a/2
+            TEXT "Badge Count" [I70522:3267;70504:3015;70486:523] @1181,31 7x13 fill=#140d0a font="Roboto Mono 500 10/13.2 ls=0" text="6"
+          GROUP "Login" [I70522:3267;70504:3015;70486:524] @1220,24 100x35 radius=6
+            FRAME "Login Button" [I70522:3267;70504:3015;70486:525] @1220,24 100x35 fill=#d28a4c radius=6 layout=VERTICAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+              FRAME "Login Button Content" [I70522:3267;70504:3015;70486:526] @1229,31 82x21 layout=HORIZONTAL gap=4 pad=0/0/0/0 align=/
+                INSTANCE "Iconly/Curved/Logout" [I70522:3267;70504:3015;70486:527] @1229,31 20x20
+                  GROUP "Logout" [I70522:3267;70504:3015;70486:527;29221:4777] @1231,34 20x19
+                    VECTOR "Stroke 1" [I70522:3267;70504:3015;70486:527;29221:4778] @1237,41 10x1 stroke=#140d0a/1.5
+                    VECTOR "Stroke 3" [I70522:3267;70504:3015;70486:527;29221:4779] @1245,39 2x5 stroke=#140d0a/1.5
+                    VECTOR "Stroke 4" [I70522:3267;70504:3015;70486:527;29221:4780] @1231,33 12x15 stroke=#140d0a/1.5
+                TEXT "Entrar" [I70522:3267;70504:3015;70486:528] @1253,31 58x21 fill=#140d0a font="Roboto Mono 500 16/21.1 ls=0" text="Entrar"
+      LINE "Line 1" [I70522:3267;70504:3016] @120,69 1200x0 stroke=#d28a4c/0.30000001192092896
+    FRAME "Body" [70386:263] @120,101 1200x726 layout=HORIZONTAL gap=28 pad=0/0/0/0 align=/
+      FRAME "Account Sidebar" [70420:4536] @120,101 310x407 fill=#241612 layout=VERTICAL gap=0 pad=8/0/8/0 align=/
+        FRAME "Frame 457" [70420:4537] @120,109 129x36 layout=HORIZONTAL gap=10 pad=10/10/10/10 align=CENTER/CENTER
+          TEXT "Meu perfil" [70420:4538] @130,119 109x16 fill=#f5f1eb font="Roboto Mono 700 18/16 ls=0" text="Meu perfil"
+        FRAME "Frame 459" [70420:4539] @120,145 310x45 stroke=#d28a4c/1 layout=VERTICAL gap=0 pad=0/16/0/16 align=CENTER/
+          FRAME "Frame 458" [70420:4540] @136,145 278x45 layout=HORIZONTAL gap=16 pad=0/0/0/0 align=/CENTER
+            INSTANCE "User" [70420:4541] @136,159 18x18
+              VECTOR "Vector" [I70420:4541;9:1444] @139,160 12x15 fill=#d28a4c
+            TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4542] @170,145 136x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Dados do perfil"
+        FRAME "Frame 460" [70420:4543] @120,190 310x45 layout=HORIZONTAL gap=12 pad=0/16/0/16 align=/CENTER
+          INSTANCE "Iconly/Light-Outline/Location" [70420:4544] @136,203 20x20
+            GROUP "Location" [I70420:4544;33437:4982] @139,204 14x16
+              BOOLEAN_OPERATION "Fill 1" [I70420:4544;33437:4983] @144,208 5x5 fill=#b39463
+                VECTOR "Path" [I70420:4544;33437:4984] @145,210 3x3
+                VECTOR "Path" [I70420:4544;33437:4985] @144,208 5x5
+              GROUP "Group 5" [I70420:4544;33437:4986] @139,204 14x16
+                VECTOR "Clip 4" [I70420:4544;33437:4987] @139,204 14x16 fill=#000000
+                BOOLEAN_OPERATION "Fill 3" [I70420:4544;33437:4988] @139,204 14x16 fill=#b39463
+                  VECTOR "Path" [I70420:4544;33437:4989] @141,205 11x14
+                  VECTOR "Path" [I70420:4544;33437:4990] @139,204 14x16
+          TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4545] @168,190 82x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Carteiras"
+        FRAME "Frame 461" [70420:4546] @120,235 310x45 layout=HORIZONTAL gap=12 pad=0/16/0/16 align=/CENTER
+          FRAME "shopping 1" [70420:4547] @136,249 18x18
+            VECTOR "Vector" [70420:4548] @136,249 18x18 fill=#b39463
+          TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4549] @166,235 82x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Atividade"
+        FRAME "Frame 462" [70420:4550] @120,280 310x45 layout=HORIZONTAL gap=12 pad=0/16/0/16 align=/CENTER
+          FRAME "heart 1" [70420:4551] @136,295 16x16
+            VECTOR "Vector" [70420:4552] @136,295 16x14 fill=#b39463
+          TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4553] @164,280 163x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Lista de interesse"
+        FRAME "Frame 463" [70420:4554] @120,325 310x45 layout=HORIZONTAL gap=12 pad=0/16/0/16 align=/CENTER
+          INSTANCE "Iconly/Curved/Activity" [70420:4555] @136,339 18x18
+            GROUP "Activity" [I70420:4555;29221:4825] @138,340 14x14
+              VECTOR "Stroke 1" [I70420:4555;29221:4826] @141,346 7x4 stroke=#b39463/1.5
+              VECTOR "Stroke 2" [I70420:4555;29221:4827] @149,340 3x3 stroke=#b39463/1.5
+              VECTOR "Stroke 4" [I70420:4555;29221:4828] @138,341 14x14 stroke=#b39463/1.5
+          TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4556] @166,325 64x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Ofertas"
+        FRAME "Frame 464" [70420:4557] @120,370 310x45 layout=HORIZONTAL gap=12 pad=0/16/0/16 align=/CENTER
+          INSTANCE "Iconly/Curved/Download" [70420:4558] @136,384 18x18
+            GROUP "Download" [I70420:4558;29221:4751] @138,386 14x14
+              VECTOR "Stroke 1" [I70420:4558;29221:4752] @145,386 1x9 stroke=#b39463/1.5
+              VECTOR "Stroke 3" [I70420:4558;29221:4753] @143,392 4x2 stroke=#b39463/1.5
+              VECTOR "Stroke 4" [I70420:4558;29221:4754] @138,389 14x11 stroke=#b39463/1.5
+          TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4559] @166,370 154x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Arquivos baixados"
+        FRAME "Frame 465" [70420:4560] @120,415 310x45 layout=HORIZONTAL gap=12 pad=0/16/0/16 align=/CENTER
+          INSTANCE "Iconly/Curved/Danger Triangle" [70420:4561] @136,429 18x18
+            GROUP "Danger Triangle" [I70420:4561;29221:4772] @138,431 14x14
+              VECTOR "Stroke 3" [I70420:4561;29221:4773] @138,431 14x14 stroke=#b39463/1.5
+              VECTOR "Stroke 3" [I70420:4561;29221:4774] @145,435 1x3 stroke=#b39463/1.5
+              VECTOR "Stroke 15" [I70420:4561;29221:4775] @145,440 1x1 stroke=#b39463/1.5
+          TEXT "Profile Details
+Wallets
+Activity
+Watchlist
+Offers
+Downloads
+Support" [70420:4562] @166,415 64x45 fill=#e89b55 font="Roboto Mono 400 15/45 ls=0" text="Suporte"
+        LINE "Line 2" [70420:4563] @120,460 310x0 stroke=#d28a4c/0.30000001192092896
+        FRAME "Frame 38" [70420:4564] @120,460 310x40 layout=HORIZONTAL gap=8 pad=0/16/0/16 align=/CENTER
+          INSTANCE "Iconly/Curved/Logout" [70420:4565] @136,470 20x20
+            GROUP "Logout" [I70420:4565;29221:4777] @138,472 16x15
+              VECTOR "Stroke 1" [I70420:4565;29221:4778] @144,480 10x1 stroke=#d28a4c/1.5
+              VECTOR "Stroke 3" [I70420:4565;29221:4779] @152,478 2x5 stroke=#d28a4c/1.5
+              VECTOR "Stroke 4" [I70420:4565;29221:4780] @138,472 12x15 stroke=#d28a4c/1.5
+          TEXT "Sair" [70420:4566] @164,473 37x15 fill=#e89b55 font="Roboto Mono 700 15/15 ls=0" text="Sair"
+      FRAME "Profile Form" [70386:239] @458,101 862x726 layout=VERTICAL gap=32 pad=0/0/0/0 align=/
+        TEXT "Perfil do colecionador" [9:1569] @458,101 212x16 fill=#f5f1eb font="Roboto Mono 700 16/16 ls=0" text="Perfil do colecionador"
+        FRAME "Fields" [70386:240] @458,149 862x285 layout=VERTICAL gap=24 pad=0/0/0/0 align=/
+          FRAME "Field Row 1" [70386:241] @458,149 862x79 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+            FRAME "Display Name Field" [70386:242] @458,149 417x79 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+              FRAME "Frame 16" [70304:398] @458,149 159x29 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=/CENTER
+                TEXT "Nome de exibição" [9:1508] @458,156 145x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Nome de exibição"
+                TEXT "*" [9:1516] @603,149 14x29 fill=#f0805f font="Roboto Mono 400 22/29 ls=0" text="*"
+              RECTANGLE "Rectangle 59" [9:1509] @458,188 417x40 stroke=#3f2319/1 radius=3
+            FRAME "Frame 454" [70410:4356] @903,149 417x79 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+              FRAME "Username Field" [70386:243] @903,149 417x79 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+                FRAME "Label" [70386:244] @903,149 150x29 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+                  FRAME "Frame 453" [70410:4355] @903,149 150x29 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=/CENTER
+                    TEXT "Nome de usuário" [9:1510] @903,156 136x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Nome de usuário"
+                    FRAME "Frame 452" [70410:4354] @1039,149 14x29 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+                      TEXT "*" [9:1517] @1039,149 14x29 fill=#f0805f font="Roboto Mono 400 22/29 ls=0" text="*"
+                RECTANGLE "Rectangle 60" [9:1511] @903,188 417x40 stroke=#3f2319/1 radius=3
+          FRAME "Field Row 2" [70386:245] @458,252 862x79 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+            FRAME "Bio Field" [70386:246] @458,252 417x79 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+              FRAME "Frame 17" [70304:399] @458,252 69x29 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=/CENTER
+                TEXT "E-mail" [9:1578] @458,259 55x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="E-mail"
+                TEXT "*" [9:1579] @513,252 14x29 fill=#f0805f font="Roboto Mono 400 22/29 ls=0" text="*"
+              RECTANGLE "Rectangle 66" [9:1580] @458,291 417x40 stroke=#3f2319/1 radius=3
+            FRAME "ENS Field" [70386:247] @903,252 417x79 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+              FRAME "Frame 455" [70410:4357] @903,252 91x29 layout=HORIZONTAL gap=4 pad=0/0/0/0 align=/CENTER
+                TEXT "Nome ENS" [9:1518] @903,259 73x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Nome ENS"
+                TEXT "*" [9:1519] @980,252 14x29 fill=#f0805f font="Roboto Mono 400 22/29 ls=0" text="*"
+              FRAME "ENS Input" [70386:249] @903,291 417x40
+                RECTANGLE "Rectangle 67" [9:1587] @903,291 78x40 stroke=#3f2319/1 radius=3
+                TEXT ".eth" [9:1588] @913,304 37x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text=".eth"
+                COMPONENT "Arrow-Down" [9:1589] @956,301 20x20
+                  VECTOR "Vector 37 (Stroke)" [9:1590] @960,309 11x6 fill=#f5f1eb
+                RECTANGLE "Rectangle 61" [9:1522] @991,291 329x40 stroke=#3f2319/1 radius=3
+          FRAME "Field Row 3" [70386:250] @458,355 862x79 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+            FRAME "Website Field" [70386:251] @458,355 417x79 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+              FRAME "Frame 18" [70304:400] @458,355 172x29 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=/CENTER
+                TEXT "Apelido da carteira" [9:1521] @458,362 172x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Apelido da carteira"
+                TEXT "*" [9:1520] @630,355 14x29 fill=#f0805f font="Roboto Mono 400 22/29 ls=0" text="*"
+              RECTANGLE "Rectangle 62" [9:1523] @458,394 417x40 stroke=#3f2319/1 radius=3
+            FRAME "Avatar Field" [70386:252] @903,355 417x75 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+              FRAME "Label" [70386:253] @903,355 55x15 layout=VERTICAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+                TEXT "Avatar" [9:1536] @903,355 55x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Avatar"
+              FRAME "Avatar Controls" [70386:254] @903,380 251x50 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=/CENTER
+                FRAME "Frame 456" [70410:4359] @903,380 251x50 layout=HORIZONTAL gap=24 pad=0/0/0/0 align=/CENTER
+                  FRAME "Frame 32" [9:1581] @903,380 50x50 fill=#2f1d15 stroke=#3f2319/1 radius=25 layout=HORIZONTAL gap=10 pad=12/12/12/12 align=/
+                    INSTANCE "Iconly/Curved/Image 2" [9:1560] @915,392 24x24
+                      GROUP "Image 2" [I9:1560;29221:4679] @918,395 19x19
+                        VECTOR "Stroke 1" [I9:1560;29221:4680] @918,395 19x19 stroke=#d28a4c/1.5
+                        VECTOR "Stroke 3" [I9:1560;29221:4681] @922,399 4x4 stroke=#d28a4c/1.5
+                        VECTOR "Stroke 5" [I9:1560;29221:4682] @919,404 17x7 stroke=#d28a4c/1.5
+                  FRAME "Frame 33" [9:1582] @977,385 177x40 layout=HORIZONTAL gap=20 pad=0/0/0/0 align=/CENTER
+                    RECTANGLE "Rectangle 66" [9:1540] @977,385 98x40 fill=#d28a4c radius=3
+                    TEXT "Remover" [9:1548] @1095,397 59x16 fill=#f5f1eb font="Roboto Mono 400 14/16 ls=0" text="Remover"
+                    TEXT "Alterar" [9:1547] @1002,397 59x16 fill=#140d0a font="Roboto Mono 700 14/16 ls=0" text="Alterar"
+        FRAME "Change Password" [70386:255] @458,466 862x289 layout=VERTICAL gap=24 pad=0/0/0/0 align=/
+          TEXT "Alterar senha" [9:1586] @458,466 125x16 fill=#f5f1eb font="Roboto Mono 500 16/16 ls=0" text="Alterar senha"
+          FRAME "Current Password Field" [70386:256] @458,506 417x67 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+            TEXT "Senha atual" [9:1529] @458,506 100x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Senha atual"
+            INSTANCE "Password Input" [70522:3144] @458,533 417x40 stroke=#3f2319/1 radius=3 layout=HORIZONTAL gap=10 pad=0/16/0/16 align=MAX/CENTER
+              INSTANCE "Iconly/Light-Outline/Hide" [I70522:3144;70504:2972] @839,543 20x20
+                GROUP "Hide" [I70522:3144;70504:2972;33437:4846] @841,546 17x14
+                  VECTOR "Fill 1" [I70522:3144;70504:2972;33437:4847] @846,550 6x6 fill=#b39463
+                  VECTOR "Fill 3" [I70522:3144;70504:2972;33437:4848] @849,553 3x3 fill=#b39463
+                  GROUP "Group 7" [I70522:3144;70504:2972;33437:4849] @841,547 16x14
+                    VECTOR "Clip 6" [I70522:3144;70504:2972;33437:4850] @840,546 13x12 fill=#000000
+                    VECTOR "Fill 5" [I70522:3144;70504:2972;33437:4851] @840,546 13x12 fill=#b39463
+                  GROUP "Group 10" [I70522:3144;70504:2972;33437:4852] @846,550 13x12
+                    VECTOR "Clip 9" [I70522:3144;70504:2972;33437:4853] @845,549 11x10 fill=#000000
+                    VECTOR "Fill 8" [I70522:3144;70504:2972;33437:4854] @845,549 11x10 fill=#b39463
+                  GROUP "Group 13" [I70522:3144;70504:2972;33437:4855] @842,546 17x17
+                    VECTOR "Clip 12" [I70522:3144;70504:2972;33437:4856] @842,546 14x14 fill=#000000
+                    VECTOR "Fill 11" [I70522:3144;70504:2972;33437:4857] @842,546 14x14 fill=#b39463
+          FRAME "New Password Field" [70386:258] @458,597 417x67 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+            TEXT "Nova senha" [9:1532] @458,597 91x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Nova senha"
+            INSTANCE "Password Input" [70522:3158] @458,624 417x40 stroke=#3f2319/1 radius=3 layout=HORIZONTAL gap=10 pad=0/16/0/16 align=MAX/CENTER
+              INSTANCE "Iconly/Light-Outline/Hide" [I70522:3158;70504:2972] @839,634 20x20
+                GROUP "Hide" [I70522:3158;70504:2972;33437:4846] @841,637 17x14
+                  VECTOR "Fill 1" [I70522:3158;70504:2972;33437:4847] @846,641 6x6 fill=#b39463
+                  VECTOR "Fill 3" [I70522:3158;70504:2972;33437:4848] @849,644 3x3 fill=#b39463
+                  GROUP "Group 7" [I70522:3158;70504:2972;33437:4849] @841,638 16x14
+                    VECTOR "Clip 6" [I70522:3158;70504:2972;33437:4850] @840,637 13x12 fill=#000000
+                    VECTOR "Fill 5" [I70522:3158;70504:2972;33437:4851] @840,637 13x12 fill=#b39463
+                  GROUP "Group 10" [I70522:3158;70504:2972;33437:4852] @846,641 13x12
+                    VECTOR "Clip 9" [I70522:3158;70504:2972;33437:4853] @845,640 11x10 fill=#000000
+                    VECTOR "Fill 8" [I70522:3158;70504:2972;33437:4854] @845,640 11x10 fill=#b39463
+                  GROUP "Group 13" [I70522:3158;70504:2972;33437:4855] @842,637 17x17
+                    VECTOR "Clip 12" [I70522:3158;70504:2972;33437:4856] @842,637 14x14 fill=#000000
+                    VECTOR "Fill 11" [I70522:3158;70504:2972;33437:4857] @842,637 14x14 fill=#b39463
+          FRAME "Confirm Password Field" [70386:260] @458,688 417x67 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+            TEXT "Confirmar nova senha" [9:1534] @458,688 181x15 fill=#f5f1eb font="Roboto Mono 400 15/15 ls=0" text="Confirmar nova senha"
+            INSTANCE "Password Input" [70522:3172] @458,715 417x40 stroke=#3f2319/1 radius=3 layout=HORIZONTAL gap=10 pad=0/16/0/16 align=MAX/CENTER
+              INSTANCE "Iconly/Light-Outline/Hide" [I70522:3172;70504:2972] @839,725 20x20
+                GROUP "Hide" [I70522:3172;70504:2972;33437:4846] @841,728 17x14
+                  VECTOR "Fill 1" [I70522:3172;70504:2972;33437:4847] @846,732 6x6 fill=#b39463
+                  VECTOR "Fill 3" [I70522:3172;70504:2972;33437:4848] @849,735 3x3 fill=#b39463
+                  GROUP "Group 7" [I70522:3172;70504:2972;33437:4849] @841,729 16x14
+                    VECTOR "Clip 6" [I70522:3172;70504:2972;33437:4850] @840,728 13x12 fill=#000000
+                    VECTOR "Fill 5" [I70522:3172;70504:2972;33437:4851] @840,728 13x12 fill=#b39463
+                  GROUP "Group 10" [I70522:3172;70504:2972;33437:4852] @846,732 13x12
+                    VECTOR "Clip 9" [I70522:3172;70504:2972;33437:4853] @845,731 11x10 fill=#000000
+                    VECTOR "Fill 8" [I70522:3172;70504:2972;33437:4854] @845,731 11x10 fill=#b39463
+                  GROUP "Group 13" [I70522:3172;70504:2972;33437:4855] @842,728 17x17
+                    VECTOR "Clip 12" [I70522:3172;70504:2972;33437:4856] @842,728 14x14 fill=#000000
+                    VECTOR "Fill 11" [I70522:3172;70504:2972;33437:4857] @842,728 14x14 fill=#b39463
+        FRAME "Save Button" [70386:262] @458,787 131x40 fill=#d28a4c radius=3 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+          TEXT "Salvar" [9:1646] @498,799 51x16 fill=#140d0a font="Roboto Mono 700 14/16 ls=0" text="Salvar"

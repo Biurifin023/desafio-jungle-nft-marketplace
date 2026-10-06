@@ -1,0 +1,52 @@
+FRAME "Mobile / Login" [16:1022] @0,0 414x896 fill=#140d0a radius=40 layout=VERTICAL gap=40 pad=80/28/24/28 align=/
+  FRAME "Logo" [70399:239] @28,80 358x136 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+    TEXT "KURIO Wordmark" [70278:430] @153,127 109x42 fill=#f5f1eb font="Roboto Mono 700 32/42.2 ls=3.2" text="KURIO"
+  FRAME "Title" [70399:240] @28,256 358x16 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/
+    TEXT "Entrar" [16:1173] @171,256 73x16 fill=#f5f1eb font="Roboto Mono 700 20/16 ls=0" text="Entrar"
+  FRAME "Form" [70399:241] @28,312 358x140 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+    FRAME "Frame 445" [70410:4221] @28,312 358x50 stroke=#3f2319/1 radius=10 layout=HORIZONTAL gap=10 pad=0/0/0/16 align=/CENTER
+      TEXT "contato@email.com" [16:1182] @44,329 143x16 fill=#b39463 font="Roboto Mono 400 14/16 ls=0" text="contato@email.com"
+    FRAME "Frame 444" [70410:4220] @28,374 358x50 stroke=#d28a4c/1 radius=10 layout=VERTICAL gap=10 pad=0/16/0/16 align=CENTER/
+      FRAME "Frame 443" [70410:4219] @44,390 326x18 layout=HORIZONTAL gap=207 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+        GROUP "Group 91" [16:1217] @44,391 106x16 radii=0/0/0/0
+          TEXT "***********" [16:1185] @44,391 106x16 fill=#f5f1eb font="Roboto Mono 400 16/16 ls=0" text="***********"
+        INSTANCE "Iconly/Curved/Hide" [16:1191] @352,390 18x18 radius=10
+          GROUP "Hide" [I16:1191;29221:4811] @354,393 14x12
+            VECTOR "Stroke 1" [I16:1191;29221:4812] @354,394 11x10 stroke=#55321f/1.5
+            VECTOR "Stroke 3" [I16:1191;29221:4813] @359,396 9x8 stroke=#55321f/1.5
+            VECTOR "Stroke 5" [I16:1191;29221:4814] @359,397 4x4 stroke=#55321f/1.5
+            VECTOR "Stroke 7" [I16:1191;29221:4815] @361,400 2x2 stroke=#55321f/1.5
+            VECTOR "Stroke 9" [I16:1191;29221:4816] @355,393 12x12 stroke=#55321f/1.5
+    FRAME "Forgot Link" [70399:242] @28,436 358x16 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=MAX/CENTER
+      TEXT "Esqueceu a senha?" [16:1183] @243,436 143x16 fill=#e89b55 font="Roboto Mono 400 14/16 ls=0" text="Esqueceu a senha?"
+  FRAME "Sign In Button" [70399:243] @28,492 358x60 fill=#d28a4c radius=10 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+    TEXT "Entrar" [16:1192] @178,514 58x16 fill=#140d0a font="Roboto Mono 700 16/16 ls=0" text="Entrar"
+  INSTANCE "Mobile Social Block" [70522:3186] @28,592 358x124 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+    FRAME "Frame 4" [I70522:3186;70504:2987] @28,592 358x16 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=/CENTER
+      LINE "Line 7" [I70522:3186;70504:2988] @28,600 110x0 stroke=#3f2319/1
+      TEXT "Ou continue com" [I70522:3186;70504:2989] @148,592 118x16 fill=#f5f1eb font="Roboto Mono 400 13/16 ls=0" text="Ou continue com"
+      LINE "Line 8" [I70522:3186;70504:2990] @276,600 110x0 stroke=#3f2319/1
+    FRAME "Frame 370" [I70522:3186;70504:2991] @28,620 358x96 layout=VERTICAL gap=16 pad=0/0/0/0 align=/
+      INSTANCE "Social Button" [I70522:3186;70504:2992] @28,620 358x40 stroke=#3f2319/1 radius=5 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+        FRAME "Content" [I70522:3186;70504:2992;70483:241] @104,630 189x20 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/CENTER
+          FRAME "google 1" [I70522:3186;70504:2992;70483:242] @104,630 20x20
+            GROUP "Group" [I70522:3186;70504:2992;70483:243] @104,630 20x20
+              VECTOR "Vector" [I70522:3186;70504:2992;70483:244] @105,642 15x8 fill=#59c36a
+              VECTOR "Vector" [I70522:3186;70504:2992;70483:245] @114,644 6x6 fill=#00a66c
+              GROUP "Connected_Home_1_" [I70522:3186;70504:2992;70483:246] @104,635 5x10
+                GROUP "Group" [I70522:3186;70504:2992;70483:247] @104,635 5x10
+                  GROUP "Group" [I70522:3186;70504:2992;70483:248] @104,635 5x10
+                    GROUP "Group" [I70522:3186;70504:2992;70483:249] @104,635 5x10
+                      VECTOR "Vector" [I70522:3186;70504:2992;70483:250] @104,635 5x10 fill=#ffda2d
+              VECTOR "Vector" [I70522:3186;70504:2992;70483:251] @113,638 11x10 fill=#4086f4
+              VECTOR "Vector" [I70522:3186;70504:2992;70483:252] @114,638 10x10 fill=#4175df
+              VECTOR "Vector" [I70522:3186;70504:2992;70483:253] @105,630 15x8 fill=#ff641a
+              VECTOR "Vector" [I70522:3186;70504:2992;70483:254] @114,630 7x6 fill=#f0805f
+          TEXT "Continuar com Google" [I70522:3186;70504:2992;70483:255] @136,632 157x16 fill=#cfb28c font="Roboto Mono 500 13/16 ls=0" text="Continuar com Google"
+      INSTANCE "Social Button" [I70522:3186;70504:2993] @28,676 358x40 stroke=#3f2319/1 radius=5 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+        FRAME "Content" [I70522:3186;70504:2993;70483:258] @96,686 204x20 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/CENTER
+          FRAME "facebook 1" [I70522:3186;70504:2993;70483:259] @96,686 20x20
+            VECTOR "Vector" [I70522:3186;70504:2993;70483:260] @101,686 10x20 fill=#3b5999
+          TEXT "Continuar com Facebook" [I70522:3186;70504:2993;70483:261] @128,688 172x16 fill=#cfb28c font="Roboto Mono 500 13/16 ls=0" text="Continuar com Facebook"
+  FRAME "Signup Link" [70399:247] @28,756 358x20 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+    TEXT "Novo na Kurio? Crie uma conta" [16:1227] @76,756 262x20 fill=#cfb28c font="Roboto Mono 400 15/19.8 ls=0" text="Novo na Kurio? Crie uma conta"

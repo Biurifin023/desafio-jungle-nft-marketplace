@@ -1,0 +1,50 @@
+/*
+ * Tokens extraídos do Figma "Marketplace de NFTs GreenMint" (pnpm figma:extract → docs/figma/tokens.json).
+ * Frequência de uso entre parênteses.
+ */
+:root {
+  /* Tipografia: Roboto Mono em todo o layout (auto-hospedada via @fontsource-variable). */
+  --kurio-font-mono: 'Roboto Mono Variable', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Superfícies */
+  --kurio-bg: #140d0a; /* fundo da página */
+  --kurio-surface: #241612; /* cards, sidebar, footer (89) */
+  --kurio-surface-2: #2f1d15; /* gradientes e itens elevados (27) */
+  --kurio-surface-3: #38220f; /* faixa do footer, input da newsletter (17) */
+
+  /* Marca */
+  --kurio-copper: #d28a4c; /* botões, badges, divisores (168) */
+  --kurio-amber: #e89b55; /* link/navegação ativa, preços (136) */
+
+  /* Texto */
+  --kurio-text: #f5f1eb; /* texto principal (385) */
+  --kurio-sand: #cfb28c; /* texto secundário (155) */
+  --kurio-khaki: #b39463; /* placeholders e metadados (51) */
+  --kurio-coral: #f0805f; /* obrigatório/erro (32) */
+  --kurio-star: #e3a44e;
+  --kurio-success: #7fcf8a;
+
+  /* Bordas */
+  --kurio-border: #3f2319; /* inputs e divisores (112) */
+  --kurio-border-strong: #55321f; /* (27) */
+
+  /* Efeitos */
+  --kurio-shadow-glow: 0 0 20px 0 #0a060473;
+  --kurio-shadow-card: 0 4px 12px -2px #140d0a26;
+  --kurio-shadow-up: 0 -10px 30px 0 #0a060473;
+
+  /* Layout: 24px no mobile (414), 120px no desktop (1440). */
+  --page-gutter: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --page-gutter: 120px;
+  }
+}

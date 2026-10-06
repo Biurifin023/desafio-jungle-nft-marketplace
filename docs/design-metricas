@@ -1,0 +1,255 @@
+# Inventário de design — Frontend Challenge
+
+**Arquivo Figma:** Frontend Challenge  
+**Página:** Marketplace de NFTs GreenMint  
+**Referência:** [Abrir o arquivo Figma](https://www.figma.com/design/Ff0SksUi7UFtPWUO8kyNtw/Frontend-Challenge)  
+**Atualizado em:** 2026-10-05  
+**Base da coleta:** painel de propriedades e biblioteca Styles visíveis no Figma; inspeção automática do nó continua indisponível porque o arquivo está em modo somente visualização/comentário.
+
+## Visão geral do design
+
+Marketplace de NFTs com estética escura e quente: superfícies marrons quase pretas, acentos laranja/dourados, texto creme, contornos sutis e imagens de colecionáveis em destaque. O canvas mostra navegação superior, busca, carrinho, login, filtros, cards de NFTs, preços em ETH, paginação e rodapé. As telas mobile de autenticação exibem a marca KURIO centralizada acima do formulário.
+
+A tipografia parece monoespaçada em várias telas, mas o painel da biblioteca de estilos não informa claramente a família tipográfica. Portanto, esta é uma observação visual, não uma especificação confirmada.
+
+## Organização e hierarquia das telas
+
+Uma página — **Marketplace de NFTs GreenMint** — contém 15 frames. Hierarquias principais observadas no painel Layers:
+
+| Frame | Seções/camadas de primeiro nível observadas |
+|---|---|
+| Mobile / Cadastro | Logo; Title; Form; Create Profile Button; Mobile Social Block; Login Link |
+| Mobile / Login | Logo; Title; Form; Sign In Button; Mobile Social Block; Signup Link |
+| Mobile / Pagamento | Content |
+| Mobile / Carrinho de NFTs | Content; Payment Summary |
+| Mobile / Detalhes do NFT | Hero; Details Sheet; Buy Bar |
+| Mobile / Início | Search Bar; Hero Banner; Tabs; Product Grid; Tab Bar |
+| Desktop / Carteiras | Top |
+| Desktop / Perfil do Colecionador | Top |
+| Desktop / Cadastro | Marketplace Page; BG; Sign Up Modal |
+| Desktop / Login | Marketplace Page; BG; Sign In Modal |
+| Desktop / Confirmação de Pedido | Checkout Page; Footer; BG; Order Confirmation Modal |
+| Desktop / Pagamento | Checkout Page; Footer |
+| Desktop / Carrinho de NFTs | Top; Related Products; Footer |
+| Desktop / Detalhes do NFT | Top; Description; Related Products; Footer |
+| Desktop / Início | Top; Products; Promos; Blog; Footer |
+
+Os nomes acima são os nomes literais das camadas de primeiro nível. Vários contêineres têm filhos internos; a árvore completa de todas as telas não foi extraída.
+
+## Medidas e layout dos frames
+
+Valores observados no painel Properties. “—” indica que o painel não mostrou o valor naquela seleção durante esta coleta.
+
+| Frame | Dimensão | Padding (top / right / bottom / left) | Gap | Raio |
+|---|---:|---:|---:|---:|
+| Mobile / Cadastro | 414 × 896 px | 80 / 28 / 24 / 28 px | 40 px | 40 px |
+| Mobile / Login | 414 × 896 px | 80 / 28 / 24 / 28 px | 40 px | 40 px |
+| Mobile / Pagamento | 414 × 896 px | 32 / 28 / 32 / 28 px | — | 40 px |
+| Mobile / Carrinho de NFTs | 414 × 896 px | top 32 px | 4 px | 40 px |
+| Mobile / Detalhes do NFT | 414 × 896 px | — | — | 40 px |
+| Mobile / Início | 414 × 896 px | top 40 px; laterais 24 px | 16 px | 40 px |
+| Desktop / Carteiras | 1440 × 1080 px | 24 / 120 / 24 / 120 px | 96 px | — |
+| Desktop / Perfil do Colecionador | 1440 × 1080 px | 24 / 120 / 24 / 120 px | 96 px | — |
+| Desktop / Cadastro | 1440 × 1981 px (hug) | 24 / 120 / — / 120 px | 96 px | — |
+| Desktop / Login | 1440 × 1981 px (hug) | 24 / 120 / — / 120 px | 96 px | — |
+| Desktop / Confirmação de Pedido | 1440 × 1657 px (hug) | 24 / 120 / 24 / 120 px | 96 px | — |
+| Desktop / Pagamento | 1440 × 1657 px (hug) | 24 / 120 / 24 / 120 px | 96 px | — |
+| Desktop / Carrinho de NFTs | 1440 × 1754 px (hug) | 24 / 120 / 24 / 120 px | 96 px | — |
+| Desktop / Detalhes do NFT | 1440 × 2246 px (hug) | 24 / 120 / 24 / 120 px | 96 px | — |
+| Desktop / Início | 1440 × 3668 px (hug) | 24 / 120 / 24 / 120 px | 96 px | — |
+
+Os frames mobile usam fluxo vertical e largura fixa de 414 px. Os frames desktop também usam fluxo vertical, largura fixa de 1440 px e, em várias telas, altura `Hug` baseada no conteúdo.
+
+## Biblioteca de cores
+
+Os valores abaixo foram lidos abrindo cada estilo nomeado no painel **Styles → Color styles**. São os nomes e hex exibidos pelo Figma.
+
+### Cores de interface (`Color/*`)
+
+| Estilo | Hex |
+|---|---|
+| `Color/Primary` | `#D28A4C` |
+| `Color/Primary Light` | `#DD9A5F` |
+| `Color/Primary Dark` | `#C47B3E` |
+| `Color/Amber` | `#E3A44E` |
+| `Color/Foreground` | `#F5F1EB` |
+| `Color/Background Elevated` | `#FBFBFB` |
+| `Color/White` | `#FFFFFF` |
+| `Color/Black` | `#000000` |
+| `Color/Secondary` | `#B39463` |
+| `Color/Surface Card` | `#241612` |
+| `Color/Surface Raised` | `#2F1D15` |
+| `Color/Ink` | `#140D0A` |
+| `Color/Surface Dark` | `#38220F` |
+| `Color/Border` | `#3F2319` |
+| `Color/Border Soft` | `#55321F` |
+| `Color/Gray Light` | `#EDEDED` |
+| `Color/Success` | `#00A66C` |
+| `Color/Error` | `#ED1B2E` |
+
+### Cores de texto (`Text/*`)
+
+| Estilo | Hex / descrição |
+|---|---|
+| `Text/Coral` | `#EA6B4F` |
+| `Text/Secondary` | `#CFB28C` |
+| `Text/Accent` | `#E89B55` |
+| `Text/Primary` | O painel não mostrou hex. A descrição diz “Slightly warmer cream than Color/Foreground, kept for the headings carried over from the retired legacy palette.” |
+
+### Cores de marca e provedores (`Logo/*`)
+
+| Estilo | Hex |
+|---|---|
+| `Logo/Orange` | `#FF641A` |
+| `Logo/Facebook` | `#3B5999` |
+| `Logo/Google Blue` | `#4086F4` |
+| `Logo/Google Green` | `#59C36A` |
+| `Logo/Google Yellow` | `#FFDA2D` |
+| `Logo/Blue` | `#4175DF` |
+| `Logo/Light Blue` | `#03A9F4` |
+| `Logo/Indigo` | `#283593` |
+
+**Nota sobre variáveis:** o texto de descrição de alguns estilos associa `Color/Foreground` a `color/background`, `Color/Surface Card` a `color/text-primary` e `Color/Surface Raised` a `color/text-secondary`. Esses vínculos parecem semanticamente inesperados; preservei os nomes/valores exibidos pelo Figma e recomendo conferir os aliases de variáveis antes de reutilizá-los como tokens de código. `Text/Primary` não apresentou valor hexadecimal.
+
+## Biblioteca tipográfica
+
+O painel **Styles → Text styles** contém **59 variantes**, agrupadas em Display, Heading, Title, Body Large, Body, Caption e Tiny. A lista abaixo reproduz o nome da variante e a medida resumida que o Figma mostra na linha (por exemplo, `43/70`). Não infiro a família da fonte a partir desses rótulos.
+
+### Display — 2 variantes
+
+- `Display/43 Bold` — `43/70`
+- `Display/32 Bold` — `32/Auto`
+
+### Heading — 3 variantes
+
+- `Heading/28 Bold` — `28/Auto`
+- `Heading/26 Bold` — `26/32`
+- `Heading/24 Bold` — `24/Auto`
+
+### Title — 7 variantes
+
+- `Title/23 Bold` — `23/16`
+- `Title/22 Bold` — `22/16`
+- `Title/22 Regular` — `22/29`
+- `Title/21 Regular` — `21/16`
+- `Title/20 Regular · lh 10` — `20/28`
+- `Title/20 Medium` — `20/16`
+- `Title/20 Bold · lh 16` — `20/16`
+
+### Body Large — 17 variantes
+
+- `Body Large/19 Bold` — `19/29`
+- `Body Large/18 Bold · lh 16` — `18/16`
+- `Body Large/18 Regular` — `18/16`
+- `Body Large/18 Light` — `18/16`
+- `Body Large/18 Bold · lh 24` — `18/24`
+- `Body Large/18 Medium` — `18/25`
+- `Body Large/17 Bold` — `17/16`
+- `Body Large/17 Regular · lh 16` — `17/16`
+- `Body Large/17 Regular · lh 10` — `17/24`
+- `Body Large/16 Bold · lh auto` — `16/Auto`
+- `Body Large/16 Regular · lh auto` — `16/Auto`
+- `Body Large/16 Medium · lh auto` — `16/Auto`
+- `Body Large/16 Bold · lh 20` — `16/20`
+- `Body Large/16 Regular · lh 16` — `16/16`
+- `Body Large/16 Medium · lh 16` — `16/16`
+- `Body Large/16 Bold · lh 16` — `16/16`
+- `Body Large/16 Regular · lh 10` — `16/22`
+
+### Body — 21 variantes
+
+- `Body/15 Medium` — `15/16`
+- `Body/15 Regular · lh 16` — `15/Auto`
+- `Body/15 Regular · lh 40` — `15/40`
+- `Body/15 Bold · lh 40` — `15/40`
+- `Body/15 Bold · lh 16` — `15/16`
+- `Body/15 Regular · lh 15` — `15/15`
+- `Body/15 Regular · lh 45` — `15/45`
+- `Body/15 Bold · lh 15` — `15/15`
+- `Body/14 Bold · lh auto` — `14/Auto`
+- `Body/14 Medium · lh 16` — `14/16`
+- `Body/14 Regular · lh 24` — `14/24`
+- `Body/14 Medium · lh 16 · ls 0%` — `14/16`
+- `Body/14 Regular · lh 22` — `14/22`
+- `Body/14 Medium · lh 20` — `14/20`
+- `Body/14 Regular · lh 30` — `14/30`
+- `Body/14 Regular · lh 16` — `14/16`
+- `Body/14 Bold · lh 24` — `14/24`
+- `Body/14 Bold · lh 20` — `14/20`
+- `Body/14 Bold · lh 16` — `14/16`
+- `Body/14 Regular · lh 15` — `14/15`
+- `Body/14 Bold · lh auto · ls 0%` — `14/Auto`
+
+### Caption — 6 variantes
+
+- `Caption/13 Regular · lh 22` — `13/22`
+- `Caption/13 Regular · lh 16` — `13/16`
+- `Caption/13 Medium` — `13/16`
+- `Caption/12 Regular · lh 16` — `12/16`
+- `Caption/12 Regular · lh 18` — `12/18`
+- `Caption/12 Bold` — `12/14`
+
+### Tiny — 3 variantes
+
+- `Tiny/11 Medium` — `11/16`
+- `Tiny/10 Medium` — `10/Auto`
+- `Tiny/9 Bold` — `9/Auto`
+
+Na ficha individual de `Display/43 Bold`, a descrição exposta pelo Figma aparece como `combo:43|Bold|70px|0%` e indica 3 usos. A ficha não apresenta claramente o nome da família tipográfica. Os rótulos de variantes confirmam pesos como Light, Regular, Medium e Bold, além de diferentes medidas compactas de linha/tracking.
+
+## Componentes medidos
+
+### Botão de criação de perfil — Mobile / Cadastro
+
+- Camada: `Create Profile Button`
+- Largura: 358 px (fill)
+- Altura: 60 px
+- Raio: 10 px
+- Preenchimento: `Color/Primary`, `#D28A4C`
+
+### Campo de formulário — Mobile / Cadastro
+
+- Campo selecionado: 358 × 50 px
+- Raio: 10 px
+- Borda: 1 px, `Color/Border`, `#3F2319`
+- Padding horizontal: 16 px por lado
+- Gap interno observado: 10 px
+- O formulário é vertical, 358 px de largura, altura hug 236 px e gap 12 px.
+- Placeholders visíveis: “Nome de usuário”, “Digite seu e-mail” e “Senha”. A senha tem ícone de visibilidade.
+
+### Logo e título — Mobile / Cadastro
+
+- `Logo`: 358 × 136 px; visualmente apresenta “KURIO” centralizado.
+- `Title`: texto “Criar perfil de colecionador”; largura fill 358 px e caixa/altura hug observada de 16 px.
+
+### Modais desktop
+
+| Componente | Dimensão | Fluxo | Fundo | Raio observado |
+|---|---:|---|---|---:|
+| `Sign Up Modal` | 500 × 656 px | Vertical | `Color/Surface Card`, `#241612` | 8 px |
+| `Sign In Modal` | 500 × 600 px | Vertical | `Color/Surface Card`, `#241612` | não exibido |
+| `Order Confirmation Modal` | 578 × 821 px (height Hug) | Vertical | `Color/Surface Card`, `#241612` | não exibido |
+
+## Observações para implementação
+
+- Use os valores de frame e de componentes como base de layout; eles foram lidos no painel Figma.
+- Os nomes das camadas indicam a separação de áreas e fluxos de autenticação, checkout, carrinho, detalhe de NFT e listagem.
+- A paleta nomeada tem superfícies `#140D0A`, `#241612`, `#2F1D15` e `#38220F`, bordas `#3F2319`/`#55321F`, acentos `#D28A4C`, `#DD9A5F`, `#C47B3E`, `#E3A44E` e texto creme `#F5F1EB`.
+- Existem cores específicas de provedores sociais e estados de sucesso/erro.
+- A biblioteca tipográfica possui muitas variantes próximas; o agente de design deve reutilizar os estilos nomeados se tiver acesso ao arquivo, em vez de reduzir a escala a um único tamanho.
+
+## Limitações remanescentes
+
+A conta conectada ao Figma continua sem permissão de edição, e o arquivo informa **“You can only view and comment on this file”**. A integração `get_design_context` recusou a leitura por falta de acesso de edição. A coleta manual pelo painel agora inclui hierarquia principal, estilos globais e algumas propriedades de componentes, mas ainda não cobre todas as camadas de cada tela.
+
+Ainda não confirmados/exaustivos:
+
+- família tipográfica exata;
+- todos os valores de `Text/Primary` e outros estilos sem hex exposto;
+- regras completas de sombras, opacidades, estados hover/focus/disabled e gradientes;
+- raios, bordas, gaps e paddings de cada componente em todas as telas;
+- dimensões e hierarquia interna completa dos cards, navegação, ícones e componentes de checkout;
+- SVGs, imagens originais e parâmetros de export dos assets de NFT;
+- conexões e transições completas do protótipo.
+
+Para fechar esses itens de forma confiável, o proprietário do arquivo precisa conceder acesso de edição à conta Figma conectada.

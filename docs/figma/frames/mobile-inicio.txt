@@ -1,0 +1,109 @@
+FRAME "Mobile / Início" [14:5226] @0,0 414x896 fill=#140d0a radius=40 layout=VERTICAL gap=16 pad=40/24/0/24 align=/
+  FRAME "Search Bar" [70395:239] @24,40 366x45
+    FRAME "Frame 404" [70410:4124] @24,40 313x45 fill=#241612 radius=10 layout=VERTICAL gap=10 pad=12/129/12/12 align=/
+      FRAME "Frame 403" [70410:4123] @36,52 173x22 layout=HORIZONTAL gap=8 pad=0/0/0/0 align=/CENTER
+        COMPONENT "Search" [15:5331] @36,52 22x22
+          VECTOR "Ellipse 2 (Stroke)" [15:5332] @38,54 18x18 fill=#b39463
+        TEXT "Explorar coleções" [15:5485] @66,55 143x16 fill=#b39463 font="Roboto Mono 700 14/16 ls=0" text="Explorar coleções"
+    FRAME "Frame 402" [70410:4122] @345,40 45x45 fill=gradient_linear(#d28a4c73 0%, #d28a4c 100%) radius=14 layout=HORIZONTAL gap=10 pad=12/12/12/12 align=/
+      INSTANCE "Iconly/Curved/Filter" [15:5488] @357,52 22x22
+        GROUP "Filter" [I15:5488;29221:4570] @361,56 15x15
+          VECTOR "Stroke 1" [I15:5488;29221:4571] @361,68 6x1 stroke=#140d0a/1.5
+          VECTOR "Stroke 3" [I15:5488;29221:4572] @371,66 5x5 stroke=#140d0a/1.5
+          VECTOR "Stroke 5" [I15:5488;29221:4573] @370,58 6x1 stroke=#140d0a/1.5
+          VECTOR "Stroke 7" [I15:5488;29221:4574] @361,56 5x5 stroke=#140d0a/1.5
+  FRAME "Hero Banner" [70395:240] @24,101 366x190 radius=12 layout=VERTICAL gap=10 pad=16/16/16/16 align=CENTER/CENTER
+    GROUP "Mask Group" [14:5290] @24,101 366x190 radii=0/0/0/0
+      RECTANGLE "Rectangle 95" [14:5291] @24,101 366x190 fill=gradient_linear(#d28a4c33 0%, #d28a4c1a 100%) radius=30
+      RECTANGLE "Rectangle 94" [14:5235] @24,101 366x190 fill=#ededed radius=30
+      ELLIPSE "Ellipse 49" [23:1385] @-56,70 248x248 fill=gradient_linear(#dd9a5f6e 0%, #d28a4c0a 100%)
+      ELLIPSE "Ellipse 50" [23:1386] @97,91 248x248 fill=gradient_linear(#dd9a5f5e 0%, #d28a4c00 100%)
+    FRAME "Frame 407" [70410:4130] @40,107 334x179 layout=VERTICAL gap=16 pad=0/0/0/0 align=/CENTER
+      FRAME "Frame 406" [70410:4129] @40,107 334x156 layout=HORIZONTAL gap=8 pad=0/0/0/0 align=/CENTER
+        FRAME "Frame 405" [70410:4128] @40,107 188x156 layout=VERTICAL gap=0 pad=0/0/0/0 align=/
+          FRAME "Frame 55" [15:5292] @40,107 188x140 layout=VERTICAL gap=6 pad=0/0/0/0 align=/
+            TEXT "Bem-vindo à Kurio" [14:5288] @40,107 188x16 fill=#f5f1eb font="Roboto Mono 500 12/16 ls=0" text="Bem-vindo à Kurio"
+            TEXT "OWN DIGITAL
+CULTURE" [14:5234] @40,129 190x58 fill=#f5f1eb font="Roboto Mono 700 18/29 ls=0" text="SEJA DONO DA\nCULTURA DIGITAL"
+            TEXT "Descubra NFTs selecionados de criadores do mundo todo." [14:5289] @40,193 188x54 fill=#cfb28c font="Roboto Mono 400 12/18 ls=0" text="Descubra NFTs selecionados de criadores do mundo todo."
+          FRAME "Frame 56" [15:5299] @40,247 82x16 layout=HORIZONTAL gap=8 pad=0/0/0/0 align=/CENTER
+            TEXT "EXPLORAR" [15:5294] @40,248 58x14 fill=#e89b55 font="Roboto Mono 700 12/14 ls=0" text="EXPLORAR"
+            INSTANCE "Iconly/Curved/Arrow - Right" [15:5295] @106,247 16x16
+              GROUP "Arrow - Right" [I15:5295;29221:4926] @109,250 10x8
+                VECTOR "Stroke 1" [I15:5295;29221:4927] @109,254 10x1 stroke=#d28a4c/1.5
+                VECTOR "Stroke 3" [I15:5295;29221:4928] @115,250 4x8 stroke=#d28a4c/1.5
+        GROUP "Group 105" [70410:4127] @236,112 138x146 radius=16
+          RECTANGLE "Mobile NFT Artwork 1" [14:5238] @236,112 138x138 fill=image(8459204731e6eba9d474cbc8ebc37071360d3ba5) radius=16
+          RECTANGLE "Mobile NFT Artwork 2" [14:5239] @250,200 58x58 fill=image(2986a7cb16d09de8970824d2dd58bf0bb021702c) radius=16
+      FRAME "Frame 4" [15:5300] @191,279 33x7 layout=HORIZONTAL gap=6 pad=0/0/0/0 align=/CENTER
+        ELLIPSE "Ellipse 4" [15:5303] @191,279 7x7 fill=#d28a4c
+        ELLIPSE "Ellipse 2" [15:5301] @204,279 7x7 fill=#d28a4c
+        ELLIPSE "Ellipse 3" [15:5302] @217,279 7x7 fill=#d28a4c
+  FRAME "Tabs" [70395:241] @24,307 366x20 layout=VERTICAL gap=4 pad=0/0/0/0 align=/
+    FRAME "Frame 409" [70410:4133] @24,307 332x20 layout=HORIZONTAL gap=4 pad=0/0/0/0 align=/
+      FRAME "Frame 408" [70410:4132] @24,307 110x20 layout=VERTICAL gap=4 pad=0/0/0/0 align=/
+        TEXT "Todos os NFTs" [15:5361] @24,307 110x16 fill=#e89b55 font="Roboto Mono 700 14/16 ls=0" text="Todos os NFTs"
+        LINE "Line 3" [15:5366] @24,327 110x0 stroke=#d28a4c/2
+      FRAME "Frame 234" [70367:2847] @138,307 218x16 layout=HORIZONTAL gap=16 pad=0/0/0/0 align=/CENTER
+        TEXT "Novos lançamentos" [15:5362] @138,307 143x16 fill=#f5f1eb font="Roboto Mono 400 14/16 ls=0" text="Novos lançamentos"
+        TEXT "Em alta" [15:5363] @297,307 59x16 fill=#f5f1eb font="Roboto Mono 400 14/16 ls=0" text="Em alta"
+  FRAME "Product Grid" [70395:242] @24,343 366x544 layout=HORIZONTAL gap=16 pad=0/0/0/0 align=SPACE_BETWEEN/
+    FRAME "Column L" [70395:243] @24,343 175x513 layout=VERTICAL gap=24 pad=0/0/0/0 align=/
+      GROUP "P-1" [15:5497] @24,343 175x244
+        FRAME "Frame 414" [70410:4139] @24,343 175x244 layout=VERTICAL gap=8 pad=0/0/0/0 align=/
+          FRAME "Frame 412" [70410:4136] @24,343 175x200 fill=gradient_linear(#241612 0%, #2f1d15 100%) radius=20 layout=HORIZONTAL gap=10 pad=12/4/20/4 align=/
+            FRAME "Frame 411" [70410:4135] @28,355 168x168 fill=image(8459204731e6eba9d474cbc8ebc37071360d3ba5) radius=16 layout=HORIZONTAL gap=10 pad=0/8/140/133 align=/
+              FRAME "Frame 57" [15:5464] @161,355 28x28 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+                FRAME "Frame 410" [70410:4134] @161,355 28x28 fill=#2f1d15 stroke=#3f2319/1 radius=14 layout=VERTICAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+                  VECTOR "Vector" [15:5427] @168,362 15x13 fill=#d28a4c
+          FRAME "Frame 413" [70410:4137] @24,551 175x36 layout=VERTICAL gap=0 pad=0/0/0/8 align=/
+            TEXT "Emerald Ape #042" [15:5385] @32,551 167x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Emerald Ape #042"
+            TEXT "1.19 ETH" [15:5394] @32,571 167x16 fill=#e89b55 font="Roboto Mono 700 16/16 ls=0" text="1.19 ETH"
+      GROUP "P-3" [15:5499] @24,611 175x245 radii=0/0/0/0
+        FRAME "Frame 418" [70410:4143] @27,820 153x36 layout=VERTICAL gap=0 pad=0/0/0/8 align=/
+          TEXT "Emerald Ape #042" [15:5471] @35,820 145x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Emerald Ape #042"
+          TEXT "1.19 ETH" [15:5472] @35,840 145x16 fill=#e89b55 font="Roboto Mono 700 16/16 ls=0" text="1.19 ETH"
+        FRAME "Frame 421" [70410:4149] @24,611 175x200 fill=gradient_linear(#241612 0%, #2f1d15 100%) radius=20 layout=VERTICAL gap=0 pad=0/0/0/0 align=CENTER/
+          FRAME "Frame 422" [70410:4150] @24,627 175x168 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+            RECTANGLE "Mobile NFT Artwork 5" [15:5416] @28,627 168x168 fill=image(9df2ff42dd27ba657621c304557d1a855a4be6a5) radius=16
+          GROUP "Group 61" [15:5496] @24,627 68x32
+            RECTANGLE "Rectangle 9" [15:5418] @24,627 68x32 fill=#d28a4c
+            TEXT "RARO" [15:5419] @32,634 51x18 fill=#140d0a font="Roboto Mono 500 13/16 ls=0" text="RARO"
+    FRAME "Column R" [70395:244] @215,343 175x544 layout=VERTICAL gap=24 pad=32/0/0/0 align=/
+      GROUP "P-2" [15:5498] @215,375 175x244
+        GROUP "Group 58" [15:5465] @351,387 28x28
+          ELLIPSE "Ellipse 38" [15:5466] @351,387 28x28 fill=#2f1d15 stroke=#3f2319/1
+          VECTOR "Vector" [15:5467] @357,395 15x13 fill=#d28a4c
+        FRAME "Frame 417" [70410:4142] @215,375 175x244 layout=VERTICAL gap=8 pad=0/0/0/0 align=/
+          FRAME "Frame 416" [70410:4141] @215,375 175x200 fill=gradient_linear(#241612 0%, #2f1d15 100%) radius=20 layout=HORIZONTAL gap=10 pad=20/4/12/4 align=/
+            RECTANGLE "Mobile NFT Artwork 4" [15:5415] @219,395 168x168 fill=image(2986a7cb16d09de8970824d2dd58bf0bb021702c) radius=16
+          FRAME "Frame 415" [70410:4140] @215,583 175x36 layout=VERTICAL gap=0 pad=0/0/0/8 align=/
+            TEXT "Sage Nomad #009" [15:5462] @223,583 167x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Sage Nomad #009"
+            TEXT "1.69 ETH" [15:5463] @223,603 167x16 fill=#e89b55 font="Roboto Mono 700 16/16 ls=0" text="1.69 ETH"
+      GROUP "P-4" [15:5500] @215,643 175x244
+        GROUP "Group 60" [15:5477] @351,655 28x28
+          ELLIPSE "Ellipse 38" [15:5478] @351,655 28x28 fill=#2f1d15 stroke=#3f2319/1
+          VECTOR "Vector" [15:5479] @357,663 15x13 fill=#d28a4c
+        FRAME "Frame 423" [70410:4153] @215,643 175x244 layout=VERTICAL gap=8 pad=0/0/0/0 align=/
+          FRAME "Frame 420" [70410:4145] @215,643 175x200 fill=gradient_linear(#241612 0%, #2f1d15 100%) radius=20 layout=HORIZONTAL gap=10 pad=20/4/12/4 align=/
+            RECTANGLE "Mobile NFT Artwork 6" [15:5431] @219,663 168x168 fill=image(87580f2def9af0ce13f4b6f6ce17bb2449bcfc16) radius=16
+          FRAME "Frame 419" [70410:4144] @215,851 144x36 layout=VERTICAL gap=0 pad=0/0/0/8 align=/
+            TEXT "Sage Nomad #009" [15:5480] @223,851 136x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Sage Nomad #009"
+            TEXT "1.69 ETH" [15:5481] @223,871 136x16 fill=#e89b55 font="Roboto Mono 700 16/16 ls=0" text="1.69 ETH"
+  FRAME "Tab Bar" [70395:245] @0,770 414x126
+    VECTOR "Vector" [15:5504] @0,801 414x95 fill=#241612 effect=DROP_SHADOW 0 -10 30 0 #0a060473
+    ELLIPSE "Ellipse 39" [15:5507] @175,770 65x65 fill=gradient_linear(#d28a4c66 0%, #d28a4c 100%)
+    INSTANCE "Iconly/Bold/Home" [15:5519] @36,841 20x20
+      GROUP "Home" [I15:5519;15:5517] @38,843 16x17
+        VECTOR "Home" [I15:5519;15:5518] @38,843 16x17 fill=#e89b55
+    COMPONENT "User" [15:5522] @354,841 20x20
+      VECTOR "Vector" [15:5523] @357,843 13x17 fill=#cfb28c
+    COMPONENT "Shop" [15:5524] @292,841 20x20
+      VECTOR "Vector" [15:5525] @293,843 18x17 fill=#cfb28c
+    VECTOR "Vector" [15:5527] @108,842 20x18 fill=#cfb28c
+    GROUP "Group" [15:5529] @194,791 27x24
+      VECTOR "Vector" [15:5530] @194,802 27x2 fill=#f5f1eb
+      VECTOR "Vector" [15:5531] @195,805 10x10 fill=#f5f1eb
+      VECTOR "Vector" [15:5532] @209,791 10x10 fill=#f5f1eb
+      VECTOR "Vector" [15:5533] @209,805 10x10 fill=#f5f1eb
+      VECTOR "Vector" [15:5534] @195,791 10x10 fill=#f5f1eb

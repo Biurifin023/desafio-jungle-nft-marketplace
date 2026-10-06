@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './tokens.css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Mapeamento dos tokens do Figma (src/styles/tokens.css) para as variáveis
+ * consumidas pelos componentes shadcn/ui e utilitários do Tailwind.
+ */
+@theme inline {
+  --font-sans: var(--kurio-font-mono);
+  --font-mono: var(--kurio-font-mono);
+
+  --color-background: var(--kurio-bg);
+  --color-foreground: var(--kurio-text);
+  --color-card: var(--kurio-surface);
+  --color-card-foreground: var(--kurio-text);
+  --color-popover: var(--kurio-surface);
+  --color-popover-foreground: var(--kurio-text);
+  --color-primary: var(--kurio-copper);
+  --color-primary-foreground: var(--kurio-bg);
+  --color-secondary: var(--kurio-surface-3);
+  --color-secondary-foreground: var(--kurio-text);
+  --color-muted: var(--kurio-surface-2);
+  --color-muted-foreground: var(--kurio-sand);
+  --color-accent: var(--kurio-surface-2);
+  --color-accent-foreground: var(--kurio-amber);
+  --color-destructive: var(--kurio-coral);
+  --color-border: var(--kurio-border);
+  --color-input: var(--kurio-border);
+  --color-ring: var(--kurio-amber);
+
+  /* Paleta nomeada do Figma */
+  --color-surface: var(--kurio-surface);
+  --color-surface-2: var(--kurio-surface-2);
+  --color-surface-3: var(--kurio-surface-3);
+  --color-copper: var(--kurio-copper);
+  --color-amber: var(--kurio-amber);
+  --color-sand: var(--kurio-sand);
+  --color-khaki: var(--kurio-khaki);
+  --color-cream: var(--kurio-text);
+  --color-ink: var(--kurio-bg);
+  --color-coral: var(--kurio-coral);
+  --color-star: var(--kurio-star);
+  --color-success: var(--kurio-success);
+  --color-border-strong: var(--kurio-border-strong);
+
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+
+  --shadow-glow: var(--kurio-shadow-glow);
+  --shadow-card: var(--kurio-shadow-card);
+  --shadow-up: var(--kurio-shadow-up);
+
+  --breakpoint-xs: 390px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+
+  --animate-shimmer: shimmer 1.6s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 2px solid var(--kurio-amber);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--kurio-copper) 45%, transparent);
+  }
+}
+
+@layer components {
+  /* Container do Figma: 1200px úteis em 1440px (120px de margem). */
+  .page-container {
+    width: 100%;
+    max-width: calc(1200px + 2 * var(--page-gutter));
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+  }
+
+  .shimmer {
+    background-color: var(--kurio-surface-2);
+    background-image: linear-gradient(
+      90deg,
+      var(--kurio-surface-2) 0%,
+      var(--kurio-surface-3) 40%,
+      color-mix(in oklab, var(--kurio-copper) 18%, var(--kurio-surface-2)) 50%,
+      var(--kurio-surface-3) 60%,
+      var(--kurio-surface-2) 100%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .shimmer {
+    animation: none;
+    background-image: none;
+  }
+}

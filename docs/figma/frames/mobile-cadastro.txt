@@ -1,0 +1,64 @@
+FRAME "Mobile / Cadastro" [16:1228] @0,0 414x896 fill=#140d0a radius=40 layout=VERTICAL gap=40 pad=80/28/24/28 align=/
+  FRAME "Logo" [70410:4345] @28,80 358x136 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+    TEXT "KURIO Wordmark" [70410:4346] @153,127 109x42 fill=#f5f1eb font="Roboto Mono 700 32/42.2 ls=3.2" text="KURIO"
+  FRAME "Title" [70399:249] @28,256 358x16 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/
+    TEXT "Criar perfil de colecionador" [16:1241] @56,256 303x16 fill=#f5f1eb font="Roboto Mono 700 18/16 ls=0" text="Criar perfil de colecionador"
+  FRAME "Form" [70399:250] @28,312 358x236 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+    FRAME "Container" [70410:4348] @28,312 358x50 stroke=#3f2319/1 radius=10 layout=HORIZONTAL gap=10 pad=0/16/0/16 align=SPACE_BETWEEN/CENTER
+      TEXT "User Name" [16:1286] @144,329 127x16 fill=#b39463 font="Roboto Mono 400 14/16 ls=0" text="Nome de usuário"
+    FRAME "Frame 447" [70410:4349] @28,374 358x50 stroke=#3f2319/1 radius=10 layout=HORIZONTAL gap=10 pad=0/16/0/16 align=/CENTER
+      TEXT "Digite seu e-mail" [16:1245] @44,391 143x16 fill=#b39463 font="Roboto Mono 400 14/16 ls=0" text="Digite seu e-mail"
+    FRAME "Frame 449" [70410:4351] @28,436 358x50 layout=VERTICAL gap=10 pad=0/16/0/16 align=CENTER/
+      RECTANGLE "Rectangle 49" [16:1291] @28,436 358x50 stroke=#3f2319/1 radius=10
+      FRAME "Frame 448" [70410:4350] @44,452 326x18 layout=HORIZONTAL gap=269 pad=0/0/0/0 align=SPACE_BETWEEN/
+        TEXT "Senha" [16:1290] @44,452 43x16 fill=#b39463 font="Roboto Mono 400 14/16 ls=0" text="Senha"
+        INSTANCE "Iconly/Curved/Hide" [16:1292] @352,452 18x18 radius=10
+          GROUP "Hide" [I16:1292;29221:4811] @354,455 14x12
+            VECTOR "Stroke 1" [I16:1292;29221:4812] @354,456 11x10 stroke=#55321f/1.5
+            VECTOR "Stroke 3" [I16:1292;29221:4813] @359,458 9x8 stroke=#55321f/1.5
+            VECTOR "Stroke 5" [I16:1292;29221:4814] @359,459 4x4 stroke=#55321f/1.5
+            VECTOR "Stroke 7" [I16:1292;29221:4815] @361,462 2x2 stroke=#55321f/1.5
+            VECTOR "Stroke 9" [I16:1292;29221:4816] @355,455 12x12 stroke=#55321f/1.5
+    FRAME "Frame 451" [70410:4353] @28,498 358x50 layout=VERTICAL gap=0 pad=0/16/0/16 align=SPACE_BETWEEN/
+      GROUP "Group 98" [16:1299] @28,498 358x50 radius=10
+        RECTANGLE "Rectangle 49" [16:1301] @28,498 358x50 stroke=#3f2319/1 radius=10
+      FRAME "Frame 450" [70410:4352] @44,514 326x18 layout=HORIZONTAL gap=185 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+        TEXT "Confirmar senha" [16:1300] @44,515 127x16 fill=#b39463 font="Roboto Mono 400 14/16 ls=0" text="Confirmar senha"
+        INSTANCE "Iconly/Curved/Hide" [16:1302] @352,514 18x18 radius=10
+          GROUP "Hide" [I16:1302;29221:4811] @354,517 14x12
+            VECTOR "Stroke 1" [I16:1302;29221:4812] @354,518 11x10 stroke=#55321f/1.5
+            VECTOR "Stroke 3" [I16:1302;29221:4813] @359,520 9x8 stroke=#55321f/1.5
+            VECTOR "Stroke 5" [I16:1302;29221:4814] @359,521 4x4 stroke=#55321f/1.5
+            VECTOR "Stroke 7" [I16:1302;29221:4815] @361,524 2x2 stroke=#55321f/1.5
+            VECTOR "Stroke 9" [I16:1302;29221:4816] @355,517 12x12 stroke=#55321f/1.5
+  FRAME "Create Profile Button" [70399:251] @28,588 358x60 fill=#d28a4c radius=10 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+    TEXT "Criar perfil" [16:1256] @149,610 116x16 fill=#140d0a font="Roboto Mono 700 16/16 ls=0" text="Criar perfil"
+  INSTANCE "Mobile Social Block" [70522:3213] @28,688 358x124 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+    FRAME "Frame 4" [I70522:3213;70504:2987] @28,688 358x16 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=/CENTER
+      LINE "Line 7" [I70522:3213;70504:2988] @28,696 110x0 stroke=#3f2319/1
+      TEXT "Ou continue com" [I70522:3213;70504:2989] @148,688 118x16 fill=#f5f1eb font="Roboto Mono 400 13/16 ls=0" text="Ou continue com"
+      LINE "Line 8" [I70522:3213;70504:2990] @276,696 110x0 stroke=#3f2319/1
+    FRAME "Frame 370" [I70522:3213;70504:2991] @28,716 358x96 layout=VERTICAL gap=16 pad=0/0/0/0 align=/
+      INSTANCE "Social Button" [I70522:3213;70504:2992] @28,716 358x40 stroke=#3f2319/1 radius=5 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+        FRAME "Content" [I70522:3213;70504:2992;70483:241] @104,726 189x20 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/CENTER
+          FRAME "google 1" [I70522:3213;70504:2992;70483:242] @104,726 20x20
+            GROUP "Group" [I70522:3213;70504:2992;70483:243] @104,726 20x20
+              VECTOR "Vector" [I70522:3213;70504:2992;70483:244] @105,738 15x8 fill=#59c36a
+              VECTOR "Vector" [I70522:3213;70504:2992;70483:245] @114,740 6x6 fill=#00a66c
+              GROUP "Connected_Home_1_" [I70522:3213;70504:2992;70483:246] @104,731 5x10
+                GROUP "Group" [I70522:3213;70504:2992;70483:247] @104,731 5x10
+                  GROUP "Group" [I70522:3213;70504:2992;70483:248] @104,731 5x10
+                    GROUP "Group" [I70522:3213;70504:2992;70483:249] @104,731 5x10
+                      VECTOR "Vector" [I70522:3213;70504:2992;70483:250] @104,731 5x10 fill=#ffda2d
+              VECTOR "Vector" [I70522:3213;70504:2992;70483:251] @113,734 11x10 fill=#4086f4
+              VECTOR "Vector" [I70522:3213;70504:2992;70483:252] @114,734 10x10 fill=#4175df
+              VECTOR "Vector" [I70522:3213;70504:2992;70483:253] @105,726 15x8 fill=#ff641a
+              VECTOR "Vector" [I70522:3213;70504:2992;70483:254] @114,726 7x6 fill=#f0805f
+          TEXT "Continuar com Google" [I70522:3213;70504:2992;70483:255] @136,728 157x16 fill=#cfb28c font="Roboto Mono 500 13/16 ls=0" text="Continuar com Google"
+      INSTANCE "Social Button" [I70522:3213;70504:2993] @28,772 358x40 stroke=#3f2319/1 radius=5 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+        FRAME "Content" [I70522:3213;70504:2993;70483:258] @96,782 204x20 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/CENTER
+          FRAME "facebook 1" [I70522:3213;70504:2993;70483:259] @96,782 20x20
+            VECTOR "Vector" [I70522:3213;70504:2993;70483:260] @101,782 10x20 fill=#3b5999
+          TEXT "Continuar com Facebook" [I70522:3213;70504:2993;70483:261] @128,784 172x16 fill=#cfb28c font="Roboto Mono 500 13/16 ls=0" text="Continuar com Facebook"
+  FRAME "Login Link" [70399:255] @28,852 358x20 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/MAX
+    TEXT "Já tem uma conta? Entre" [16:1243] @103,852 208x20 fill=#cfb28c font="Roboto Mono 400 15/19.8 ls=0" text="Já tem uma conta? Entre"

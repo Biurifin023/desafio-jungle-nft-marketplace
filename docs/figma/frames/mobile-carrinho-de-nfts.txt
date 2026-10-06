@@ -1,0 +1,97 @@
+FRAME "Mobile / Carrinho de NFTs" [16:360] @0,0 414x896 fill=#140d0a radius=40 layout=VERTICAL gap=4 pad=32/0/0/0 align=/
+  FRAME "Content" [70397:239] @0,32 414x518 layout=VERTICAL gap=12 pad=0/28/0/28 align=/
+    FRAME "Screen Header" [70397:240] @28,32 358x44
+      GROUP "Back" [16:393] @28,32 35x35
+        ELLIPSE "Ellipse 38" [16:394] @28,32 35x35 fill=#2f1d15 stroke=#3f2319/1
+        INSTANCE "Iconly/Curved/Arrow - Left 2" [16:395] @35,39 20x20
+          GROUP "Arrow - Left 2" [I16:395;29221:4975] @42,43 6x12
+            VECTOR "Stroke 1" [I16:395;29221:4976] @42,43 6x12 stroke=#b39463/1.5
+      TEXT "Carrinho de NFTs" [16:415] @124,41 193x16 fill=#f5f1eb font="Roboto Mono 700 20/16 ls=0" text="Carrinho de NFTs"
+    FRAME "Cart Items" [70397:241] @28,88 358x462 layout=VERTICAL gap=20 pad=0/0/0/0 align=/
+      FRAME "Item 1" [70397:242] @28,88 358x100
+        RECTANGLE "Rectangle 102" [16:657] @28,88 358x100 fill=gradient_linear(#241612 0%, #241612 100%) radius=14 effect=DROP_SHADOW 0 6 20 0 #0a060473
+        RECTANGLE "Rectangle 106" [22:1315] @28,88 100x100 fill=image(8459204731e6eba9d474cbc8ebc37071360d3ba5) radii=14/0/0/14
+        RECTANGLE "Mobile Cart NFT 2" [22:1330] @29,90 100x100 fill=image(8459204731e6eba9d474cbc8ebc37071360d3ba5) radius=14
+        TEXT "Emerald Ape #042" [16:429] @137,101 145x16 fill=#f5f1eb font="Roboto Mono 700 15/16 ls=0" text="Emerald Ape #042"
+        TEXT "Edição: 1/50" [22:1316] @137,123 101x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="Edição: 1/50"
+        TEXT "1.19 ETH" [16:435] @137,157 87x16 fill=#e89b55 font="Roboto Mono 700 18/16 ls=0" text="1.19 ETH"
+        GROUP "Group 81" [16:658] @289,126 81x29 radii=0/0/0/0
+          TEXT "1" [16:398] @326,133 10x22 fill=#f5f1eb font="Roboto Mono 400 16/22 ls=0" text="1"
+          GROUP "Group 65" [16:399] @289,126 24x24 radius=29
+            RECTANGLE "Rectangle 79" [16:400] @289,126 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=29
+            LINE "Line 9" [16:401] @297,140 9x0 stroke=#55321f/2
+          GROUP "Group 64" [16:402] @346,126 24x24 radius=31
+            RECTANGLE "Rectangle 80" [16:403] @346,126 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=31
+            TEXT "+" [16:404] @352,131 12x14 fill=#f5f1eb font="Roboto Mono 400 21/16 ls=0" text="+"
+      FRAME "Item 2" [70397:243] @28,208 358x100
+        RECTANGLE "Rectangle 107" [22:1317] @28,208 358x100 fill=gradient_linear(#241612 0%, #241612 100%) radius=14 effect=DROP_SHADOW 0 6 20 0 #0a060473
+        RECTANGLE "Rectangle 108" [22:1318] @28,208 100x100 fill=image(2986a7cb16d09de8970824d2dd58bf0bb021702c) radii=14/0/0/14
+        RECTANGLE "Mobile Cart NFT 3" [22:1344] @29,208 100x100 fill=image(2986a7cb16d09de8970824d2dd58bf0bb021702c) radius=14
+        TEXT "Violet Nomad #314" [22:1327] @137,221 154x16 fill=#f5f1eb font="Roboto Mono 700 15/16 ls=0" text="Violet Nomad #314"
+        TEXT "Edição: 1/1" [22:1328] @137,243 93x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="Edição: 1/1"
+        TEXT "1.39 ETH" [22:1329] @137,277 87x16 fill=#e89b55 font="Roboto Mono 700 18/16 ls=0" text="1.39 ETH"
+        GROUP "Group 85" [22:1319] @289,246 81x29 radii=0/0/0/0
+          TEXT "1" [22:1320] @326,253 10x22 fill=#f5f1eb font="Roboto Mono 400 16/22 ls=0" text="1"
+          GROUP "Group 65" [22:1321] @289,246 24x24 radius=29
+            RECTANGLE "Rectangle 79" [22:1322] @289,246 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=29
+            LINE "Line 9" [22:1323] @297,260 9x0 stroke=#55321f/2
+          GROUP "Group 64" [22:1324] @346,246 24x24 radius=31
+            RECTANGLE "Rectangle 80" [22:1325] @346,246 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=31
+            TEXT "+" [22:1326] @352,251 12x14 fill=#f5f1eb font="Roboto Mono 400 21/16 ls=0" text="+"
+      GROUP "Item 3" [22:1359] @28,328 358x102 radii=0/0/0/0
+        RECTANGLE "Rectangle 109" [22:1331] @28,330 358x100 fill=gradient_linear(#241612 0%, #241612 100%) radius=14 effect=DROP_SHADOW 0 6 20 0 #0a060473
+        RECTANGLE "Rectangle 110" [22:1332] @28,330 100x100 fill=image(9df2ff42dd27ba657621c304557d1a855a4be6a5) radii=14/0/0/14
+        GROUP "Group 83" [16:665] @289,368 81x29 radii=0/0/0/0
+          TEXT "2" [16:539] @325,375 10x22 fill=#f5f1eb font="Roboto Mono 400 16/22 ls=0" text="2"
+          GROUP "Group 72" [16:540] @289,368 24x24 radius=29
+            RECTANGLE "Rectangle 79" [16:541] @289,368 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=29
+            LINE "Line 9" [16:542] @297,382 9x0 stroke=#f5f1eb/2
+          GROUP "Group 73" [16:543] @346,368 24x24 radius=31
+            RECTANGLE "Rectangle 80" [16:544] @346,368 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=31
+            TEXT "+" [16:545] @352,373 12x14 fill=#f5f1eb font="Roboto Mono 400 21/16 ls=0" text="+"
+        TEXT "Ivory Baron #088" [22:1341] @137,343 145x16 fill=#f5f1eb font="Roboto Mono 700 15/16 ls=0" text="Ivory Baron #088"
+        TEXT "Edição: 1/10" [22:1342] @137,365 101x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="Edição: 1/10"
+        TEXT "3.58 ETH" [22:1343] @137,399 87x16 fill=#e89b55 font="Roboto Mono 700 18/16 ls=0" text="3.58 ETH"
+        RECTANGLE "Mobile Cart NFT 4" [22:1358] @28,328 100x100 fill=image(9df2ff42dd27ba657621c304557d1a855a4be6a5) radius=14
+        INSTANCE "Iconly/Curved/Delete" [16:463] @341,370 24x24
+          GROUP "Delete" [I16:463;29221:4602] @345,373 16x18
+            VECTOR "Stroke 1" [I16:463;29221:4603] @347,380 13x12 stroke=#d28a4c/1.5
+            VECTOR "Stroke 3" [I16:463;29221:4604] @345,376 16x1 stroke=#d28a4c/1.5
+            VECTOR "Stroke 5" [I16:463;29221:4605] @350,373 7x4 stroke=#d28a4c/1.5
+      FRAME "Item 4" [70397:244] @28,450 358x100
+        RECTANGLE "Rectangle 111" [22:1345] @28,450 358x100 fill=gradient_linear(#241612 0%, #241612 100%) radius=14 effect=DROP_SHADOW 0 6 20 0 #0a060473
+        RECTANGLE "Rectangle 112" [22:1346] @28,450 100x100 fill=image(87580f2def9af0ce13f4b6f6ce17bb2449bcfc16) radii=14/0/0/14
+        RECTANGLE "Mobile Cart NFT 1" [16:553] @28,450 100x100 fill=image(87580f2def9af0ce13f4b6f6ce17bb2449bcfc16) radius=14
+        TEXT "Golden Beat #207" [22:1355] @137,463 145x16 fill=#f5f1eb font="Roboto Mono 700 15/16 ls=0" text="Golden Beat #207"
+        TEXT "Edição: 1/50" [22:1356] @137,485 101x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="Edição: 1/50"
+        TEXT "1.98 ETH" [22:1357] @137,519 87x16 fill=#e89b55 font="Roboto Mono 700 18/16 ls=0" text="1.98 ETH"
+        GROUP "Group 86" [22:1347] @289,488 81x29 radii=0/0/0/0
+          TEXT "2" [22:1348] @325,495 10x22 fill=#f5f1eb font="Roboto Mono 400 16/22 ls=0" text="2"
+          GROUP "Group 72" [22:1349] @289,488 24x24 radius=29
+            RECTANGLE "Rectangle 79" [22:1350] @289,488 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=29
+            LINE "Line 9" [22:1351] @297,502 9x0 stroke=#f5f1eb/2
+          GROUP "Group 73" [22:1352] @346,488 24x24 radius=31
+            RECTANGLE "Rectangle 80" [22:1353] @346,488 24x24 fill=#2f1d15 stroke=#3f2319/1 radius=31
+            TEXT "+" [22:1354] @352,493 12x14 fill=#f5f1eb font="Roboto Mono 400 21/16 ls=0" text="+"
+  FRAME "Payment Summary" [70397:245] @0,554 414x342 fill=#241612 radii=40/40/0/0 layout=VERTICAL gap=12 pad=24/24/36/24 align=SPACE_BETWEEN/CENTER
+    FRAME "Frame 441" [70410:4217] @24,578 366x190 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+      FRAME "Promo Input" [70397:246] @24,578 366x50 fill=#241612 stroke=#3f2319/1 radius=40 effect=DROP_SHADOW 0 6 20 0 #0a060473 layout=HORIZONTAL gap=0 pad=0/0/0/16 align=/CENTER
+        TEXT "Digite o código promocional..." [16:1018] @40,592 253x22 fill=#b39463 font="Roboto Mono 400 13/22 ls=0" text="Digite o código promocional..."
+        FRAME "Frame 439" [70410:4215] @293,578 97x50 fill=gradient_linear(#d28a4c8a 0%, #d28a4c 100%) radius=40 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+          TEXT "Aplicar" [16:1019] @310,595 64x16 fill=#f5f1eb font="Roboto Mono 700 15/16 ls=0" text="Aplicar"
+      FRAME "Subtotal" [70397:247] @24,640 366x20 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+        TEXT "Subtotal" [16:1009] @24,640 73x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Subtotal"
+        TEXT "8.92 ETH" [16:1015] @313,640 77x16 fill=#f5f1eb font="Roboto Mono 400 16/16 ls=0" text="8.92 ETH"
+      FRAME "Discount" [70397:248] @24,672 366x20 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+        TEXT "Desconto do lançamento" [16:1010] @24,672 199x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Desconto do lançamento"
+        TEXT "(-) 00.00" [16:1011] @308,672 82x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="(-) 00.00"
+      FRAME "Network Fee" [70397:249] @24,704 366x36 layout=VERTICAL gap=0 pad=0/0/0/0 align=/MAX
+        FRAME "Frame 440" [70410:4216] @24,704 366x20 layout=HORIZONTAL gap=162 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+          TEXT "Taxa de rede" [16:1012] @24,704 109x20 fill=#f5f1eb font="Roboto Mono 400 15/19.8 ls=0" text="Taxa de rede"
+          TEXT "0.016 ETH" [16:1016] @303,706 87x16 fill=#f5f1eb font="Roboto Mono 400 16/16 ls=0" text="0.016 ETH"
+        TEXT "Taxa estimada" [16:1013] @296,724 94x16 fill=#e89b55 font="Roboto Mono 400 12/16 ls=0" text="Taxa estimada"
+      FRAME "Total" [70397:250] @24,752 366x16 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/
+        TEXT "Total" [16:1014] @24,752 49x16 fill=#f5f1eb font="Roboto Mono 700 16/16 ls=0" text="Total"
+        TEXT "8.936 ETH" [16:1017] @292,752 98x16 fill=#e89b55 font="Roboto Mono 700 18/16 ls=0" text="8.936 ETH"
+    FRAME "Checkout Button" [70397:251] @24,800 366x60 fill=gradient_linear(#d28a4c 0%, #d28a4ccc 100%) radius=40 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+      TEXT "Conectar e finalizar" [16:1008] @111,822 193x16 fill=#140d0a font="Roboto Mono 700 16/16 ls=0" text="Conectar e finalizar"

@@ -1,0 +1,70 @@
+FRAME "Mobile / Detalhes do NFT" [15:5536] @0,0 414x896 fill=#140d0a radius=40 layout=VERTICAL gap=-114 pad=0/0/0/0 align=/
+  FRAME "Hero" [70396:241] @0,0 414x506
+    RECTANGLE "Rectangle 6" [15:5559] @0,0 414x506 fill=gradient_linear(#241612 0%, #2f1d15 100%)
+    GROUP "Group 62" [15:5657] @179,365 56x7 radii=0/0/0/0
+      ELLIPSE "Ellipse 2" [15:5653] @214,365 7x7 fill=#d28a4c
+      ELLIPSE "Ellipse 3" [15:5654] @228,365 7x7 fill=#d28a4c
+      RECTANGLE "Rectangle 98" [15:5656] @179,365 28x7 fill=#d28a4c radius=25
+    FRAME "Frame 427" [70410:4159] @28,23 361x399 layout=VERTICAL gap=8 pad=0/0/0/0 align=/CENTER
+      FRAME "Frame 426" [70410:4158] @28,23 361x35 layout=HORIZONTAL gap=291 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+        FRAME "Back" [15:5754] @28,23 35x35 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+          FRAME "Frame 424" [70410:4156] @28,23 35x35 fill=#2f1d15 stroke=#3f2319/1 radius=17.5 layout=HORIZONTAL gap=10 pad=8/8/8/8 align=/
+            INSTANCE "Iconly/Curved/Arrow - Left 2" [15:5745] @36,31 20x20
+              GROUP "Arrow - Left 2" [I15:5745;29221:4975] @43,35 6x12
+                VECTOR "Stroke 1" [I15:5745;29221:4976] @43,35 6x12 stroke=#cfb28c/1.5
+        FRAME "Heart" [15:5755] @354,23 35x35 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+          FRAME "Frame 57" [15:5640] @354,23 35x35 layout=VERTICAL gap=10 pad=0/0/0/0 align=/
+            FRAME "Frame 425" [70410:4157] @354,23 35x35 fill=#2f1d15 stroke=#3f2319/1 radius=17.5 layout=VERTICAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+              VECTOR "Vector" [15:5642] @364,33 16x14 fill=#e89b55
+      RECTANGLE "Mobile NFT Hero Artwork" [15:5639] @28,66 361x356 fill=image(8459204731e6eba9d474cbc8ebc37071360d3ba5) radius=24
+  FRAME "Details Sheet" [70396:242] @0,392 414x504 fill=#241612 radii=31/31/0/0 layout=VERTICAL gap=12 pad=32/24/24/24 align=/
+    FRAME "Title Row" [70396:243] @24,424 366x27 layout=HORIZONTAL gap=0 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+      TEXT "Emerald Ape #042" [15:5561] @24,430 193x16 fill=#f5f1eb font="Roboto Mono 700 20/16 ls=0" text="Emerald Ape #042"
+      GROUP "Review" [15:5690] @307,424 83x27 radii=0/0/0/0
+        INSTANCE "Iconly/Bold/Star" [15:5663] @313,430 14x14
+          GROUP "Star" [I15:5663;11:1193] @314,431 12x11
+            VECTOR "Star" [I15:5663;11:1194] @314,431 12x11 fill=#e3a44e
+        GROUP "Group 63" [15:5689] @307,424 83x27 radius=32
+          TEXT "(19)" [15:5662] @356,430 34x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="(19)"
+          TEXT "4.8" [15:5687] @331,430 26x16 fill=#f5f1eb font="Roboto Mono 500 14/16 ls=0" text="4.8"
+          RECTANGLE "Rectangle 99" [15:5688] @307,424 80x27 stroke=#d28a4c/1 radius=32
+    TEXT "Um colecionável digital 1/50 finalizado à mão da coleção Kurio Editions, verificado na Ethereum." [15:5668] @24,463 361x71 fill=#cfb28c font="Roboto Mono 400 14/24 ls=0" text="Um colecionável digital 1/50 finalizado à mão da coleção Kurio Editions, verificado na Ethereum."
+    FRAME "Frame 66" [15:5761] @24,546 232x52 layout=VERTICAL gap=8 pad=0/0/0/0 align=/
+      TEXT "Edição:" [15:5660] @24,546 64x16 fill=#f5f1eb font="Roboto Mono 700 15/16 ls=0" text="Edição:"
+      FRAME "Frame 432" [70410:4178] @24,570 232x28 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/
+        FRAME "Frame 428" [70410:4166] @24,570 42x28 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+          ELLIPSE "Ellipse 25" [15:5670] @24,570 42x28 stroke=#3f2319/1
+          TEXT "1/10" [15:5674] @28,576 34x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="1/10"
+        FRAME "Frame 431" [70410:4173] @78,570 42x28 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+          ELLIPSE "Ellipse 25" [70410:4174] @78,570 42x28 stroke=#3f2319/1
+          TEXT "1/10" [70410:4175] @82,576 34x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="1/10"
+        FRAME "Frame 429" [70410:4167] @132,570 46x28 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+          ELLIPSE "Ellipse 26" [15:5671] @132,570 46x28 stroke=#d28a4c/1
+          TEXT "1/50" [15:5675] @138,576 34x16 fill=#e89b55 font="Roboto Mono 500 14/16 ls=0" text="1/50"
+        FRAME "Frame 430" [70410:4168] @190,570 66x28 layout=HORIZONTAL gap=10 pad=0/0/0/0 align=CENTER/CENTER
+          ELLIPSE "Ellipse 27" [15:5672] @190,570 66x28 stroke=#3f2319/1
+          TEXT "ABERTA" [15:5676] @198,576 51x16 fill=#cfb28c font="Roboto Mono 400 14/16 ls=0" text="ABERTA"
+    FRAME "Token Info" [70396:244] @24,610 307x84 layout=VERTICAL gap=12 pad=0/0/0/0 align=/
+      TEXT "ID do token: #0042" [15:5693] @24,610 163x20 fill=#b39463 font="Roboto Mono 400 15/19.8 ls=0" text="ID do token: #0042"
+      TEXT "Coleção: Kurio Apes" [15:5694] @24,642 172x20 fill=#b39463 font="Roboto Mono 400 15/19.8 ls=0" text="Coleção: Kurio Apes"
+      TEXT "Atributos: Óculos, Esmeralda, Raro" [15:5695] @24,674 307x20 fill=#b39463 font="Roboto Mono 400 15/19.8 ls=0" text="Atributos: Óculos, Esmeralda, Raro"
+  FRAME "Buy Bar" [70396:245] @0,732 414x164 fill=#241612 radii=40/40/0/0 effect=DROP_SHADOW 0 0 20 0 #0a060473 layout=VERTICAL gap=10 pad=20/24/36/24 align=/
+    FRAME "Frame 438" [70410:4214] @24,752 366x110 layout=VERTICAL gap=20 pad=0/0/0/0 align=/
+      FRAME "Frame 434" [70410:4210] @24,752 366x30 layout=HORIZONTAL gap=142 pad=0/0/0/0 align=SPACE_BETWEEN/CENTER
+        FRAME "Frame 67" [16:355] @24,752 120x30 layout=HORIZONTAL gap=8 pad=0/0/0/0 align=/CENTER
+          TEXT "Qtd." [15:5759] @24,759 37x16 fill=#cfb28c font="Roboto Mono 500 15/16 ls=0" text="Qtd."
+          FRAME "Frame 433" [70410:4179] @69,752 75x30 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/CENTER
+            FRAME "Add Button" [70410:4202] @69,752 20x30 fill=#d28a4c stroke=#140d0a/1 radius=20 effect=DROP_SHADOW 0 4 12 -2 #140d0a26 layout=VERTICAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+              FRAME "Frame" [70410:4203] @71,759 16x16
+                VECTOR "Vector" [70410:4204] @74,766 9x1 fill=#000000
+            TEXT "1" [15:5720] @101,755 11x25 fill=#f5f1eb font="Roboto Mono 500 18/25 ls=0" text="1"
+            FRAME "Add Button" [70410:4206] @124,752 20x30 fill=#d28a4c stroke=#140d0a/1 radius=20 effect=DROP_SHADOW 0 4 12 -2 #140d0a26 layout=VERTICAL gap=0 pad=0/0/0/0 align=CENTER/CENTER
+              FRAME "Frame" [70410:4207] @126,759 16x16
+                VECTOR "Vector" [70410:4208] @129,762 9x9 fill=#000000
+        TEXT "1.19 ETH" [15:5562] @293,759 97x16 fill=#e89b55 font="Roboto Mono 700 20/16 ls=0" text="1.19 ETH"
+      FRAME "Frame 437" [70410:4213] @24,802 268x60 layout=HORIZONTAL gap=12 pad=0/0/0/0 align=/CENTER
+        FRAME "Frame 435" [70410:4211] @24,802 196x60 fill=gradient_linear(#d28a4c 0%, #d28a4ccc 100%) radius=40 layout=HORIZONTAL gap=10 pad=20/44/20/48 align=CENTER/CENTER
+          TEXT "Comprar NFT" [15:5728] @71,822 106x20 fill=#140d0a font="Roboto Mono 700 16/20 ls=0" text="Comprar NFT"
+        FRAME "Frame 436" [70410:4212] @232,802 60x60 fill=#2f1d15 stroke=#3f2319/1 radius=40 layout=HORIZONTAL gap=10 pad=20/20/20/20 align=/
+          INSTANCE "Shop" [16:357] @252,822 20x20
+            VECTOR "Vector" [I16:357;15:5525] @253,824 18x17 fill=#b39463
