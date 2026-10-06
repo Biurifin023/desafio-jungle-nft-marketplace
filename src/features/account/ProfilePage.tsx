@@ -12,7 +12,6 @@ import { ArrowDownIcon, HideIcon, ImageIcon } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { announce } from '@/lib/announce'
-import { cn } from '@/lib/utils'
 import { useSessionSnapshot } from '@/features/session/session-store'
 import { AccountSidebar } from './AccountSidebar'
 
@@ -156,7 +155,7 @@ function ProfileForm({ initial, avatarUrl }: { initial: UpdateProfileInput; avat
   )
 }
 
-/** Campo obrigatório no padrão do Figma: rótulo 15px, asterisco coral 22px colado e 10px até o input. */
+/** Campo obrigatório no padrão do Figma: rótulo 15px numa linha de 29px e 10px até o input. */
 function ProfileField({
   label,
   error,
@@ -165,7 +164,7 @@ function ProfileField({
 }: {
   label: string
   error?: string
-  /** Campo ENS: seletor ".eth" à esquerda e 4px entre o rótulo e o asterisco. */
+  /** Campo ENS: seletor ".eth" à esquerda do input. */
   ens?: boolean
   children: ReactElement<Record<string, unknown>>
 }) {
@@ -176,16 +175,14 @@ function ProfileField({
     id: inputId,
     'aria-invalid': Boolean(error) || undefined,
     'aria-describedby': error ? errorId : undefined,
+    'aria-required': true,
     className: 'h-10 text-[15px]',
   })
 
   return (
     <div className="min-w-0">
-      <label htmlFor={inputId} className={cn('flex h-[29px] items-center text-[15px] leading-[15px] text-cream', ens && 'gap-1')}>
+      <label htmlFor={inputId} className="flex h-[29px] items-center text-[15px] leading-[15px] text-cream">
         {label}
-        <span aria-hidden className="text-[22px] leading-[29px] text-coral">
-          *
-        </span>
       </label>
       <div className="mt-2.5 flex gap-2.5">
         {ens ? (

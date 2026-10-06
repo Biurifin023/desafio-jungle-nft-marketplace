@@ -1,11 +1,12 @@
 import { useEffect, useState, type FocusEvent, type HTMLAttributes } from 'react'
 import { Link } from '@tanstack/react-router'
-import { Pause, Play } from 'lucide-react'
 import type { FeaturedResponse, NftSummary } from '@/api/contracts'
 import { NftImage } from '@/components/common/NftImage'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ArrowRightIcon } from '@/components/icons'
 import { cn } from '@/lib/utils'
+
+const AUTOPLAY_MS = 3000
 
 export function CatalogHero({
   featured,
@@ -17,19 +18,18 @@ export function CatalogHero({
   const slides = featured?.hero ?? []
   const [index, setIndex] = useState(0)
   const [reduceMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  const [paused, setPaused] = useState(false)
   const [interacting, setInteracting] = useState(false)
   const safeIndex = slides.length ? index % slides.length : 0
   const current = slides[safeIndex]
   const autoplay = slides.length > 1 && !reduceMotion
 
   useEffect(() => {
-    if (!autoplay || paused || interacting) return
+    if (!autoplay || interacting) return
     const timer = window.setInterval(() => {
       setIndex((i) => (i + 1) % slides.length)
-    }, 6000)
+    }, AUTOPLAY_MS)
     return () => window.clearInterval(timer)
-  }, [autoplay, paused, interacting, slides.length])
+  }, [autoplay, interacting, slides.length])
 
   /** Passar o mouse ou focar algo dentro do destaque segura a troca automática. */
   const interaction = {
@@ -44,8 +44,6 @@ export function CatalogHero({
     slides,
     index: safeIndex,
     onIndex: setIndex,
-    paused: autoplay ? paused : null,
-    onTogglePause: () => setPaused((value) => !value),
   }
 
   if (isPending && !featured) {
@@ -69,9 +67,6 @@ type HeroControls = {
   slides: NftSummary[]
   index: number
   onIndex: (i: number) => void
-  /** `null` quando não há troca automática (um destaque só ou movimento reduzido). */
-  paused: boolean | null
-  onTogglePause: () => void
 }
 
 type HeroInteraction = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave' | 'onFocus' | 'onBlur'>
@@ -187,42 +182,22 @@ function MobileHero({
   )
 }
 
-function HeroDots({
-  slides,
-  index,
-  onIndex,
-  paused,
-  onTogglePause,
-  className,
-}: HeroControls & { className?: string }) {
+function HeroDots({ slides, index, onIndex, className }: HeroControls & { className?: string }) {
   if (slides.length < 2) return null
   return (
-    <div className={cn('-mx-2 flex items-center', className)}>
-      <div className="flex items-center" role="group" aria-label="Escolher destaque">
-        {slides.map((slide, i) => (
-          <button
-            key={slide.id}
-            type="button"
-            aria-label={`Destaque ${i + 1} de ${slides.length}`}
-            aria-current={i === index ? 'true' : undefined}
-            onClick={() => onIndex(i)}
-            className="grid size-6 cursor-pointer place-items-center rounded-full"
-          >
-            <span aria-hidden className={cn('size-2 rounded-full', i === index ? 'bg-copper' : 'bg-copper/40')} />
-          </button>
-        ))}
-      </div>
-      {paused !== null ? (
+    <div className={cn('-mx-2 flex items-center', className)} role="group" aria-label="Escolher destaque">
+      {slides.map((slide, i) => (
         <button
+          key={slide.id}
           type="button"
-          aria-label={paused ? 'Retomar troca automática dos destaques' : 'Pausar troca automática dos destaques'}
-          aria-pressed={paused}
-          onClick={onTogglePause}
-          className="grid size-6 cursor-pointer place-items-center rounded-full text-copper transition-colors hover:text-amber"
+          aria-label={`Destaque ${i + 1} de ${slides.length}`}
+          aria-current={i === index ? 'true' : undefined}
+          onClick={() => onIndex(i)}
+          className="grid size-6 cursor-pointer place-items-center rounded-full"
         >
-          {paused ? <Play aria-hidden className="size-3 fill-current" /> : <Pause aria-hidden className="size-3 fill-current" />}
+          <span aria-hidden className={cn('size-2 rounded-full', i === index ? 'bg-copper' : 'bg-copper/40')} />
         </button>
-      ) : null}
+      ))}
     </div>
   )
 }

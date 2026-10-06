@@ -19,18 +19,13 @@ export function FormField({
     id: inputId,
     'aria-invalid': Boolean(error) || undefined,
     'aria-describedby': error ? errorId : undefined,
+    'aria-required': required || undefined,
   })
 
   return (
     <div>
       <Label htmlFor={inputId} className="mb-2 block text-[15px] font-medium text-cream">
         {label}
-        {required ? (
-          <span className="text-coral" aria-hidden>
-            {' '}
-            *
-          </span>
-        ) : null}
       </Label>
       {field}
       {error ? (

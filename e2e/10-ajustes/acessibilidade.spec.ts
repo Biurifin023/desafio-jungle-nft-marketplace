@@ -58,33 +58,31 @@ test.describe('acessibilidade', () => {
     await expect(max).toHaveAttribute('aria-valuetext', /ETH$/)
   })
 
-  test('destaques: troca automática pode ser pausada', async ({ page }) => {
+  test('destaques: troca a cada 3 segundos e segura com o mouse sobre o destaque', async ({ page }) => {
     test.setTimeout(60_000)
     await resetScenario(page, 'fast')
-    const pause = page.getByRole('button', { name: 'Pausar troca automática dos destaques' })
-    await expect(pause).toBeVisible()
     const current = page.locator('[aria-label^="Destaque "][aria-current="true"]:visible')
+    await expect(current).toBeVisible()
+    await expect(page.getByRole('button', { name: /troca automática dos destaques/ })).toHaveCount(0)
     const first = await current.getAttribute('aria-label')
 
     await page.mouse.move(0, 0)
-    await expect(current).not.toHaveAttribute('aria-label', first!, { timeout: 8_000 })
+    await expect(current).not.toHaveAttribute('aria-label', first!, { timeout: 4_500 })
     const afterAutoplay = await current.getAttribute('aria-label')
 
-    await pause.click()
-    const resume = page.getByRole('button', { name: 'Retomar troca automática dos destaques' })
-    await expect(resume).toHaveAttribute('aria-pressed', 'true')
-    // Sem foco nem mouse no destaque, só a pausa explícita segura a troca.
-    await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur())
-    await page.mouse.move(0, 0)
-    await page.waitForTimeout(7_000)
+    await current.hover()
+    await page.waitForTimeout(4_000)
     await expect(current).toHaveAttribute('aria-label', afterAutoplay!)
   })
 
-  test('destaques: sem troca automática nem botão de pausa com movimento reduzido', async ({ page }) => {
+  test('destaques: sem troca automática com movimento reduzido', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await resetScenario(page, 'fast')
-    await expect(page.locator('[aria-label^="Destaque "]:visible').first()).toBeVisible()
-    await expect(page.getByRole('button', { name: /troca automática dos destaques/ })).toHaveCount(0)
+    const current = page.locator('[aria-label^="Destaque "][aria-current="true"]:visible')
+    const first = await current.getAttribute('aria-label')
+    await page.mouse.move(0, 0)
+    await page.waitForTimeout(4_000)
+    await expect(current).toHaveAttribute('aria-label', first!)
   })
 
   test('mudança de preço só interrompe o leitor de tela quando o NFT está no carrinho', async ({ page }) => {
