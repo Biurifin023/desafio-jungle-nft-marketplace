@@ -27,6 +27,35 @@ export async function loginAs(page: Page, who: keyof typeof CREDENTIALS = 'ana')
   }, { email, password })
 }
 
+export async function seedGuestCart(
+  page: Page,
+  items: { nftId: string; editionId: string; quantity: number }[],
+) {
+  await page.waitForFunction(() => {
+    try {
+      return Boolean(JSON.parse(localStorage.getItem('kurio.guestCartId') ?? 'null'))
+    } catch {
+      return false
+    }
+  })
+  await page.evaluate(async (payload) => {
+    const guestId = JSON.parse(localStorage.getItem('kurio.guestCartId') ?? 'null') as string | null
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+    if (guestId) headers['X-Guest-Cart'] = guestId
+    for (const item of payload) {
+      const res = await fetch('/api/cart/items', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(item),
+      })
+      if (!res.ok) throw new Error(await res.text())
+      const data = (await res.json()) as { cart: { id: string } }
+      localStorage.setItem('kurio.guestCartId', JSON.stringify(data.cart.id))
+      headers['X-Guest-Cart'] = data.cart.id
+    }
+  }, items)
+}
+
 export const test = base
 
 export { expect }
