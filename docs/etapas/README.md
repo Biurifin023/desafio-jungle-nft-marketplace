@@ -7,7 +7,7 @@
 | 00 Fundação | `main` | Integração (15), Mocking (10), Arquitetura (5) | smoke | concluída |
 | 01 Catálogo | `feat/e1-catalogo` | Fidelidade (20), Fluxos (20) | 1, 12 (catálogo) | pendente |
 | 02 Detalhe e favoritos | `feat/e2-detalhe` | Fluxos (20) | 2, 4, 12 (detalhe) | pendente |
-| 03 Auth e sessão | `feat/e3-auth` | Fluxos (20) | 3 | pendente |
+| 03 Auth e sessão | `feat/e3-auth` | Fluxos (20) | 3 | em andamento |
 | 04 Carrinho | `feat/e4-carrinho` | Fluxos (20) | 5, 12 (carrinho) | pendente |
 | 05 Checkout e confirmação | `feat/e5-checkout` | Fluxos (20) | 6, 7 | pendente |
 | 06 Perfil e carteiras | `feat/e6-conta` | Fluxos (20) | 8 | pendente |
