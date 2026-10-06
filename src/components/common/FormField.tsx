@@ -52,4 +52,4 @@ export function FormError({ children }: { children: ReactNode }) {
 }
 
 export const selectClassName =
-  'h-10 w-full rounded-xs border border-input bg-transparent px-3 text-sm text-cream outline-none focus-visible:border-copper focus-visible:ring-[3px] focus-visible:ring-ring/40'
+  'select-native h-10 w-full rounded-xs border border-input bg-transparent pl-3 text-sm text-cream outline-none focus-visible:border-copper focus-visible:ring-[3px] focus-visible:ring-ring/40 [&_option]:bg-surface [&_option]:text-cream [&_option:checked]:bg-copper [&_option:checked]:text-ink'

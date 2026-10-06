@@ -78,12 +78,15 @@ function DesktopHero({
               artistas e tenha uma parte da cultura da internet.
             </p>
           </div>
-          <a
-            href="#catalogo"
+          <Link
+            to="."
+            search
+            hash="catalogo"
+            resetScroll={false}
             className="inline-flex h-10 w-[140px] items-center justify-center rounded-md bg-copper text-base font-bold text-ink hover:bg-amber"
           >
             EXPLORAR
-          </a>
+          </Link>
         </div>
         {current ? (
           <Link to="/nft/$id" params={{ id: current.id }} className="size-[min(450px,38vw)] shrink-0 overflow-hidden rounded-3xl">
@@ -125,10 +128,10 @@ function MobileHero({
             CULTURA DIGITAL
           </h1>
           <p className="mt-2 text-xs leading-[18px] text-sand">Descubra NFTs selecionados de criadores do mundo todo.</p>
-          <a href="#catalogo" className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-amber">
+          <Link to="." search hash="catalogo" resetScroll={false} className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-amber">
             EXPLORAR
             <ArrowRightIcon className="size-4 text-copper" />
-          </a>
+          </Link>
         </div>
         <div className="relative h-[146px] w-[138px] shrink-0">
           {current ? (

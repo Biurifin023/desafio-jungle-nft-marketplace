@@ -231,7 +231,7 @@ function CheckoutActions({ quote, canCheckout }: { quote: Quote | undefined; can
           Conectar e finalizar
         </Button>
       )}
-      <Link to="/" hash="catalogo" className="hidden text-[15px] text-amber hover:underline lg:inline">
+      <Link to="/" hash="catalogo" resetScroll={false} className="hidden text-[15px] text-amber hover:underline lg:inline">
         Continuar explorando
       </Link>
     </div>
@@ -262,7 +262,7 @@ export function CartEmpty() {
         description="Explore o mercado e adicione edições para ver o resumo da cotação aqui."
         action={
           <Button asChild>
-            <Link to="/" hash="catalogo">
+            <Link to="/" hash="catalogo" resetScroll={false}>
               Continuar explorando
             </Link>
           </Button>

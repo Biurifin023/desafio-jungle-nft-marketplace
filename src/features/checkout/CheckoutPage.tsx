@@ -232,13 +232,17 @@ export function CheckoutPage() {
   return (
     <section className="page-container py-8" aria-labelledby="checkout-title" data-testid="checkout-page">
       <nav aria-label="Trilha" className="text-sm font-bold text-cream">
-        <Link to="/">Início</Link>
+        <Link to="/" className="transition-colors hover:text-amber">
+          Início
+        </Link>
         <span> / </span>
-        <Link to="/" hash="catalogo">
+        <Link to="/" hash="catalogo" resetScroll={false} className="text-amber">
           Mercado
         </Link>
         <span> / </span>
-        <span>Pagamento</span>
+        <span aria-current="page" className="text-amber">
+          Pagamento
+        </span>
       </nav>
       <h1 id="checkout-title" className="mt-6 text-3xl font-bold text-cream">
         Pagamento

@@ -138,11 +138,11 @@ export function NftDetailPage({ id }: { id: string }) {
       <div className="page-container hidden flex-col gap-24 py-8 lg:flex">
         <div className="flex flex-col gap-3">
           <nav aria-label="Trilha de navegação" className="text-[15px] font-bold text-cream">
-            <Link to="/" className="hover:text-amber">
+            <Link to="/" className="transition-colors hover:text-amber">
               Início
             </Link>
             <span aria-hidden> / </span>
-            <Link to="/" hash="catalogo" className="hover:text-amber">
+            <Link to="/" hash="catalogo" resetScroll={false} className="text-amber">
               Mercado
             </Link>
           </nav>

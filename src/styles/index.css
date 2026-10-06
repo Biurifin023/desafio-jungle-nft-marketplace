@@ -98,6 +98,19 @@
   ::selection {
     background: color-mix(in oklab, var(--kurio-copper) 45%, transparent);
   }
+  /* O preflight do Tailwind v4 deixa botões com cursor padrão. */
+  a[href],
+  summary,
+  select:not(:disabled),
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  [role='tab']:not([aria-disabled='true']),
+  [role='menuitem']:not([data-disabled]),
+  [role='menuitemcheckbox']:not([data-disabled]),
+  [role='menuitemradio']:not([data-disabled]),
+  [role='option']:not([data-disabled]) {
+    cursor: pointer;
+  }
 }
 
 @layer components {
@@ -121,6 +134,16 @@
     );
     background-size: 200% 100%;
     animation: var(--animate-shimmer);
+  }
+
+  /* Seta própria do <select> nativo: a do navegador não aceita espaçamento em relação à borda. */
+  .select-native {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cfb28c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
   }
 }
 

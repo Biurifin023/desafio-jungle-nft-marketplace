@@ -13,6 +13,9 @@ const CATEGORIES = Object.keys(CATEGORY_LABEL) as Category[]
 const NETWORKS = Object.keys(NETWORK_LABEL) as Network[]
 const SORTS = Object.keys(NFT_SORT_LABEL) as NftSort[]
 
+const filterItem =
+  '-mx-2 flex h-10 w-[calc(100%+1rem)] min-w-0 cursor-pointer items-center justify-between rounded-xs px-2 text-[15px] leading-10 transition-colors hover:bg-copper/10 hover:text-amber'
+
 function toBound(value: string | undefined, fallback: string) {
   const n = Number(value)
   return Number.isFinite(n) ? n : Number(fallback)
@@ -109,10 +112,7 @@ function CatalogFiltersBody({
                   type="button"
                   aria-pressed={selected}
                   onClick={() => toggleCategory(category)}
-                  className={cn(
-                    'flex h-10 w-full min-w-0 cursor-pointer items-center justify-between text-[15px] leading-10',
-                    selected ? 'font-normal text-amber' : 'text-sand',
-                  )}
+                  className={cn(filterItem, selected ? 'font-normal text-amber' : 'text-sand')}
                 >
                   <span className="truncate">{CATEGORY_LABEL[category]}</span>
                   <span className={cn('shrink-0 tabular-nums', selected && 'font-bold')}>({count})</span>
@@ -155,10 +155,7 @@ function CatalogFiltersBody({
                   type="button"
                   aria-pressed={selected}
                   onClick={() => toggleNetwork(network)}
-                  className={cn(
-                    'flex h-10 w-full min-w-0 cursor-pointer items-center justify-between text-[15px] leading-10',
-                    selected ? 'text-amber' : 'text-sand',
-                  )}
+                  className={cn(filterItem, selected ? 'text-amber' : 'text-sand')}
                 >
                   <span className="truncate">{NETWORK_LABEL[network]}</span>
                   <span className="shrink-0 tabular-nums">({count})</span>

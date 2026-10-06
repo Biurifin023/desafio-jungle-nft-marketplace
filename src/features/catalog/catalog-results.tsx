@@ -49,12 +49,12 @@ function CatalogTabs({ value, onChange }: { value: NftTab; onChange: (tab: NftTa
             aria-selected={active}
             onClick={() => onChange(tab.id)}
             className={cn(
-              'relative cursor-pointer pb-1 text-sm leading-4 whitespace-nowrap',
-              active ? 'font-bold text-amber lg:font-medium' : 'font-normal text-cream lg:font-medium',
+              'relative cursor-pointer pb-1 text-sm leading-4 whitespace-nowrap transition-colors hover:text-amber',
+              'after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-copper after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:after:scale-x-100',
+              active ? 'font-bold text-amber after:scale-x-100 lg:font-medium' : 'font-normal text-cream lg:font-medium',
             )}
           >
             {tab.label}
-            {active ? <span aria-hidden className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-copper" /> : null}
           </button>
         )
       })}
@@ -126,6 +126,8 @@ export function CatalogPagination({ search, totalPages }: { search: CatalogSearc
             <Link
               to="/"
               search={serializeCatalogSearch({ ...search, page })}
+              hash="catalogo"
+              resetScroll={false}
               aria-label={`Página ${page}`}
               aria-current={page === current ? 'page' : undefined}
               className={cn(
@@ -141,6 +143,8 @@ export function CatalogPagination({ search, totalPages }: { search: CatalogSearc
           <Link
             to="/"
             search={serializeCatalogSearch({ ...search, page: next })}
+            hash="catalogo"
+            resetScroll={false}
             aria-label="Próxima página"
             aria-disabled={current >= totalPages}
             className={cn(

@@ -9,12 +9,14 @@ export interface RouterContext {
 }
 
 export function createAppRouter(queryClient: QueryClient) {
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
   return createRouter({
     routeTree,
     context: { queryClient },
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
     scrollRestoration: true,
+    defaultHashScrollIntoView: reduceMotion ? true : { behavior: 'smooth', block: 'start' },
     defaultNotFoundComponent: () => <NotFound />,
     defaultErrorComponent: RouteError,
   })

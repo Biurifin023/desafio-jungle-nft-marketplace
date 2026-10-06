@@ -27,8 +27,9 @@ export function Logo({ className }: { className?: string }) {
   )
 }
 
-const navLink = 'relative flex h-[45px] items-start text-base text-cream transition-colors hover:text-amber'
-const activeNav = 'font-bold text-amber after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:bg-copper'
+const navLink =
+  'relative flex h-[45px] items-start text-base text-cream transition-colors hover:text-amber after:absolute after:inset-x-0 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-copper after:transition-transform after:duration-300 hover:after:scale-x-100 focus-visible:after:scale-x-100'
+const activeNav = 'font-bold text-amber after:scale-x-100'
 
 function useActiveNav() {
   const matches = useMatches()
@@ -58,7 +59,7 @@ function HeaderSearch() {
     e.preventDefault()
     const q = String(new FormData(e.currentTarget).get('q') ?? '').trim()
     setOpen(false)
-    void navigate({ to: '/', search: q ? { q } : {}, hash: 'catalogo' })
+    void navigate({ to: '/', search: q ? { q } : {}, hash: 'catalogo', resetScroll: false })
   }
   return (
     <>
@@ -152,7 +153,7 @@ export function Header() {
               </Link>
             </li>
             <li>
-              <Link to="/" hash="catalogo" className={cn(navLink, active === 'mercado' && activeNav)} aria-current={active === 'mercado' ? 'page' : undefined}>
+              <Link to="/cart" className={cn(navLink, active === 'mercado' && activeNav)} aria-current={active === 'mercado' ? 'page' : undefined}>
                 Mercado
               </Link>
             </li>

@@ -16,7 +16,7 @@ function Home() {
     <HomePage
       search={search}
       onSearch={(next) => {
-        void navigate({ to: '/', search: serializeCatalogSearch(next) })
+        void navigate({ to: '/', search: serializeCatalogSearch(next), resetScroll: false })
       }}
     />
   )

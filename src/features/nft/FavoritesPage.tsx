@@ -57,7 +57,7 @@ export function FavoritesPage() {
           title="Nenhum favorito ainda"
           description="Toque em Favoritar na página de um NFT para guardá-lo aqui."
           action={
-            <Link to="/" hash="catalogo" className="text-amber underline-offset-4 hover:underline">
+            <Link to="/" hash="catalogo" resetScroll={false} className="text-amber underline-offset-4 hover:underline">
               Explorar o mercado
             </Link>
           }

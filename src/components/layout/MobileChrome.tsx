@@ -12,7 +12,7 @@ export function MobileTopBar({ onOpenFilters, initialQuery = '' }: { onOpenFilte
   const [q, setQ] = useState(initialQuery)
   function submit(e: FormEvent) {
     e.preventDefault()
-    void navigate({ to: '/', search: q.trim() ? { q: q.trim() } : {}, hash: 'catalogo' })
+    void navigate({ to: '/', search: q.trim() ? { q: q.trim() } : {}, hash: 'catalogo', resetScroll: false })
   }
   return (
     <div className="flex items-center gap-2 px-[var(--page-gutter)] pt-10 lg:hidden">

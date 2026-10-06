@@ -113,6 +113,7 @@ export function Footer() {
                 to="/"
                 search={{ categories: [cat] }}
                 hash="catalogo"
+                resetScroll={false}
                 className="block py-1 text-sm leading-[30px] text-cream hover:text-amber"
               >
                 {CATEGORY_LABEL[cat]}
