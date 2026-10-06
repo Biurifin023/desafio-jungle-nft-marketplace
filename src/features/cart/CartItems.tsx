@@ -18,7 +18,7 @@ export function CartItems({ items, lines, quotePending }: { items: CartItem[]; l
 
   return (
     <div className="min-w-0 flex-1">
-      <div className="mb-3 hidden grid-cols-[minmax(0,1fr)_77px_75px_87px_24px] items-center gap-x-6 border-b border-copper/30 pb-3 text-base text-cream lg:grid">
+      <div className="mb-3 hidden grid-cols-[minmax(0,1fr)_77px_75px_87px_24px] items-center gap-x-6 border-b border-copper/30 pr-3 pb-3 text-base text-cream lg:grid">
         <p className="font-bold">NFTs</p>
         <p className="text-center font-medium">Preço</p>
         <p className="text-center font-bold">Edições</p>
@@ -98,7 +98,7 @@ function CartItemRow({ item, line, quotePending }: { item: CartItem; line: Quote
       data-testid="cart-item"
       data-item-id={item.id}
       data-edition={item.editionLabel}
-      className={cn('lg:grid lg:grid-cols-[minmax(0,1fr)_77px_75px_87px_24px] lg:items-center lg:gap-x-6 lg:bg-surface', busy && 'opacity-80')}
+      className={cn('lg:grid lg:grid-cols-[minmax(0,1fr)_77px_75px_87px_24px] lg:items-center lg:gap-x-6 lg:bg-surface lg:pr-3', busy && 'opacity-80')}
     >
       <article className="relative flex overflow-hidden rounded-[14px] bg-surface shadow-[0_6px_20px_0_#0a060473] lg:rounded-none lg:bg-transparent lg:shadow-none">
         <Link to="/nft/$id" params={{ id: item.nftId }} className="shrink-0" aria-label={`Ver ${item.name}`}>

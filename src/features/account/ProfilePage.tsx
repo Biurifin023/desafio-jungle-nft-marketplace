@@ -303,7 +303,7 @@ function AvatarField({ avatarUrl }: { avatarUrl: string | null }) {
         <div className="flex items-center gap-5">
           <Button
             type="button"
-            className="h-10 w-[98px] justify-start rounded-xs pl-[25px] text-sm font-bold"
+            className="h-10 w-[98px] rounded-xs px-0 text-sm font-bold"
             disabled={update.isPending}
             onClick={() => fileRef.current?.click()}
           >
