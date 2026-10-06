@@ -91,4 +91,8 @@ Limitação: o binding no navegador não replica cluster nem salas. Auth vai no 
 
 ## Deploy
 
-A build de demonstração usa `VITE_ENABLE_MOCKS=true`. `vercel.json` reescreve rotas para `index.html` para o refresh direto funcionar; arquivos estáticos (incluindo `mockServiceWorker.js`, servido com `Cache-Control: no-cache`) têm prioridade sobre o rewrite.
+A build de demonstração usa `VITE_ENABLE_MOCKS=true`. `vercel.json` reescreve rotas para `index.html` para o refresh direto funcionar; arquivos estáticos (incluindo `mockServiceWorker.js`, servido com `Cache-Control: no-cache`) têm prioridade sobre o rewrite. Os chunks com hash em `/assets` (JS, CSS e fontes) recebem cache imutável de um ano; as imagens das fixtures não têm hash e ficam com o cache padrão.
+
+A Vercel usaria por padrão um pnpm mais antigo que o do lockfile (que traz `allowBuilds`, configuração do pnpm 11). Por isso `installCommand` e `buildCommand` rodam o `pnpm@11.13.1` via `npx`.
+
+Produção: https://kurio-nft-marketplace-woad.vercel.app (projeto `kurio-nft-marketplace`, deploy a cada push na `main`). Para rodar a suíte contra uma URL publicada, use `E2E_BASE_URL`; o Playwright então não sobe servidor local.

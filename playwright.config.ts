@@ -1,7 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
 
 const port = 4173
-const baseURL = `http://127.0.0.1:${port}`
+const remoteURL = process.env.E2E_BASE_URL
+const baseURL = remoteURL ?? `http://127.0.0.1:${port}`
 
 export default defineConfig({
   testDir: './e2e',
@@ -31,10 +32,12 @@ export default defineConfig({
       use: { ...devices['Pixel 5'], viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true },
     },
   ],
-  webServer: {
-    command: `pnpm build:demo && pnpm exec vite preview --host 127.0.0.1 --port ${port} --strictPort`,
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
+  webServer: remoteURL
+    ? undefined
+    : {
+        command: `pnpm build:demo && pnpm exec vite preview --host 127.0.0.1 --port ${port} --strictPort`,
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+        timeout: 120_000,
+      },
 })

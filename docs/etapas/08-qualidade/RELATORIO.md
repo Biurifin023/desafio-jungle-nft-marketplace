@@ -14,6 +14,7 @@
 - A busca mobile não tinha indicador de foco.
 - Lighthouse: ordem de headings, área de toque dos pontos do carrossel e nome acessível do card (accessibility de 95 para 100).
 - Bundle do MSW de 476 KB para 186 KB (stub do `tough-cookie`).
+- Checkout: o formulário era preenchido assim que o perfil carregava. Se a lista de carteiras chegasse depois, o campo Carteira ficava vazio e "Conectar carteira" falhava. Agora o preenchimento espera as duas consultas (achado por uma falha intermitente do teste 10).
 
 ## Playwright
 
@@ -28,8 +29,22 @@ Os 4 pulos são intencionais: drawer de filtros só no mobile, zoom da galeria s
 
 ## Lighthouse (mediana)
 
-Início: mobile 87 / desktop 98. Detalhe: mobile 88 / desktop 99. Accessibility, Best Practices e SEO em 100 nas quatro combinações. A justificativa da performance mobile está em `docs/lighthouse/RESULTADOS.md`.
+| Ambiente | Início mobile | Início desktop | Detalhe mobile | Detalhe desktop |
+| --- | ---: | ---: | ---: | ---: |
+| Produção (Vercel) | 94 | 100 | 98 | 100 |
+| `vite preview` local | 87 | 98 | 88 | 99 |
+
+Accessibility, Best Practices e SEO ficam em 100 nas oito combinações. Em produção todas as metas são atingidas. O preview local serve os chunks sem compressão, e a análise completa está em `docs/lighthouse/RESULTADOS.md`.
 
 ## Deploy
 
-Vercel, com o projeto ligado ao repositório do GitHub (build `pnpm build:demo`, `VITE_ENABLE_MOCKS=true`). URL e verificação em produção no `README.md`.
+- Produção: https://kurio-nft-marketplace-woad.vercel.app
+- Repositório: https://github.com/Biurifin023/desafio-jungle-nft-marketplace (público; `main` mais as branches `feat/e0`–`feat/e8`)
+- Projeto Vercel `kurio-nft-marketplace`, ligado à `main`. O `vercel.json` fixa o pnpm 11.13.1, roda `pnpm build:demo`, reescreve as rotas do SPA, serve `mockServiceWorker.js` sem cache e aplica cache imutável aos chunks com hash.
+- Checkout limpo validado num clone novo do GitHub: `pnpm install --frozen-lockfile`, `pnpm typecheck` e `pnpm build:demo`.
+
+Verificação em produção:
+
+- Acesso direto e refresh em `/`, `/nft/:id`, `/cart`, `/login`, `/checkout`, `/profile` e numa rota inexistente: todos retornam 200 com o shell do SPA, e a própria aplicação resolve o 404.
+- Suíte Playwright completa apontada para a URL de produção (`E2E_BASE_URL`): **92 passed, 4 skipped**, incluindo login, checkout com idempotência, Socket.IO simulado (testes 9 e 10), acessibilidade, responsividade e regressão visual.
+- Lighthouse de produção na tabela acima (`docs/lighthouse/producao/`).

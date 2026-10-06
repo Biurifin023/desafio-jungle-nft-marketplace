@@ -2,6 +2,9 @@
 
 Entrega do desafio frontend (React, TypeScript, TanStack Router/Query, Axios, MSW, Socket.IO, Tailwind, shadcn/ui, Playwright, Lighthouse).
 
+- Produção: https://kurio-nft-marketplace-woad.vercel.app
+- Repositório: https://github.com/Biurifin023/desafio-jungle-nft-marketplace
+
 ## Setup
 
 ```bash
@@ -69,11 +72,18 @@ Controle pontual: `window.__mock.setScenario`, `failNext`, `updateNft`, `expireS
 | `pnpm test:e2e:report` | Relatório HTML (traces das falhas em `test-results/`) |
 | `pnpm lighthouse` | Auditoria (3× início/detalhe × mobile/desktop, requer `pnpm build:demo`) |
 
+Contra uma URL publicada (sem servidor local):
+
+```powershell
+$env:E2E_BASE_URL = "https://kurio-nft-marketplace-woad.vercel.app"; pnpm test:e2e
+$env:LH_BASE_URL = "https://kurio-nft-marketplace-woad.vercel.app"; $env:LH_SKIP_SERVER = "1"; $env:LH_OUT_DIR = "docs/lighthouse/producao"; pnpm lighthouse
+```
+
 ## Testes e qualidade
 
-- Playwright: 96 testes (92 executados e 4 pulados por viewport), cobrindo os itens 1–12 da seção 9, responsividade em 390/768/1440 + zoom 200% e regressão visual. O `webServer` gera `pnpm build:demo` e sobe `vite preview`.
+- Playwright: 96 testes (92 executados e 4 pulados por viewport), cobrindo os itens 1–12 da seção 9, responsividade em 390/768/1440 + zoom 200% e regressão visual. O `webServer` gera `pnpm build:demo` e sobe `vite preview`. A mesma suíte passa contra produção (92 aprovados).
 - Os baselines visuais foram gerados no Windows (`*-win32.png`). Em Linux ou macOS, gere os locais uma vez com `pnpm test:e2e:update -- e2e/08-qualidade/visual.spec.ts`.
-- Lighthouse (mediana): início 87 mobile / 98 desktop, detalhe 88 mobile / 99 desktop; Accessibility, Best Practices e SEO em 100. Análise em `docs/lighthouse/RESULTADOS.md`.
+- Lighthouse em produção (mediana de 3): início 94 mobile / 100 desktop, detalhe 98 mobile / 100 desktop; Accessibility, Best Practices e SEO em 100. No `vite preview` local: 87 / 98 e 88 / 99. Análise em `docs/lighthouse/RESULTADOS.md`.
 
 ## Fluxos de falha para reproduzir
 
@@ -96,4 +106,6 @@ Controle pontual: `window.__mock.setScenario`, `failNext`, `updateNft`, `expireS
 
 ## Deploy
 
-Recomendado: Vercel com `pnpm build:demo` e `VITE_ENABLE_MOCKS=true`. `vercel.json` reescreve o SPA para refresh direto das rotas.
+Vercel, projeto `kurio-nft-marketplace` ligado à branch `main` (cada push gera um deploy). O `vercel.json` fixa o pnpm 11.13.1, roda `pnpm build:demo` (MSW ligado), publica `dist/`, reescreve as rotas do SPA para `index.html` (refresh e acesso direto funcionam) e serve `mockServiceWorker.js` sem cache.
+
+Na demonstração não existe backend: API e Socket.IO são simulados no navegador, e cada visitante tem seu próprio estado em `localStorage`/`sessionStorage`.

@@ -1,5 +1,29 @@
 # Resultados Lighthouse
 
+## Produção (Vercel)
+
+Medição de 06/10/2026 em https://kurio-nft-marketplace-woad.vercel.app, com o mesmo build, as mesmas URLs (`?scenario=default`), as mesmas 3 execuções e o mesmo throttling da medição local. Os relatórios HTML e o `summary.json` estão em `producao/`.
+
+| Página | Perfil | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Início (`/`) | mobile | 94 | 100 | 100 | 100 | 2,29 s | 0,024 | 184 ms |
+| Início (`/`) | desktop | 100 | 100 | 100 | 100 | 0,53 s | 0 | 1 ms |
+| Detalhe (`/nft/emerald-ape-042`) | mobile | 98 | 100 | 100 | 100 | 2,18 s | 0 | 59 ms |
+| Detalhe (`/nft/emerald-ape-042`) | desktop | 100 | 100 | 100 | 100 | 0,49 s | 0 | 0 ms |
+| **Meta** | | ≥ 90 | ≥ 95 | ≥ 95 | ≥ 90 | | | |
+
+Execuções individuais de performance: início mobile 68 / 94 / 98, início desktop 100 / 100 / 100, detalhe mobile 98 / 97 / 98, detalhe desktop 100 / 100 / 100. Como na medição local, a primeira execução do início mobile é a fria e fica fora da mediana.
+
+Todas as metas são atingidas em produção. A diferença para o `vite preview` vem da entrega: a CDN da Vercel serve os chunks com brotli, enquanto o preview local os serve sem compressão. Com menos bytes no caminho crítico, a cadeia de boot descrita abaixo termina antes no 4G simulado, e o LCP mobile cai de ~3,5 s para ~2,2 s.
+
+Reproduzir:
+
+```powershell
+$env:LH_BASE_URL = "https://kurio-nft-marketplace-woad.vercel.app"; $env:LH_SKIP_SERVER = "1"; $env:LH_OUT_DIR = "docs/lighthouse/producao"; pnpm lighthouse
+```
+
+## Local (`vite preview`)
+
 Medição de 06/10/2026 sobre o build de demonstração (`pnpm build:demo`) servido por `vite preview`, mocks no cenário **padrão** (`?scenario=default`, latência de 120–380 ms com seed fixa). Três execuções por página e perfil; a tabela mostra a mediana. Os dados brutos estão em `summary.json` e cada execução tem relatório HTML e JSON nesta pasta (`<pagina>-<perfil>-runN.report.html|json`).
 
 ## Medianas

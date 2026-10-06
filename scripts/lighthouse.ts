@@ -4,7 +4,8 @@
  * Requer `pnpm build:demo`.
  *
  * Uso: pnpm lighthouse
- * Env: LH_BASE_URL (padrão http://127.0.0.1:4173) e LH_SKIP_SERVER=1 se o preview já estiver no ar.
+ * Env: LH_BASE_URL (padrão http://127.0.0.1:4173), LH_SKIP_SERVER=1 se o preview já estiver no ar
+ * e LH_OUT_DIR (padrão docs/lighthouse) para gravar em outra pasta.
  */
 import { spawn, spawnSync, type ChildProcess } from 'node:child_process'
 import { createRequire } from 'node:module'
@@ -33,7 +34,7 @@ interface Report {
 }
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const outDir = path.join(root, 'docs', 'lighthouse')
+const outDir = path.resolve(root, process.env.LH_OUT_DIR ?? path.join('docs', 'lighthouse'))
 const rc = createRequire(import.meta.url)('../lighthouserc.cjs') as LighthouseRc
 const { collect, assert } = rc.ci
 const profiles = ['mobile', 'desktop'] as const
