@@ -43,6 +43,9 @@ const ICONS: Record<string, string> = {
   image: '9:1560',
   'arrow-down': '9:1589',
   wallet: '23:1379',
+  user: '70420:4541',
+  shopping: '70420:4547',
+  heart: '70420:4551',
 }
 
 /** Ícones multicoloridos preservam as cores originais; os demais herdam `currentColor`. */

@@ -27,7 +27,7 @@ pnpm test:e2e
 
 Os 4 pulos são intencionais: drawer de filtros só no mobile, zoom da galeria só no desktop e os 2 testes responsivos só no projeto desktop (eles trocam o viewport sozinhos).
 
-> Atualização posterior: com `e2e/09-correcoes` e `e2e/10-ajustes`, a suíte tem 150 testes (142 executados e 8 pulados). Os pulos novos seguem a mesma regra de viewport: um teste de correção, o slider de preço, o rodapé e a aba de detalhes, que só aparecem no layout desktop.
+> Atualização posterior: com `e2e/09-correcoes` e `e2e/10-ajustes`, a suíte tem 152 testes (144 executados e 8 pulados). Os pulos novos seguem a mesma regra de viewport: um teste de correção, o slider de preço, o rodapé e a aba de detalhes, que só aparecem no layout desktop.
 
 ## Lighthouse (mediana)
 

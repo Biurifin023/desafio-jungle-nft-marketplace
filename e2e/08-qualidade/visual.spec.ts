@@ -46,6 +46,15 @@ test.describe('regressão visual', () => {
     await expect(page).toHaveScreenshot('pagamento.png', { ...shot, fullPage: true })
   })
 
+  test('perfil do colecionador', async ({ page }) => {
+    await resetScenario(page, 'fast')
+    await loginAs(page, 'ana')
+    await page.goto('/profile')
+    await expect(page.getByLabel('Nome de exibição')).toHaveValue('Ana Colecionadora')
+    await waitForImages(page)
+    await expect(page).toHaveScreenshot('perfil.png', { ...shot, fullPage: true })
+  })
+
   test('início com zoom 200%', async ({ page }) => {
     await resetScenario(page, 'fast')
     await page.evaluate(() => {

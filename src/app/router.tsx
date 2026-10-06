@@ -33,5 +33,7 @@ declare module '@tanstack/react-router' {
     nav?: 'inicio' | 'mercado'
     /** Título usado no <title> do documento. */
     title?: string
+    /** Páginas de conta no Figma não têm rodapé. */
+    hideFooter?: boolean
   }
 }

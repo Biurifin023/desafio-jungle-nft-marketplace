@@ -4,6 +4,6 @@ import { requireAuth } from '@/features/session/guard'
 
 export const Route = createFileRoute('/profile')({
   beforeLoad: requireAuth,
-  staticData: { title: 'Perfil', mobileChrome: 'tabbar' },
+  staticData: { nav: 'inicio', title: 'Perfil', mobileChrome: 'tabbar', hideFooter: true },
   component: ProfilePage,
 })

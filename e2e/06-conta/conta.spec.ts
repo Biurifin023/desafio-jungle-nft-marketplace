@@ -43,13 +43,18 @@ test.describe('8. perfil, avatar, senha e carteiras', () => {
     await page.getByTestId('avatar-input').setInputFiles({ name: 'avatar.png', mimeType: 'image/png', buffer: PNG })
     await expect(page.getByTestId('avatar-preview')).toBeVisible()
 
-    await page.getByLabel('Senha atual').fill('errada')
-    await page.getByLabel('Nova senha').fill('Kurio@2027')
-    await page.getByTestId('password-save').click()
+    await page.getByLabel('Senha atual', { exact: true }).fill('errada')
+    await page.getByLabel('Nova senha', { exact: true }).fill('Kurio@2027')
+    await page.getByLabel('Confirmar nova senha', { exact: true }).fill('Kurio@2028')
+    await page.getByTestId('profile-save').click()
+    await expect(page.getByRole('alert').filter({ hasText: /senhas não coincidem/i })).toBeVisible()
+
+    await page.getByLabel('Confirmar nova senha', { exact: true }).fill('Kurio@2027')
+    await page.getByTestId('profile-save').click()
     await expect(page.getByRole('alert').filter({ hasText: /senha atual incorreta/i })).toBeVisible()
 
-    await page.getByLabel('Senha atual').fill(CREDENTIALS.ana.password)
-    await page.getByTestId('password-save').click()
+    await page.getByLabel('Senha atual', { exact: true }).fill(CREDENTIALS.ana.password)
+    await page.getByTestId('profile-save').click()
     await expect(page.getByTestId('live-region').getByText(/senha alterada/i)).toBeVisible()
 
     await page.goto('/wallets')

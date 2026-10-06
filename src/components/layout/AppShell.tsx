@@ -19,6 +19,7 @@ export function AppShell() {
   const matches = useMatches()
   const title = [...matches].reverse().find((m) => m.staticData?.title)?.staticData.title
   const chrome = [...matches].reverse().find((m) => m.staticData?.mobileChrome)?.staticData.mobileChrome
+  const hideFooter = matches.some((m) => m.staticData?.hideFooter)
   usePageTitle(title)
 
   return (
@@ -32,7 +33,7 @@ export function AppShell() {
       <main id="conteudo" className={cn('min-h-[50vh]', chrome !== 'none' && 'pb-28 lg:pb-0')}>
         <Outlet />
       </main>
-      {chrome !== 'none' ? <Footer /> : null}
+      {chrome !== 'none' && !hideFooter ? <Footer /> : null}
       <MobileTabBar />
       <Toaster position="top-right" />
     </NotAvailableProvider>
