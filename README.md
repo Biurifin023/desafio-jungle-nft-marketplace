@@ -81,7 +81,7 @@ $env:LH_BASE_URL = "https://kurio-nft-marketplace-woad.vercel.app"; $env:LH_SKIP
 
 ## Testes e qualidade
 
-- Playwright: 156 testes (142 executados e 14 pulados por viewport), cobrindo os itens 1–12 da seção 9, responsividade em 390/768/1440 + zoom 200%, regressão visual, correções pós-entrega (`e2e/09-correcoes`) e ajustes de estados de erro, sessão e acessibilidade (`e2e/10-ajustes`). O `webServer` gera `pnpm build:demo` e sobe `vite preview`. Na etapa 8, a suíte da época passou também contra produção (92 aprovados).
+- Playwright: 160 testes (149 executados e 11 pulados por viewport), cobrindo os itens 1–12 da seção 9, responsividade em 390/768/1440 + zoom 200%, regressão visual, correções pós-entrega (`e2e/09-correcoes`) e ajustes de estados de erro, sessão e acessibilidade (`e2e/10-ajustes`). O `webServer` gera `pnpm build:demo` e sobe `vite preview`. Na etapa 8, a suíte da época passou também contra produção (92 aprovados).
 - Os baselines visuais foram gerados no Windows (`*-win32.png`). Em Linux ou macOS, gere os locais uma vez com `pnpm test:e2e:update -- e2e/08-qualidade/visual.spec.ts`.
 - CI (`.github/workflows/ci.yml`): em push na `main` e em pull requests roda typecheck, lint, build e o Playwright no Ubuntu, sem a regressão visual (os baselines são do Windows). A versão do Node fica em `.nvmrc`.
 - Lighthouse em produção (mediana de 3): início 94 mobile / 100 desktop, detalhe 98 mobile / 100 desktop; Accessibility, Best Practices e SEO em 100. No `vite preview` local: 87 / 98 e 88 / 99. Análise em `docs/lighthouse/RESULTADOS.md`.

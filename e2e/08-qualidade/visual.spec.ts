@@ -14,8 +14,9 @@ async function waitForImages(page: Page) {
 
 test.describe('regressão visual', () => {
   test('início', async ({ page }) => {
+    // Sob carga a página pode levar mais de 3 s para carregar; sem movimento reduzido o destaque já teria trocado.
+    await page.emulateMedia({ reducedMotion: 'reduce' })
     await resetScenario(page, 'fast')
-    // Mouse sobre o destaque segura a troca automática durante a captura.
     await page.getByRole('heading', { level: 1 }).hover()
     await expect(page.getByRole('link', { name: /emerald ape #042/i }).first()).toBeVisible()
     await waitForImages(page)
@@ -53,6 +54,15 @@ test.describe('regressão visual', () => {
     await expect(page.getByLabel('Nome de exibição')).toHaveValue('Ana Colecionadora')
     await waitForImages(page)
     await expect(page).toHaveScreenshot('perfil.png', { ...shot, fullPage: true })
+  })
+
+  test('carteiras', async ({ page }) => {
+    await resetScenario(page, 'fast')
+    await loginAs(page, 'ana')
+    await page.goto('/wallets')
+    await expect(page.getByLabel('Apelido da carteira')).toHaveValue('Principal')
+    await expect(page.getByTestId('secondary-wallet-summary')).toContainText('Reserva')
+    await expect(page).toHaveScreenshot('carteiras.png', { ...shot, fullPage: true })
   })
 
   test('início com zoom 200%', async ({ page }) => {

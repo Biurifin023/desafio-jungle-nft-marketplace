@@ -4,6 +4,6 @@ import { requireAuth } from '@/features/session/guard'
 
 export const Route = createFileRoute('/wallets')({
   beforeLoad: requireAuth,
-  staticData: { title: 'Carteiras', mobileChrome: 'tabbar' },
+  staticData: { nav: 'inicio', title: 'Carteiras', mobileChrome: 'tabbar', hideFooter: true },
   component: WalletsPage,
 })

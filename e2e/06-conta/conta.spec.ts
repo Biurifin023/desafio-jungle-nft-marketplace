@@ -69,4 +69,24 @@ test.describe('8. perfil, avatar, senha e carteiras', () => {
     await page.getByTestId('wallet-primary-save').click()
     await expect(page.getByRole('alert').filter({ hasText: /0x seguido de 40/i })).toBeVisible()
   })
+
+  test('carteira secundária fica recolhida e pode copiar os dados da principal', async ({ page }) => {
+    await resetScenario(page, 'fast')
+    await loginAs(page, 'ana')
+    await page.goto('/wallets')
+    await expect(page.getByRole('link', { name: 'Carteiras' })).toHaveAttribute('aria-current', 'page')
+    await expect(page.getByTestId('secondary-wallet-summary')).toContainText('Reserva')
+    await expect(page.getByTestId('wallet-secondary-save')).toHaveCount(0)
+
+    await page.getByRole('button', { name: 'Igual à carteira principal' }).click()
+    const secondary = page.getByRole('form', { name: 'Carteira secundária' })
+    await expect(secondary.getByLabel('Nome de exibição')).toHaveValue('Ana Colecionadora')
+    await expect(secondary.getByLabel('Apelido da carteira')).toHaveValue('Reserva')
+    await expect(secondary.getByLabel('Endereço da carteira')).toHaveValue('')
+
+    await secondary.getByLabel('Endereço da carteira').fill(`0x${'c'.repeat(40)}`)
+    await page.getByTestId('wallet-secondary-save').click()
+    await expect(page.getByTestId('live-region').getByText(/carteira secundária salva/i)).toBeVisible()
+    await expect(page.getByTestId('secondary-wallet-summary')).toContainText('0xcccc…cccc')
+  })
 })
