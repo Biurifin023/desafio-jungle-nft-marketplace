@@ -121,8 +121,10 @@ function CartItemRow({ item, line, quotePending }: { item: CartItem; line: Quote
       <p className="hidden text-center text-base font-bold text-sand lg:block">{formatEth(item.unitPriceEth)}</p>
       <div className="hidden lg:block">{desktop ? stepper : null}</div>
       <div className="hidden text-right lg:block">
-        {quotePending || !lineTotal ? (
+        {quotePending ? (
           <Skeleton className="ml-auto h-4 w-20" />
+        ) : !lineTotal ? (
+          <p className="text-base font-bold text-khaki">—</p>
         ) : (
           <p className="text-base font-bold text-amber">{formatEth(lineTotal)}</p>
         )}

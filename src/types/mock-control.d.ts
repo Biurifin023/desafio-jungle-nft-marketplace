@@ -16,6 +16,7 @@ export interface MockFailureRule {
   code: string
   message?: string
   retryable?: boolean
+  fields?: Record<string, string>
   times?: number
 }
 

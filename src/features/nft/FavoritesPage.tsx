@@ -5,6 +5,7 @@ import { useFavorites } from '@/api/favorites'
 import { nftDetailQuery } from '@/api/nfts'
 import { EmptyState, ErrorState } from '@/components/common/QueryState'
 import { Skeleton } from '@/components/ui/skeleton'
+import { isApiError } from '@/lib/http'
 import { FavoriteButton } from './FavoriteButton'
 import { NftCard } from './NftCard'
 
@@ -27,8 +28,14 @@ export function FavoritesPage() {
   })
 
   const isPending = favorites.isPending || details.some((query) => query.isPending)
-  const firstError = favorites.error ?? details.find((query) => query.error)?.error
+  const failed = details.filter((query) => query.error && !(isApiError(query.error) && query.error.status === 404))
+  const firstError = favorites.error ?? failed[0]?.error
   const nfts = details.map((query) => query.data).filter((nft): nft is Nft => Boolean(nft))
+
+  function retry() {
+    void favorites.refetch()
+    failed.forEach((query) => void query.refetch())
+  }
 
   return (
     <section className="page-container py-10 lg:py-16" aria-labelledby="fav-title">
@@ -50,7 +57,7 @@ export function FavoritesPage() {
           ))}
         </ul>
       ) : firstError ? (
-        <ErrorState className="mt-10" error={firstError} onRetry={() => void favorites.refetch()} />
+        <ErrorState className="mt-10" error={firstError} onRetry={retry} />
       ) : nfts.length === 0 ? (
         <EmptyState
           className="mt-10"

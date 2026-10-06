@@ -125,7 +125,7 @@ export function route<Params extends PathParams = PathParams>(
     if (scenarioState.active().network.offline) return HttpResponse.error()
     const failure = findFailure(upper, url.pathname)
     if (failure) {
-      return errorResponse(failure.status, failure.code, failure.message ?? 'Falha simulada.', { retryable: failure.retryable })
+      return errorResponse(failure.status, failure.code, failure.message ?? 'Falha simulada.', { retryable: failure.retryable, fields: failure.fields })
     }
     try {
       return await resolver(info)

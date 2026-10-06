@@ -3,7 +3,7 @@ import { Link } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import type { Cart, Quote } from '@/api/contracts'
 import { useAcknowledgePrices, useApplyCoupon, useRemoveCoupon } from '@/api/cart'
-import { EmptyState, errorMessage } from '@/components/common/QueryState'
+import { EmptyState, ErrorState, errorMessage } from '@/components/common/QueryState'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -17,7 +17,19 @@ export function formatDiscount(discountEth: string) {
   return `(-) ${formatEth(discountEth)}`
 }
 
-export function CartSummary({ cart, quote, quotePending }: { cart: Cart; quote: Quote | undefined; quotePending: boolean }) {
+export function CartSummary({
+  cart,
+  quote,
+  quotePending,
+  quoteError,
+  onRetryQuote,
+}: {
+  cart: Cart
+  quote: Quote | undefined
+  quotePending: boolean
+  quoteError?: unknown
+  onRetryQuote?: () => void
+}) {
   return (
     <aside
       aria-labelledby="cart-summary-title"
@@ -29,7 +41,7 @@ export function CartSummary({ cart, quote, quotePending }: { cart: Cart; quote: 
       <div className="mt-3 hidden border-b border-copper/30 lg:block" />
 
       <CouponForm cart={cart} />
-      <QuoteBreakdown quote={quote} pending={quotePending} />
+      <QuoteBreakdown quote={quote} pending={quotePending} error={quoteError} onRetry={onRetryQuote} />
       <QuoteIssues quote={quote} />
       <CheckoutActions quote={quote} canCheckout={Boolean(quote?.valid)} />
     </aside>
@@ -129,7 +141,20 @@ function CouponForm({ cart }: { cart: Cart }) {
   )
 }
 
-function QuoteBreakdown({ quote, pending }: { quote: Quote | undefined; pending: boolean }) {
+function QuoteBreakdown({
+  quote,
+  pending,
+  error,
+  onRetry,
+}: {
+  quote: Quote | undefined
+  pending: boolean
+  error?: unknown
+  onRetry?: () => void
+}) {
+  if (!pending && !quote && error) {
+    return <ErrorState className="mt-6 py-6" title="Não foi possível calcular o resumo" error={error} onRetry={onRetry} />
+  }
   if (pending || !quote) {
     return (
       <div data-testid="quote-skeleton" className="mt-6 space-y-3" aria-busy="true" aria-live="polite">

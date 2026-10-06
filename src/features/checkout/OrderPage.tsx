@@ -4,16 +4,35 @@ import { NftImage } from '@/components/common/NftImage'
 import { EmptyState, ErrorState } from '@/components/common/QueryState'
 import { Button } from '@/components/ui/button'
 import { useOrder } from '@/api/orders'
+import { isApiError } from '@/lib/http'
 import { formatEth } from '@/lib/money'
 import { formatDiscount } from '@/features/cart/CartSummary'
+
+function OrderNotFound() {
+  return (
+    <EmptyState
+      className="page-container py-16"
+      title="Pedido não encontrado"
+      description="Este pedido não existe ou pertence a outra conta."
+      action={
+        <Link to="/" className="text-amber underline-offset-4 hover:underline">
+          Voltar ao início
+        </Link>
+      }
+    />
+  )
+}
 
 export function OrderPage({ orderId }: { orderId: string }) {
   const query = useOrder(orderId)
 
   if (query.isPending) return <p className="page-container py-16 text-sand">Carregando pedido…</p>
-  if (query.isError) return <ErrorState className="page-container py-16" error={query.error} onRetry={() => void query.refetch()} />
+  if (query.isError) {
+    if (isApiError(query.error) && query.error.status === 404) return <OrderNotFound />
+    return <ErrorState className="page-container py-16" error={query.error} onRetry={() => void query.refetch()} />
+  }
   const order = query.data
-  if (!order) return <EmptyState className="page-container py-16" title="Pedido não encontrado" />
+  if (!order) return <OrderNotFound />
 
   if (order.status === 'pending') {
     return (

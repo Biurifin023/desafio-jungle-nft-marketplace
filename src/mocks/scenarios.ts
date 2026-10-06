@@ -12,6 +12,8 @@ export interface FailureRule {
   code: string
   message?: string
   retryable?: boolean
+  /** Erros por campo devolvidos no envelope (ex.: 422 de validação). */
+  fields?: Record<string, string>
   /** Quantas vezes falhar antes de voltar a responder normalmente (padrão: sempre). */
   times?: number
 }

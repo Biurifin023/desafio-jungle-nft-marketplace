@@ -46,7 +46,13 @@ export function CartPage() {
         <>
           <div className="mt-4 flex flex-col lg:mt-3 lg:flex-row lg:justify-between lg:gap-16">
             <CartItems items={items} lines={quote.data?.lines} quotePending={quotePending} />
-            <CartSummary cart={cart.data} quote={quote.data} quotePending={quotePending} />
+            <CartSummary
+              cart={cart.data}
+              quote={quote.data}
+              quotePending={quotePending}
+              quoteError={quote.isError ? quote.error : undefined}
+              onRetryQuote={() => void quote.refetch()}
+            />
           </div>
           <CartRelated excludeIds={items.map((item) => item.nftId)} />
         </>

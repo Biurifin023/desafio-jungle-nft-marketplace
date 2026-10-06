@@ -154,6 +154,18 @@ export function CheckoutPage() {
     }
   }
 
+  function applyFieldErrors(fields: Record<string, string>) {
+    const names = Object.keys(form.getValues()) as (keyof FormValues)[]
+    let applied = 0
+    for (const [key, message] of Object.entries(fields)) {
+      const name = key.replace(/^collector\./, '') as keyof FormValues
+      if (!names.includes(name)) continue
+      form.setError(name, { message }, { shouldFocus: applied === 0 })
+      applied += 1
+    }
+    return applied > 0
+  }
+
   async function onSubmit(values: FormValues) {
     if (!quote.data || !userId || submitting) return
     if (!connected) {
@@ -204,6 +216,8 @@ export function CheckoutPage() {
           setStale('A confirmação demorou. Tente de novo — o pedido não será duplicado.')
           announce('A confirmação demorou. Tente de novo.', 'assertive')
         }
+      } else if (isApiError(error) && applyFieldErrors(error.fields)) {
+        announce(error.message, 'assertive')
       } else {
         toast.error(errorMessage(error, 'Não foi possível enviar o pedido'))
       }
@@ -247,6 +261,17 @@ export function CheckoutPage() {
       <h1 id="checkout-title" className="mt-6 text-3xl font-bold text-cream">
         Pagamento
       </h1>
+      {profile.isError || wallets.isError ? (
+        <ErrorState
+          className="mt-6"
+          title="Não foi possível carregar seus dados"
+          error={profile.error ?? wallets.error}
+          onRetry={() => {
+            void profile.refetch()
+            void wallets.refetch()
+          }}
+        />
+      ) : null}
 
       <form className="mt-8 grid gap-10 lg:grid-cols-[1fr_332px]" onSubmit={form.handleSubmit(onSubmit)} noValidate>
         <div>
@@ -314,6 +339,9 @@ export function CheckoutPage() {
         <aside className="rounded-md bg-surface p-6">
           <h2 className="text-lg font-bold text-cream">Revisão</h2>
           {quote.isPending ? <p className="mt-4 text-sand">Calculando cotação…</p> : null}
+          {quote.isError && !quote.data ? (
+            <ErrorState className="mt-4 px-0 py-4" title="Não foi possível calcular a cotação" error={quote.error} onRetry={() => void quote.refetch()} />
+          ) : null}
           {quote.data ? (
             <dl className="mt-4 space-y-2 text-sm text-cream">
               <Row label="Subtotal" value={formatEth(quote.data.subtotalEth)} />
