@@ -47,7 +47,7 @@ export function HomePage({
     <>
       <MobileTopBar key={search.q ?? ''} onOpenFilters={() => setFiltersOpen(true)} initialQuery={search.q ?? ''} />
 
-      <div className="page-container flex min-w-0 flex-col gap-16 overflow-x-clip pt-6 pb-8 lg:gap-24 lg:pt-8">
+      <div className="page-container flex min-w-0 max-w-full flex-col gap-16 overflow-x-clip pt-6 pb-8 lg:gap-24 lg:pt-8">
         <CatalogHero featured={featured.data} isPending={featured.isPending} />
 
         <section id="catalogo" className="flex min-w-0 flex-col gap-8 scroll-mt-6 lg:flex-row lg:gap-12">
