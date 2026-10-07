@@ -4,17 +4,19 @@ import type { FeaturedResponse, NftSummary } from '@/api/contracts'
 import { NftImage } from '@/components/common/NftImage'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ArrowRightIcon } from '@/components/icons'
+import { useDesktop } from '@/lib/use-desktop'
 import { cn } from '@/lib/utils'
 
 const AUTOPLAY_MS = 3000
 
-export function CatalogHero({
-  featured,
-  isPending,
-}: {
-  featured?: FeaturedResponse
-  isPending: boolean
-}) {
+/**
+ * O texto do destaque é fixo; só a imagem depende da API. Por isso a moldura real aparece desde o início
+ * (skeleton só no lugar da imagem) e a altura não muda quando os dados chegam (sem CLS).
+ * Uma árvore por breakpoint: a imagem `priority` da versão escondida baixaria em alta prioridade e
+ * disputaria banda com o LCP.
+ */
+export function CatalogHero({ featured, isPending }: { featured?: FeaturedResponse; isPending: boolean }) {
+  const desktop = useDesktop()
   const slides = featured?.hero ?? []
   const [index, setIndex] = useState(0)
   const [reduceMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
@@ -44,22 +46,13 @@ export function CatalogHero({
     slides,
     index: safeIndex,
     onIndex: setIndex,
+    pending: isPending && !featured,
   }
 
-  if (isPending && !featured) {
-    return (
-      <section aria-label="Destaques" data-testid="catalog-hero">
-        <Skeleton className="hidden h-[450px] w-full rounded-none lg:block" />
-        <Skeleton className="h-[190px] w-full rounded-xl lg:hidden" />
-      </section>
-    )
-  }
-
-  return (
-    <>
-      <DesktopHero current={current} controls={controls} interaction={interaction} />
-      <MobileHero current={current} controls={controls} interaction={interaction} />
-    </>
+  return desktop ? (
+    <DesktopHero current={current} controls={controls} interaction={interaction} />
+  ) : (
+    <MobileHero current={current} controls={controls} interaction={interaction} />
   )
 }
 
@@ -67,6 +60,7 @@ type HeroControls = {
   slides: NftSummary[]
   index: number
   onIndex: (i: number) => void
+  pending: boolean
 }
 
 type HeroInteraction = Pick<HTMLAttributes<HTMLElement>, 'onMouseEnter' | 'onMouseLeave' | 'onFocus' | 'onBlur'>
@@ -118,6 +112,8 @@ function DesktopHero({
           <Link to="/nft/$id" params={{ id: current.id }} className="size-[min(450px,38vw)] shrink-0 overflow-hidden rounded-3xl">
             <NftImage image={current.image} sizes="450px" priority className="size-full rounded-3xl" />
           </Link>
+        ) : controls.pending ? (
+          <Skeleton className="size-[min(450px,38vw)] shrink-0 rounded-3xl" />
         ) : (
           <div className="size-[min(450px,38vw)] shrink-0 rounded-3xl bg-surface" />
         )}
@@ -158,10 +154,19 @@ function MobileHero({
           </Link>
         </div>
         <div className="size-[138px] shrink-0">
-          {current ? <NftImage image={current.image} sizes="138px" priority className="size-full rounded-2xl" /> : null}
+          {current ? (
+            <NftImage image={current.image} sizes="138px" priority className="size-full rounded-2xl" />
+          ) : controls.pending ? (
+            <Skeleton className="size-full rounded-2xl" />
+          ) : (
+            <div className="size-full rounded-2xl bg-surface" />
+          )}
         </div>
       </div>
-      <HeroDots {...controls} className="mt-2 justify-center" />
+      {/* Altura dos pontos reservada antes de os destaques chegarem. */}
+      <div className="mt-2 h-6">
+        <HeroDots {...controls} className="justify-center" />
+      </div>
     </section>
   )
 }

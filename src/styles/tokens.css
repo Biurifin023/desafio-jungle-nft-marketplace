@@ -2,9 +2,27 @@
  * Tokens extraídos do Figma "Marketplace de NFTs GreenMint" (pnpm figma:extract → docs/figma/tokens.json).
  * Frequência de uso entre parênteses.
  */
+
+/*
+ * Fallback com as métricas da Roboto Mono (avanço 0,6 em, ascent 105%, descent 27%) enquanto a webfont
+ * carrega (font-display: swap). Consolas e o `monospace` genérico têm 0,55 em: o texto quebrava em menos
+ * linhas e a página "pulava" na troca (CLS). Courier New já tem 0,6 em.
+ * Só um `local()`: cada nome não instalado faz o Chrome varrer as fontes do sistema na thread principal
+ * (com Liberation Mono/Cousine/Droid Sans Mono a nota mobile da home caiu de 87 para ~53).
+ */
+@font-face {
+  font-family: 'Roboto Mono Fallback';
+  src: local('Courier New');
+  size-adjust: 100%;
+  ascent-override: 105%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Tipografia: Roboto Mono em todo o layout (auto-hospedada via @fontsource-variable). */
-  --kurio-font-mono: 'Roboto Mono Variable', 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --kurio-font-mono:
+    'Roboto Mono Variable', 'Roboto Mono', 'Roboto Mono Fallback', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Superfícies */
   --kurio-bg: #140d0a; /* fundo da página */
