@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T04:35:47.974Z",
+  "generatedAt": "2026-10-07T01:47:45.415Z",
   "config": "lighthouserc.cjs",
   "baseURL": "https://kurio-nft-marketplace-woad.vercel.app",
   "numberOfRuns": 3,
@@ -29,13 +29,13 @@
           "uploadThroughputKbps": 675,
           "cpuSlowdownMultiplier": 4
         },
-        "benchmarkIndex": 3029.5
+        "benchmarkIndex": 3055.5
       },
       "runs": {
         "performance": [
-          68,
-          94,
-          98
+          96,
+          96,
+          97
         ],
         "accessibility": [
           100,
@@ -53,29 +53,29 @@
           100
         ],
         "lcpSeconds": [
-          2.9662125,
-          2.2940039999999997,
-          2.16982
+          2.2389535,
+          2.2514969999999996,
+          2.2406599999999997
         ],
         "cls": [
-          0.023572333789130914,
-          0.02344364149833712,
-          0.023572333789130914
+          0,
+          0,
+          0
         ],
         "tbtMs": [
-          1269.9999999999998,
-          184,
-          61.5
+          158.5,
+          147.5,
+          105
         ]
       },
       "medians": {
-        "performance": 94,
+        "performance": 96,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "lcpSeconds": 2.29,
-        "cls": 0.024,
-        "tbtMs": 184
+        "lcpSeconds": 2.24,
+        "cls": 0,
+        "tbtMs": 148
       },
       "belowTarget": []
     },
@@ -92,7 +92,7 @@
           "uploadThroughputKbps": 0,
           "cpuSlowdownMultiplier": 1
         },
-        "benchmarkIndex": 2912
+        "benchmarkIndex": 3108
       },
       "runs": {
         "performance": [
@@ -116,19 +116,19 @@
           100
         ],
         "lcpSeconds": [
-          0.5282519999999999,
-          0.5349579999999999,
-          0.502961
+          0.5603340000000001,
+          0.48629449999999996,
+          0.5465599999999999
         ],
         "cls": [
-          0.0004840186580962179,
-          0.0004840186580962179,
-          0.0004840186580962179
+          0,
+          0,
+          0
         ],
         "tbtMs": [
-          0.5,
-          3,
-          0.5
+          16.5,
+          6,
+          13.5
         ]
       },
       "medians": {
@@ -136,9 +136,9 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "lcpSeconds": 0.53,
+        "lcpSeconds": 0.55,
         "cls": 0,
-        "tbtMs": 1
+        "tbtMs": 14
       },
       "belowTarget": []
     },
@@ -155,12 +155,12 @@
           "uploadThroughputKbps": 675,
           "cpuSlowdownMultiplier": 4
         },
-        "benchmarkIndex": 3221
+        "benchmarkIndex": 3074
       },
       "runs": {
         "performance": [
+          96,
           98,
-          97,
           98
         ],
         "accessibility": [
@@ -179,9 +179,9 @@
           100
         ],
         "lcpSeconds": [
-          2.161068,
-          2.233419,
-          2.1761399999999997
+          2.2214555000000002,
+          2.1541105,
+          2.15718
         ],
         "cls": [
           0,
@@ -189,9 +189,9 @@
           0
         ],
         "tbtMs": [
-          50.500000000000114,
-          85,
-          59
+          58,
+          27,
+          41
         ]
       },
       "medians": {
@@ -199,9 +199,9 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "lcpSeconds": 2.18,
+        "lcpSeconds": 2.16,
         "cls": 0,
-        "tbtMs": 59
+        "tbtMs": 41
       },
       "belowTarget": []
     },
@@ -218,7 +218,7 @@
           "uploadThroughputKbps": 0,
           "cpuSlowdownMultiplier": 1
         },
-        "benchmarkIndex": 3102
+        "benchmarkIndex": 3035.5
       },
       "runs": {
         "performance": [
@@ -242,14 +242,14 @@
           100
         ],
         "lcpSeconds": [
-          0.485419,
-          0.475582,
-          0.500196
+          0.4582525,
+          0.45247450000000006,
+          0.45638650000000003
         ],
         "cls": [
-          0.0001249472852933355,
-          0.0001249472852933355,
-          0.0001249472852933355
+          0,
+          0,
+          0
         ],
         "tbtMs": [
           0,
@@ -262,7 +262,7 @@
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100,
-        "lcpSeconds": 0.49,
+        "lcpSeconds": 0.46,
         "cls": 0,
         "tbtMs": 0
       },

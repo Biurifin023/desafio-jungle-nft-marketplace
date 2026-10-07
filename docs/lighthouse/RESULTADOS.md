@@ -2,19 +2,19 @@
 
 ## Produção (Vercel)
 
-Medição de 06/10/2026 em https://kurio-nft-marketplace-woad.vercel.app, com o mesmo build, as mesmas URLs (`?scenario=default`), as mesmas 3 execuções e o mesmo throttling da medição local. Os relatórios HTML e o `summary.json` estão em `producao/`.
+Medição de 06/10/2026 (22h47) em https://kurio-nft-marketplace-woad.vercel.app, após o deploy das correções de LCP/CLS (commit `1e87fc9`), com as mesmas URLs (`?scenario=default`), as mesmas 3 execuções e o mesmo throttling da medição local. Os relatórios HTML e o `summary.json` estão em `producao/`.
 
 | Página | Perfil | Performance | Accessibility | Best Practices | SEO | LCP | CLS | TBT |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Início (`/`) | mobile | 94 | 100 | 100 | 100 | 2,29 s | 0,024 | 184 ms |
-| Início (`/`) | desktop | 100 | 100 | 100 | 100 | 0,53 s | 0 | 1 ms |
-| Detalhe (`/nft/emerald-ape-042`) | mobile | 98 | 100 | 100 | 100 | 2,18 s | 0 | 59 ms |
-| Detalhe (`/nft/emerald-ape-042`) | desktop | 100 | 100 | 100 | 100 | 0,49 s | 0 | 0 ms |
+| Início (`/`) | mobile | 96 | 100 | 100 | 100 | 2,24 s | 0 | 148 ms |
+| Início (`/`) | desktop | 100 | 100 | 100 | 100 | 0,55 s | 0 | 14 ms |
+| Detalhe (`/nft/emerald-ape-042`) | mobile | 98 | 100 | 100 | 100 | 2,16 s | 0 | 41 ms |
+| Detalhe (`/nft/emerald-ape-042`) | desktop | 100 | 100 | 100 | 100 | 0,46 s | 0 | 0 ms |
 | **Meta** | | ≥ 90 | ≥ 95 | ≥ 95 | ≥ 90 | | | |
 
-Execuções individuais de performance: início mobile 68 / 94 / 98, início desktop 100 / 100 / 100, detalhe mobile 98 / 97 / 98, detalhe desktop 100 / 100 / 100. Como na medição local, a primeira execução do início mobile é a fria e fica fora da mediana.
+Execuções individuais de performance: início mobile 96 / 96 / 97, início desktop 100 / 100 / 100, detalhe mobile 96 / 98 / 98, detalhe desktop 100 / 100 / 100. O `benchmarkIndex` ficou entre 2738 e 3206 nas 12 execuções.
 
-Todas as metas são atingidas em produção. A diferença para o `vite preview` vem da entrega: a CDN da Vercel serve os chunks com brotli, enquanto o preview local os serve sem compressão. Com menos bytes no caminho crítico, a cadeia de boot descrita abaixo termina antes no 4G simulado, e o LCP mobile cai de ~3,5 s para ~2,2 s.
+Todas as metas são atingidas em produção. Em relação à medição anterior (antes das correções), o início mobile subiu de 94 para 96, o CLS caiu de 0,024 para 0 e o TBT de 184 para 148 ms; o detalhe mobile manteve 98, com TBT de 59 para 41 ms. A diferença para o `vite preview` vem da entrega: a CDN da Vercel serve os chunks com brotli, enquanto o preview local os serve sem compressão. Com menos bytes no caminho crítico, a cadeia de boot descrita abaixo termina antes no 4G simulado, e o LCP mobile cai de ~3,5 s para ~2,2 s.
 
 Reproduzir:
 
@@ -74,6 +74,7 @@ A primeira execução do início mobile (72) é ruído: o TBT dela foi 3× maior
 | Alias de `tough-cookie` para um stub (o cookie store do MSW não é usado: a API simulada autentica por Bearer) | Chunk do MSW de 476 KB para 186 KB (176 → 56 KB gzip) |
 | Ordem dos headings, área de toque de 24 px nos pontos do carrossel, nome acessível do card igual ao texto visível | Accessibility do início de 95 para 100 |
 | Code splitting por rota, imagens WebP com `srcset` + `width`/`height`, `fetchpriority="high"` na imagem LCP, fontes auto-hospedadas | CLS ~0 e LCP desktop ≤ 1 s |
+| Uma árvore por breakpoint no hero e no detalhe (a imagem `priority` da versão escondida baixava no mobile), `loader` nas rotas `/` e `/nft/$id` disparando as requisições em paralelo com o chunk da rota, hero com a altura final desde o início e fallback de fonte com as métricas da Roboto Mono | Produção: CLS do início mobile de 0,024 para 0, performance de 94 para 96 |
 | `modulepreload` dos chunks de boot (testado e revertido) | Piorou: o detalhe mobile caiu de 88 para 77 porque os chunks disputavam banda com a imagem LCP |
 
 Evolução nesta sessão (mediana da performance mobile, início / detalhe): 81 / 84 → 75 / 75 (com preload) → 79 / 77 (stub do cookie store, ainda com preload) → **87 / 88** (stub do cookie store, sem preload).
